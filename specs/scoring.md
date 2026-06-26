@@ -199,7 +199,7 @@ MVP 计算 9 个 `supportScore` 维度。
 主要因子：
 
 - 焦虑、低落、恐惧、无望。
-- 固定版本 `PHQ-2` 和 `GAD-2` 的筛查结果，以及按需补充的 `PHQ-9` 和 `GAD-7`；这些结果只表示筛查与支持需要，不是诊断。
+- `Q-MH-MOOD-LOW`、`Q-MH-WORRY-HIGH`、`Q-MH-FUNCTION-IMPACT` 等产品启发式支持题；它们不构成筛查或诊断。
 - 睡眠、进食、工作、日常功能影响。
 - 是否能找到安全倾诉对象。
 - 后悔担忧强度。
@@ -208,15 +208,13 @@ MVP 计算 9 个 `supportScore` 维度。
 硬规则：
 
 - 自伤/自杀念头、无法保证自身安全：R4。
-- 偶尔闪过但当前安全：至少 R3 或 R2，按强度和支持可及性判断。
-- 严重功能受损、极端绝望、失眠失控：R3。
+- 偶尔闪过但当前安全与高功能影响的精确分级以第 15.2 节 `RF-*` 规则为准。
 
 深入推荐规则：
 
-- 核心 `PHQ-2` 或 `GAD-2` 达到已确认量表版本的阳性筛查条件，或功能影响较高时，推荐完整 `PHQ-9` 和 `GAD-7` 深入模块及线下心理支持讨论入口。
-- 筛查结果不得单独决定 R3/R4；自伤、自杀、无法保证安全和严重失控仍由独立安全题触发。
-- 用户可见报告不展示任何 `PHQ-2`、`GAD-2`、`PHQ-9` 或 `GAD-7` 原始分数，只使用非诊断性提示，例如“情绪与支持需要优先关注”。
-- 任一标准量表题缺失时，对应量表不计算结果；相关维度标记为信息不完整，不以缺失代替低分或高分。
+- 启发式情绪支持题显示需要较高或功能影响较高时，按第 15.5 节推荐 `mental-deep`；自伤、自杀、无法保证安全仍由独立安全题触发。
+- 用户可见报告只使用非诊断性提示，例如“情绪与支持需要优先关注”；正式量表和其分数不在 MVP 中出现。
+- 任一启发式题缺失时，相关维度标记为信息不完整，不以缺失代替低分或高分。
 
 ### 6.3 `autonomySafetySupport`
 
@@ -608,21 +606,13 @@ interface LlmTextAnalysisResult {
 
 ## 13. 角色化输入边界
 
-角色化类型可以使用：
+角色化类型只可使用 `specs/personas.md` 9.1 节允许的 12 个启发式键和 6 个非医疗、非安全维度及其确定性；完整字段白名单、权重与门槛以该文件第 9 节为准。
 
-- 9 个维度的 `supportScore`。
-- 确定性等级。
-- 决策风格题。
-- 沟通偏好题。
-- 不确定性处理方式。
-- 价值侧重。
-- 已完成的完整角色测评维度（IPIP、GDMS、伴侣关系聚焦 ECR-RS 和结构化角色补充题）。
-
-完整角色测评数据的额外限制：
+角色数据的额外限制：
 
 - 只进入 `specs/personas.md` 定义的角色候选、次角色、状态标签和沟通解释。
 - 不得加减任何 `supportScore`，不得改变 `certaintyLevel`，不得触发或降低红旗等级。
-- 伴侣测评数据与用户数据分别计算；除非双方各自主动分享，否则不得合并为共同版输入。
+- 伴侣仅可主动分享沟通与支持摘要；其答案不得进入用户角色映射。
 - 伴侣主动分享的摘要可以进入个人报告的“伴侣视角”区和共同讨论页，但不得改变九个 `supportScore`、`certaintyLevel`、红旗、角色映射或两条路径条件清单。
 
 角色化类型不得使用：
@@ -650,7 +640,7 @@ interface LlmTextAnalysisResult {
 - 低确定性触发深入模块推荐。
 - `lifeDevelopmentSupport < 50` 必须进入优先讨论。
 - 伴侣口头支持但无具体承诺时不得高分。
-- 完整角色测评的不同结果不得改变九个 `supportScore`、红旗或路径条件清单。
+- 12 题角色启发式模块的不同结果不得改变九个 `supportScore`、红旗或路径条件清单。
 - R3/R4 时角色模块、状态标签和幽默表达必须被抑制。
 - 伴侣角色测评未主动分享时不得进入共同讨论版。
 - 家庭支持带强控制时不得高分。
@@ -658,13 +648,118 @@ interface LlmTextAnalysisResult {
 - 大模型失败不影响本地评分。
 - 大模型矛盾检查只能降低确定性，不能改分。
 
-## 15. 待后续细化
+## 15. Phase 0 规范规则包
 
-实现前需要继续补齐：
+本节是评分实现的唯一规范配置，并覆盖前文所有“示例”“建议”“按强度判断”和待细化描述。所有规则只引用 `specs/questionnaire.md` 第 3.6 节的 `answerKey`、选项 code 与回答状态；自由文本、题干、数组下标和正式量表均不得作为规则输入。
 
-- 每个题目的 `answerKey`。
-- 每个因子的具体权重。
-- 各维度 `certaintyLevel` 的量化阈值。
-- R1/R2/R3/R4 的精确触发条件。
-- 深入模块推荐排序分。
-- 路径条件清单的条件覆盖度规则。
+### 15.1 通用换算、缺失与来源
+
+- `scale5` 正向值映射为 `SD=0`、`D=25`、`U=50`、`A=75`、`SA=100`；反向因子使用 `100 - 正向值`。
+- `single`、`multi` 的精确数值使用下表各维度的映射。未列出的选项和 `uncertain` 均不计算分数。
+- 除下列特别声明外，每个因子均采用 `exclude_and_certainty_only`：`deferred`、`unanswered` 和 `uncertain` 从分子、分母同时排除，并进入确定性计算。有效因子权重不足该维度总权重的 `60%` 时，维度不产生可用于排序的内部值，报告仅显示“仍需确认”；为保持数据形状可返回 `supportScore=50`，但该值不得用于“条件较稳”的表达。
+- 所有 `supportScore` 在加权平均后四舍五入为整数；不展示给用户。除安全覆盖外，任何单项不得跨维度相互抵消。
+- `source` 为该规则的可追溯依据；`SPEC-SCORING-15` 表示经 Phase 0 审查锁定的产品规则，不代表医学、心理、法律或政策事实。
+
+### 15.2 红旗精确规则
+
+按 R4、R3、R2、R1 顺序求值；命中多项时保留最高等级和全部 `ruleId`。任一 R3/R4 使常规报告、角色、状态标签、路径比较和共同讨论入口失效。
+
+| ruleId | 等级 | 精确触发条件 | 行动类别 | source |
+| --- | --- | --- | --- | --- |
+| `RF-R4-SELF-UNSAFE` | R4 | `Q-SAFE-SELF-HARM=unsafe_now` | `ACT-URGENT-MENTAL` | `SRC-ACOG-CPG-2023` |
+| `RF-R4-UNSAFE-FILLING` | R4 | `Q-SAFE-FREE-ANSWER=unsafe` | `ACT-URGENT-SAFETY` | `SRC-ACOG-IPV` |
+| `RF-R4-URGENT-GENERAL` | R4 | `Q-SAFE-URGENT-SYMPTOM=severe` | `ACT-URGENT-MEDICAL` | `SRC-CDC-UMWS` |
+| `RF-R4-SEVERE-PAIN` | R4 | `Q-MED-PREGNANCY-CONFIRMED in {confirmed, possible}` 且 `Q-MED-ABDOMINAL-PAIN=severe_or_one_sided` | `ACT-URGENT-MEDICAL` | `SRC-NICE-NG126` |
+| `RF-R4-HEAVY-BLEEDING` | R4 | `Q-MED-PREGNANCY-CONFIRMED in {confirmed, possible}` 且 `Q-MED-BLEEDING=heavy_or_with_pain_dizziness` | `ACT-URGENT-MEDICAL` | `SRC-NICE-NG126` |
+| `RF-R4-SYMPTOM-COMBINATION` | R4 | `Q-MED-PREGNANCY-CONFIRMED in {confirmed, possible}` 且 `Q-MED-ABDOMINAL-PAIN in {clear_or_persistent,severe_or_one_sided}` 且 `Q-MED-ASSOCIATED-SYMPTOMS=clear_one_or_more` | `ACT-URGENT-MEDICAL` | `SRC-NHS-ECTOPIC` |
+| `RF-R3-SELF-THOUGHT` | R3 | `Q-SAFE-SELF-HARM=passing_but_safe` | `ACT-SOON-MENTAL` | `SRC-ACOG-CPG-2023` |
+| `RF-R3-COERCION` | R3 | `Q-SAFE-COERCION=pressure_or_fear` 或 `Q-PARTNER-CONTROL-RISK=pressure_or_fear` | `ACT-SOON-SAFETY` | `SRC-ACOG-REPRO-COERCION` |
+| `RF-R3-MEDICAL-NOT-CONFIRMED` | R3 | `Q-MED-INTRAUTERINE-CONFIRMED in {not_confirmed,not_yet_confirmable}` 且 (`Q-MED-ABDOMINAL-PAIN in {clear_or_persistent,severe_or_one_sided}` 或 `Q-MED-BLEEDING in {clear,heavy_or_with_pain_dizziness}`) | `ACT-SOON-MEDICAL` | `SRC-NICE-NG126` |
+| `RF-R3-CLINICIAN-URGENT` | R3 | `Q-MED-CLINICIAN-RISK=urgent_follow_up` | `ACT-SOON-MEDICAL` | `SRC-NHC-MATERNAL-CARE` |
+| `RF-R3-NO-CARE-PLAN` | R3 | `Q-MED-PREGNANCY-CONFIRMED=confirmed` 且 `Q-MED-GESTATION-ESTIMATE=over12` 且 `Q-MED-CARE-PLAN=none` | `ACT-SOON-MEDICAL` | `SRC-NHC-FULL-CARE` |
+| `RF-R3-MENTAL-FUNCTION` | R3 | `Q-MH-FUNCTION-IMPACT=SA` 且 (`Q-MH-MOOD-LOW=SA` 或 `Q-MH-WORRY-HIGH=SA`) 且 `Q-MH-SAFE-CONTACT in {SD,D,U}` | `ACT-SOON-MENTAL` | `SRC-NICE-CG192` |
+| `RF-R2-AUTONOMY-PRESSURE` | R2 | 无 R3/R4 且 (`Q-SAFE-COERCION=pressure_no_fear` 或 `Q-PARTNER-CONTROL-RISK=pressure_no_fear`) | `ACT-CLARIFY-AUTONOMY` | `SRC-ACOG-REPRO-COERCION` |
+| `RF-R2-MEDICAL-GAP` | R2 | 无 R3/R4 且 `Q-MED-PREGNANCY-CONFIRMED in {possible,unknown}`，或 `Q-MED-INTRAUTERINE-CONFIRMED in {not_confirmed,not_yet_confirmable,unknown}` 且 `Q-MED-CARE-PLAN in {none,unknown}` | `ACT-CLARIFY-MEDICAL` | `SRC-NHC-MATERNAL-CARE` |
+| `RF-R2-WILL-PRESSURE` | R2 | 无 R3/R4 且 `Q-WILL-SELF-VS-OTHERS in {SD,D}` | `ACT-CLARIFY-WILL` | `SRC-OTTAWA-ODSF` |
+| `RF-R2-MENTAL-SUPPORT-GAP` | R2 | 无 R3/R4 且 `Q-MH-FUNCTION-IMPACT in {A,SA}` 且 `Q-MH-SAFE-CONTACT in {SD,D,U}` | `ACT-CLARIFY-MENTAL` | `SRC-ACOG-PMH-SCREENING` |
+| `RF-R1-MILD-MEDICAL` | R1 | 无更高等级且任一：`Q-SAFE-URGENT-SYMPTOM=mild`、`Q-MED-ABDOMINAL-PAIN=mild`、`Q-MED-BLEEDING=small`、`Q-MED-ASSOCIATED-SYMPTOMS=mild_one` | `ACT-WATCH-MEDICAL` | `SRC-CDC-UMWS` |
+| `RF-R1-PRIVACY` | R1 | 无更高等级且 `Q-SAFE-PRIVACY-RISK in {some,high}` | `ACT-WATCH-PRIVACY` | `SRC-ACOG-IPV` |
+| `RF-R1-FAMILY-BOUNDARY` | R1 | 无更高等级且 `Q-FAMILY-BOUNDARY-PRESSURE in {A,SA}` | `ACT-WATCH-BOUNDARY` | `SRC-ACOG-IPV` |
+| `RF-R1-EMOTIONAL-PRESSURE` | R1 | 无更高等级且 (`Q-MH-MOOD-LOW in {A,SA}` 或 `Q-MH-WORRY-HIGH in {A,SA}`) | `ACT-WATCH-MENTAL` | `SRC-ACOG-PMH-SCREENING` |
+
+`Q-SAFE-SELF-HARM=uncertain`、安全必答题的 `uncertain`，或任何安全题保存失败时不推定“没有风险”；它们使相应维度确定性为 `low`，并产生 `ACT-CLARIFY-SAFETY`，但不得单独升格为 R3/R4。
+
+### 15.3 九维评分配置
+
+下表中 `+` 为正向映射，`-` 为反向映射，`binary` 按括号中列明的有利 code 为 100、其他已回答 code 为 0。每行权重合计为 100。`U`、`uncertain`、`deferred` 与空值按 15.1 处理。
+
+| dimension | 因子（answerKey：映射；权重） | 缺失策略 | source |
+| --- | --- | --- | --- |
+| `medicalSafetySupport` | `Q-MED-PREGNANCY-CONFIRMED: binary(confirmed);15`；`Q-MED-INTRAUTERINE-CONFIRMED: binary(confirmed);20`；`Q-MED-GESTATION-ESTIMATE: binary(under4,week4to6,week7to8,week9to12,over12);10`；`Q-MED-CARE-PLAN: booked=100,plan_to_book=70,none=20,unknown=excluded;15`；`Q-MED-ABDOMINAL-PAIN: none=100,mild=70,clear_or_persistent=30,severe_or_one_sided=0;15`；`Q-MED-BLEEDING: none=100,small=70,clear=30,heavy_or_with_pain_dizziness=0;15`；`Q-MED-ASSOCIATED-SYMPTOMS: none=100,mild_one=60,clear_one_or_more=0;10` | `exclude_and_certainty_only` | `SRC-NICE-NG126` |
+| `mentalHealthSupport` | `Q-MH-MOOD-LOW:-;20`；`Q-MH-WORRY-HIGH:-;20`；`Q-MH-FUNCTION-IMPACT:-;25`；`Q-MH-SAFE-CONTACT:+;25`；`Q-MH-REGRET-WORRY:-;10` | `exclude_and_certainty_only` | `SRC-ACOG-PMH-SCREENING` |
+| `autonomySafetySupport` | `Q-SAFE-FREE-ANSWER: safe=100,unsafe=0;20`；`Q-SAFE-PRIVACY-RISK: none=100,some=60,high=20;15`；`Q-SAFE-COERCION: none=100,pressure_no_fear=30,pressure_or_fear=0;25`；`Q-PARTNER-SAFE-TO-SPEAK:+;20`；`Q-PARTNER-CONTROL-RISK: none=100,pressure_no_fear=30,pressure_or_fear=0;20` | 安全必答未完成时仅 `certainty=low`，不以 50 当作安全 | `SRC-ACOG-IPV` |
+| `personalWillClaritySupport` | `Q-WILL-SELF-VS-OTHERS:+;30`；`Q-WILL-INFORMATION-BLOCK:-;15`；`Q-WILL-VALUE-CONFLICT:-;20`；`Q-WILL-DECISION-TIME:+;20`；`Q-VALUE-BOUNDARIES-KNOWN:+;15` | `exclude_and_certainty_only` | `SRC-OTTAWA-ODSF` |
+| `lifeDevelopmentSupport` | `Q-LIFE-PLAN-IMPORTANCE:-;10`；`Q-LIFE-CONTINUE-IMPACT:-;25`；`Q-LIFE-END-IMPACT:-;10`；`Q-LIFE-FREEDOM-IMPORTANCE:-;15`；`Q-LIFE-IDENTITY-PREPARED:+;20`；`Q-LIFE-PARTNER-SUPPORT:+;20` | `exclude_and_certainty_only` | `SPEC-SCORING-15` |
+| `partnerCommitmentSupport` | `Q-PARTNER-RESPECT-AUTONOMY:+;20`；`Q-PARTNER-SAFE-TO-SPEAK:+;15`；`Q-PARTNER-CONCRETE-COMMITMENT:+;20`；`Q-PARTNER-PAST-RELIABILITY:+;15`；`Q-PARTNER-COMMITMENT-CATEGORIES: count=0→0,1to2→35,3to4→65,5to7→85,8→100;20`；`Q-PARTNER-CONTROL-RISK: none=100,pressure_no_fear=20,pressure_or_fear=0;10` | `exclude_and_certainty_only` | `SRC-ACOG-REPRO-COERCION` |
+| `familySocialSupport` | `Q-FAMILY-SUPPORT-SOURCES: none=0,1=45,2=70,3_plus=100;15`；`Q-FAMILY-SUPPORT-TYPES: count=0→0,1to2→40,3to4→70,5_plus→100;15`；`Q-FAMILY-SUPPORT-STABILITY:+;25`；`Q-FAMILY-BOUNDARY-PRESSURE:-;20`；`Q-FAMILY-REFUSAL-CONSEQUENCE:-;15`；`Q-FAMILY-ACCEPT-SUPPORT:+;10` | `exclude_and_certainty_only` | `SPEC-SCORING-15` |
+| `financialPolicySupport` | `Q-FIN-INCOME-STABLE:+;15`；`Q-FIN-SAVINGS-BUFFER:+;15`；`Q-FIN-FIXED-COST-PRESSURE:-;15`；`Q-FIN-INSURANCE-KNOWN:+;10`；`Q-FIN-CONTINUE-INCOME-IMPACT:-;15`；`Q-FIN-POLICY-KNOWN:+;10`；`Q-FIN-CONTINUE-BUDGET:+;10`；`Q-FIN-END-BUDGET:+;10` | `exclude_and_certainty_only`；政策卡片或成本参考不得作为因子 | `SRC-HZ-MEDICAL-INSURANCE` |
+| `childcareLoadSupport` | 若 `Q-CHILD-COUNT=none`，固定 `score=100`、`certainty=high`；否则 `Q-CHILD-SPECIAL-NEEDS: none=100,mild=60,clear=20;20`；`Q-CHILD-PRIMARY-CARER: shared=100,partner=80,grandparents=70,service=70,self=40,other=50;20`；`Q-CHILD-CONTINUE-CARE-IMPACT:-;30`；`Q-CHILD-END-RECOVERY-CARE:+;30` | 有子女时 `exclude_and_certainty_only`；无子女不得因缺少条件题降分 | `SPEC-SCORING-15` |
+
+分数转用户可见等级的精确映射为：`0–24=needs_immediate_attention`、`25–49=needs_priority_support`、`50–74=needs_confirmation`、`75–100=relatively_steady`。命中 R3/R4 的相关维度显示 `offline_support_first`，不显示上述等级。`lifeDevelopmentSupport < 50` 必须添加行动项 `ACT-LIFE-DEVELOPMENT-PRIORITY`，且不得被其他维度覆盖。
+
+### 15.4 确定性与模型矛盾
+
+对每个维度计算：`coverage = 已计分权重 / 总权重`，`uncertainWeight = U、uncertain 或 unknown 的权重 / 总权重`，`missingWeight = deferred 或 unanswered 的权重 / 总权重`。使用如下固定规则：
+
+- `high`：`coverage >= 0.85`、`uncertainWeight <= 0.15`、`missingWeight <= 0.15`，且无下表矛盾；
+- `medium`：`coverage >= 0.60`、`uncertainWeight <= 0.40`、`missingWeight <= 0.40`，且最多一个矛盾；
+- `low`：其余全部情况，或安全必答未得到可判定回答。
+
+矛盾只取本地预设类型：`C-WILL`（`Q-WILL-SELF-VS-OTHERS in {SD,D}` 且 `Q-WILL-DECISION-TIME in {A,SA}`）、`C-PARTNER`（`Q-PARTNER-CONCRETE-COMMITMENT in {A,SA}` 且 `Q-PARTNER-PAST-RELIABILITY in {SD,D}`）、`C-FAMILY`（`Q-FAMILY-SUPPORT-STABILITY in {A,SA}` 且 `Q-FAMILY-BOUNDARY-PRESSURE in {A,SA}`）、`C-FINANCE`（`Q-FIN-INCOME-STABLE in {A,SA}` 且 `Q-FIN-CONTINUE-BUDGET in {SD,D}`）、`C-LIFE`（`Q-LIFE-IDENTITY-PREPARED in {A,SA}` 且 `Q-LIFE-CONTINUE-IMPACT in {A,SA}`）。每个维度最多关联一个本地矛盾。
+
+经 schema 校验的模型矛盾只能使用预设类型 `partner_reliability_conflict`、`will_vs_pressure_conflict`、`financial_confidence_conflict`、`development_priority_conflict`、`support_availability_conflict`；每次报告生成中每个相关维度最多从 `high→medium` 或 `medium→low` 降一级，`low` 不再降低。模型不得提高确定性、改变分数、红旗、角色或路径条件。无模型、模型失败或输出未通过校验时不执行该步骤。
+
+### 15.5 深入模块推荐排序
+
+无 R3/R4 时，为每个候选模块计算 `recommendationScore`：基础优先级 + `supportScore<25 ? 30 : supportScore<50 ? 15 : 0` + `certainty=low ? 20 : certainty=medium ? 5 : 0` + `R2 ? 25 : R1 ? 10 : 0`。按分数降序、再按下表 `moduleId` 升序取前 3 个；若最高分低于 15，仍取前 2 个基础模块。角色模块为额外项，不占 2–3 个名额。
+
+| moduleId | 触发维度/规则 | 基础优先级 |
+| --- | --- | ---: |
+| `safety-deep` | `autonomySafetySupport` 或任意 R1/R2 | 100 |
+| `medical-deep` | `medicalSafetySupport` 或 `RF-R1-MILD-MEDICAL` / `RF-R2-MEDICAL-GAP` | 90 |
+| `mental-deep` | `mentalHealthSupport` 或 `RF-R1-EMOTIONAL-PRESSURE` / `RF-R2-MENTAL-SUPPORT-GAP` | 80 |
+| `partner-deep` | `partnerCommitmentSupport` | 70 |
+| `life-deep` | `lifeDevelopmentSupport` | 70 |
+| `finance-deep` | `financialPolicySupport` | 60 |
+| `care-deep` | `familySocialSupport` 或 `childcareLoadSupport` | 60 |
+| `values-deep` | `personalWillClaritySupport` 或 `RF-R2-WILL-PRESSURE` | 60 |
+| `aftercare-deep` | `Q-MH-REGRET-WORRY in {A,SA}` 或任一 `Q-DEEP-AFTER-*-PLAN` 未完成 | 45 |
+
+`persona-deep` 总是作为第 4 个、可跳过的附加推荐项。R3/R4 时不生成上述常规清单，只展示对应线下支持行动；用户可在安全条件下继续填写，但报告不将深入模块作为优先事项。
+
+### 15.6 路径条件、行动项与报告排序
+
+路径条件只生成清单，不计算、展示或比较路径分数。每条的初始 `derivedStatus` 只能是 `confirmed` 或 `pending`；用户可在报告中设置独立 `readingStatus=confirmed|pending|deferred`，该操作不回写事实、评分、确定性或红旗。
+
+| conditionId | 路径 | 初始确认谓词（全部满足才为 `confirmed`） | source |
+| --- | --- | --- | --- |
+| `PC-C-MEDICAL` | continue | `Q-MED-PREGNANCY-CONFIRMED=confirmed`、`Q-MED-INTRAUTERINE-CONFIRMED=confirmed`、`Q-MED-CARE-PLAN in {booked,plan_to_book}` | `SRC-NHC-MATERNAL-CARE` |
+| `PC-C-PARTNER` | continue | `Q-PARTNER-RESPECT-AUTONOMY in {A,SA}`、`Q-PARTNER-CONCRETE-COMMITMENT in {A,SA}`、承诺类别至少 4 个 | `SPEC-SCORING-15` |
+| `PC-C-FINANCE` | continue | `Q-FIN-INCOME-STABLE in {A,SA}`、`Q-FIN-SAVINGS-BUFFER in {A,SA}`、`Q-FIN-CONTINUE-BUDGET in {A,SA}` | `SPEC-SCORING-15` |
+| `PC-C-CARE` | continue | `Q-CHILD-COUNT=none` 或 `Q-CHILD-CONTINUE-CARE-IMPACT in {SD,D,U}` 且 `Q-DEEP-CARE-NIGHT=arranged` | `SPEC-SCORING-15` |
+| `PC-C-LIFE` | continue | `Q-LIFE-IDENTITY-PREPARED in {A,SA}` 且 `Q-LIFE-PARTNER-SUPPORT in {A,SA}` | `SPEC-SCORING-15` |
+| `PC-C-BOUNDARY` | continue | `Q-WILL-SELF-VS-OTHERS in {A,SA}` 且 `Q-FAMILY-BOUNDARY-PRESSURE in {SD,D,U}` | `SRC-OTTAWA-ODSF` |
+| `PC-E-MEDICAL` | end | `Q-MED-PREGNANCY-CONFIRMED=confirmed` 且 `Q-MED-CARE-PLAN in {booked,plan_to_book}` | `SRC-NHC-FAMILY-PLANNING` |
+| `PC-E-SUPPORT` | end | `Q-DEEP-MED-APPOINTMENT-SUPPORT in {arranged,partly_arranged}` 或 `Q-MH-SAFE-CONTACT in {A,SA}` | `SPEC-SCORING-15` |
+| `PC-E-SAFETY` | end | `Q-SAFE-FREE-ANSWER=safe` 且 `Q-SAFE-COERCION=none` 且 `Q-PARTNER-CONTROL-RISK=none` | `SRC-ACOG-REPRO-COERCION` |
+| `PC-E-FINANCE` | end | `Q-FIN-END-BUDGET in {A,SA}` 或 `Q-DEEP-FIN-INCOME` 与 `Q-DEEP-FIN-FIXED-COST` 均已填写 | `SPEC-SCORING-15` |
+| `PC-E-AFTERCARE` | end | `Q-DEEP-AFTER-END-PLAN` 已填写，或 `Q-DEEP-CARE-RECOVERY in {arranged,partly_arranged}` | `SRC-NHC-POSTABORTION` |
+| `PC-E-FUTURE` | end | `Q-DEEP-VALUE-FUTURE-FERTILITY in {clear,partly_clear}` 或 `Q-DEEP-VALUE-REVIEW` 至少选择 2 项 | `SRC-OTTAWA-ODSF` |
+
+行动项排序键固定为：`rankGroup`（R4=1，R3=2，维度分数<25=3，certainty low=4，维度分数25–49=5，R2=6，R1=7，未完成推荐模块=8）→ 维度分数升序 → `actionId` 升序。用户明确的重要主题只能生成预设标签行动项，位于第 7 组之后；自由文本原文不得进入排序、条件或报告。所有 R3/R4 动作优先使用其 `ACT-*`，并阻止其它普通报告段落。
+
+### 15.7 不可用量表与测试夹具要求
+
+`MEASURE-*` 均为 `unavailable` 时，正式量表题、量表分数、量表阳性阈值、人格维度和互动风格标签必须完全缺席。心理和角色功能仅按本节所列启发式键运行。
+
+后续测试夹具至少覆盖：每条 `RF-*` 的边界；R4/R3 覆盖高分；每个维度权重和缺失阈值；无已有子女默认值；`lifeDevelopmentSupport < 50` 行动；所有推荐分数并列的 `moduleId` 排序；每条 `PC-*` 的 `confirmed/pending`；本地与模型矛盾最多降低一级；以及不可用量表不进入任何计算或展示。

@@ -32,11 +32,10 @@
 3. **关系与承诺**：共同承担、承诺落地、边界维护。
 4. **未来与生活**：长期复盘、自我连续性、现实承载条件。
 
-分类输入来自三层信息：
+分类输入来自两层信息：
 
-- 核心问卷中的短量表：当前决策风格、信息偏好、支持需求和沟通偏好。
-- 深入问卷中的正式或有来源的自陈量表：大五人格、一般决策风格、亲密关系依恋/安全感。
-- 当前情境信号：仅使用与角色解释有关的 `supportScore` 等级、确定性和已确认承诺；不读取具体敏感文本，也不读取 R3/R4 红旗细节。
+- 深入问卷中的 12 个产品启发式角色题：信息偏好、支持需求、沟通需求和长期复盘偏好。
+- `9.1` 白名单中的当前情境信号：仅使用允许维度的支持缺口与确定性；不读取医学、安全、红旗或自由文本细节。
 
 角色是“此刻最值得被理解的模式”，不是一生不变的身份。每次完成或更新问卷后均可重新计算。
 
@@ -44,28 +43,15 @@
 
 ### 3.1 用户本人的角色测评
 
-核心问卷加入 6-10 题、以 1-5 量表为主的“决策风格与支持需求”启发式短量表。它只作为最终报告中低确定性角色映射的输入，不能在填写过程中独立输出角色解释或强结论。
+MVP 的用户角色模块是深入问卷中的 12 题产品启发式题；核心问卷不计算角色。`specs/measures.md` 中的所有正式量表均为 `unavailable`，所以 MVP 不展示、复制、翻译或计分 IPIP、GDMS、ECR-RS、PHQ 或 GAD 题项，也不显示任何测量明细或人格/依恋维度。
 
-深入问卷始终向孕妇本人展示“完整角色测评”这一额外推荐项；伴侣在用户完成核心问卷后可以独立、可选地完成同一套测评。完整版本目标为 **96 题**：
-
-| 组成 | 数量 | 作用 | 解释限制 |
-| --- | ---: | --- | --- |
-| IPIP 大五题库的固定 50 题版本 | 50 | 了解开放性、尽责性、外向性、宜人性、情绪稳定性等连续倾向 | 不显示临床诊断，不以单一维度定义角色 |
-| General Decision-Making Style（GDMS）固定 25 题版本 | 25 | 识别理性、直觉、依赖、回避、自发等决策偏好 | 不将“回避”写成缺陷或病理 |
-| ECR-RS 的伴侣关系聚焦版本 | 9 | 了解亲密关系中的焦虑与回避倾向 | 仅用于沟通和支持需求，不判断关系好坏 |
-| 结构化角色补充题 | 12 | 衡量信息需求、独处/陪伴需求、承诺可执行性、边界和未来复盘倾向 | 明确标为产品启发式题，不冒充正式心理量表 |
-
-量表题项的原始出处、版本、翻译、评分键和使用条件必须在实现前记录到题库元数据。只使用可追溯、已确认的简体中文版本；没有可确认中文版本时不展示对应正式量表，保留启发式题。不得随意改写正式量表题干、反向计分或阈值。IPIP 题项应优先使用其公开题库；其他量表在复制题项前须再次核对作者页面或授权说明。
-
-本人和伴侣都只在自己的报告或摘要中看到默认折叠的正式测量明细：量表名称、维度名称、原始分数、该量表的原始分数范围、已使用版本和来源链接。不得显示总体人格分、诊断、疾病标签或妊娠去留结论。完整角色测评只要有任一题未完成，即不计算或展示任何正式量表分数、维度分数或互动标签，只提示可稍后继续完成。
-
-完整角色测评的结果只可用于：
+12 题模块的结果只可用于：
 
 - 在综合报告中解释可能更适合的沟通、核实和支持方式。
 - 辅助生成主角色、次角色和状态标签。
 - 在用户主动选择后，为伴侣共同讨论版生成非诊断性的沟通提示。
 
-完整角色测评的结果不得用于：
+12 题模块的结果不得用于：
 
 - 心理疾病筛查、治疗建议或风险定级。
 - 代替现有的安全、胁迫和围产心理风险题。
@@ -73,9 +59,9 @@
 
 ### 3.2 伴侣与家庭成员
 
-- 伴侣讨论页提供独立、可选的测评入口。用户生成初始共同讨论页后，可将设备交给伴侣完成同一语言和版本的 96 题互动风格测评及约 5 分钟支持短问卷；伴侣先查看自己的沟通与支持风格摘要及可折叠测量明细，不默认与用户结果混合，也不默认展示给另一方。
-- 伴侣测评不生成十二个主角色、次角色或角色插画；它只输出 3-5 个互动风格标签和一段非诊断性的沟通偏好摘要。
-- 伴侣测评只用于发现沟通差异和制定具体承诺，不能覆盖用户本人的意愿或降低其自主性。
+- 伴侣讨论页提供独立、可选的 4 项支持短问卷入口。用户生成初始共同讨论页后，伴侣只填写沟通偏好、可提供支持、愿意讨论事项和是否主动分享摘要；不使用量表或角色测评，也不默认与用户结果混合。
+- 伴侣流程不生成十二个主角色、次角色、角色插画、量表分数或互动风格标签；它只输出一段非诊断性的沟通与支持摘要。
+- 伴侣支持摘要只用于发现可讨论的承诺，不得覆盖用户本人的意愿或降低其自主性。
 - 父母、其他家庭成员不做人格测评。问卷仅收集其可观察的支持方式，例如是否尊重边界、是否提供可靠照护、是否施压或越界。
 
 ## 4. 十二个基础角色
@@ -125,11 +111,7 @@
 
 ### 5.2 规则服务的输入与输出
 
-角色规则服务输入：
-
-- 已完成的启发式短量表和完整角色测评的标准化维度。
-- 与角色有关的当前情境等级，例如信息完整度、决策时间压力、伴侣承诺可执行性、边界压力、人生发展支持、照护负荷和经济缓冲。
-- 每个维度的确定性和缺失比例。
+角色规则服务输入仅为第 9.1 节的白名单字段与第 9.3 节权重；不得增加“完整角色测评”、人格、依恋或伴侣测评维度。
 
 角色规则服务不可输入：
 
@@ -141,7 +123,7 @@
 
 ### 5.3 映射方法
 
-1. 对每个角色维护公开、版本化的特征权重表，权重仅引用已定义的连续量表维度和情境等级。
+1. 对每个角色维护公开、版本化的特征权重表，权重仅引用第 9.1 节的启发式题和允许的情境等级。
 2. 先计算每个角色的候选强度，再检查最少答题量、维度确定性和互斥条件。
 3. 选择强度最高且确定性达标者为主角色；从预定义的兼容矩阵选择次角色，不做任意双角色组合。
 4. 若数据不足、候选差异过小或角色置信度低，只显示“仍在校准中”的中性说明和状态标签，不强行贴角色。
@@ -224,16 +206,109 @@ MVP 发布版本必须内置 12 张固定、原创、统一画风的角色插画
 4. “这对沟通意味着什么”：给出 2-3 条具体、可讨论的提示。
 5. “下一步先补什么”：链接至问卷建议模块、承诺清单或行动项。
 
-正式量表的结果可以在综合叙述中简短提及，例如“你在信息核实和可执行承诺方面的需求较高”。个人报告提供可折叠的“测量明细”区，显示已完成量表的名称、维度名称、分数和对应版本；它不显示总体适配度、妊娠去留分数、诊断名称或疾病标签，也不得向伴侣默认暴露量表维度或用户私密回答。
+当前 MVP 不使用正式量表，因此综合叙述只能引用已批准的角色、状态标签和支持需求；不提供“测量明细”、量表名称、维度、分数或互动风格标签，也不得向伴侣默认暴露用户私密回答。
 
 无 R3/R4 时，用户可在个人报告之后主动打开“全部角色”总览，浏览十二个基础角色的称号、单句概括和插画。用户可点击任一角色展开其核心需要、沟通提示和常见盲区；展开内容不得包含诊断、适配度、评分或生育去留暗示。该页面只用于理解角色体系，不允许用户手动选择、替换或投票决定自己的角色，也不在问卷开始前展示以避免自我暗示。
 
-## 9. 实现前置条件
+## 9. Phase 0 规范角色配置
 
-角色模块开始实现前，必须完成：
+本节覆盖前文所有关于 96 题正式测评、未定权重和“预定义窗口”的描述。根据 `specs/measures.md`，IPIP-50、GDMS-25 和 ECR-RS-9 均为 `unavailable`；MVP 只使用 `specs/questionnaire.md` 3.6.3 中 12 个产品启发式角色题。它们不是正式心理测量，不产生人格、依恋或临床结论。
 
-- 在 `specs/questionnaire.md` 中固定核心启发式短量表、96 题完整角色测评流程、伴侣独立测评入口和分享规则。
-- 在 `specs/scoring.md` 中明确人格/关系数据只进入角色映射，不进入九个 `supportScore`、红旗或去留条件清单。
-- 在题库元数据中记录每个正式量表题项的来源、版本、语言、反向计分和使用条件。
-- 编写角色权重、兼容矩阵、状态标签触发阈值与 R3/R4 抑制的可测试配置。
-- 在 `specs/report.md` 中固化角色模块的展示顺序、降级文案和共享边界。
+### 9.1 允许输入与绝对禁止输入
+
+角色算法唯一允许的原始答题字段为：
+
+```text
+Q-ROLE-FACT-CHECK, Q-ROLE-PLAN-LIST, Q-ROLE-CHANGE-SENSITIVITY,
+Q-ROLE-NEED-SUPPORT, Q-ROLE-EMOTION-EXPRESSION, Q-ROLE-NEED-SPACE,
+Q-ROLE-SHARED-PARTICIPATION, Q-ROLE-COMMITMENT-EVIDENCE,
+Q-ROLE-BOUNDARY-NEED, Q-ROLE-LONG-TERM-REVIEW,
+Q-ROLE-LIFE-CONTINUITY, Q-ROLE-RESOURCE-CAPACITY
+```
+
+允许的派生输入仅限 `personalWillClaritySupport`、`lifeDevelopmentSupport`、`partnerCommitmentSupport`、`familySocialSupport`、`financialPolicySupport`、`childcareLoadSupport` 及其 `certaintyLevel`。维度输入只用 `gap = 100 - supportScore`；当该维度确定性为 `low` 时不参与候选强度。
+
+以下输入绝对禁止：当前去留倾向 `Q-WILL-CURRENT-DIRECTION`、全部医学题与 `medicalSafetySupport`、全部安全/胁迫/暴力/自伤题与红旗明细、`autonomySafetySupport`、全部自由文本、日期/金额、伴侣未主动分享内容、正式量表、模型输出。R3/R4 本身只用于抑制输出，不得被读取为候选特征。
+
+### 9.2 候选强度、最少答题量与置信度
+
+- 12 个角色题的回答映射使用 `SD=0`、`D=25`、`U=50`、`A=75`、`SA=100`；`U` 是有效但非信息性回答，`deferred`、`unanswered` 不参与。
+- `validCount` 为非 `deferred/unanswered` 的角色题数，`informativeCount` 为 code 不等于 `U` 的角色题数。只有 `validCount >= 8`、`informativeCount >= 6`、最高候选强度 `>= 55` 且置信度 `>= 70` 时，才显示主角色。
+- 每个角色的候选强度为其可用特征的加权平均；若某个上下文维度为 `low` 确定性，删除该特征并按剩余权重归一化。`coverage = validCount / 12`，`informativeCoverage = informativeCount / 12`，`spread = max(0, primaryScore - secondScore)`；`personaConfidence = min(100, round(coverage*60 + informativeCoverage*25 + min(spread*2,15)))`。
+- 未满足任一门槛时输出 `primaryPersonaId=null`、`secondaryPersonaId=null`、`suppressedReason=insufficient_persona_data`，但仍可输出符合阈值的状态标签；报告固定使用 `RPT-PERSONA-CALIBRATING`。
+
+### 9.3 十二个角色特征权重
+
+`Q-*` 是正向特征，`gap:*` 是该维度支持不足时的需求信号。每行权重合计 100；`source` 均为 `SPEC-PERSONAS`，其角色称号和用户可见文本固定使用本文件第 4 节。
+
+| personaId | 特征权重 | 最低候选强度 |
+| --- | --- | ---: |
+| `P01` | `Q-ROLE-FACT-CHECK:60`，`gap:personalWillClaritySupport:25`，`Q-ROLE-CHANGE-SENSITIVITY:15` | 55 |
+| `P02` | `Q-ROLE-PLAN-LIST:55`，`gap:financialPolicySupport:20`，`gap:childcareLoadSupport:15`，`gap:partnerCommitmentSupport:10` | 55 |
+| `P03` | `Q-ROLE-CHANGE-SENSITIVITY:60`，`gap:personalWillClaritySupport:25`，`Q-ROLE-FACT-CHECK:15` | 55 |
+| `P04` | `Q-ROLE-NEED-SUPPORT:65`，`gap:partnerCommitmentSupport:20`，`gap:familySocialSupport:15` | 55 |
+| `P05` | `Q-ROLE-EMOTION-EXPRESSION:70`，`Q-ROLE-NEED-SUPPORT:15`，`Q-ROLE-NEED-SPACE:15` | 55 |
+| `P06` | `Q-ROLE-NEED-SPACE:70`，`gap:personalWillClaritySupport:15`，`Q-ROLE-EMOTION-EXPRESSION:15` | 55 |
+| `P07` | `Q-ROLE-SHARED-PARTICIPATION:70`，`gap:partnerCommitmentSupport:30` | 55 |
+| `P08` | `Q-ROLE-COMMITMENT-EVIDENCE:70`，`gap:partnerCommitmentSupport:30` | 55 |
+| `P09` | `Q-ROLE-BOUNDARY-NEED:70`，`gap:familySocialSupport:30` | 55 |
+| `P10` | `Q-ROLE-LONG-TERM-REVIEW:70`，`gap:personalWillClaritySupport:30` | 55 |
+| `P11` | `Q-ROLE-LIFE-CONTINUITY:70`，`gap:lifeDevelopmentSupport:30` | 55 |
+| `P12` | `Q-ROLE-RESOURCE-CAPACITY:60`，`gap:financialPolicySupport:25`，`gap:childcareLoadSupport:15` | 55 |
+
+### 9.4 主次角色、平分与兼容矩阵
+
+- 对满足 9.2 门槛的候选按强度降序排序；强度差 `<= 2` 视为平分，按 `personaId` 升序决定主角色，确保结果稳定可测试。
+- 主角色确定后，次角色只能从下表许可集合中选择；其强度必须 `>=55`，与主角色的分差 `<=8`，并且候选置信度仍 `>=70`。符合多个候选时按强度降序、再 `personaId` 升序选择一个。
+- 主角色候选与次角色都不能因用户的去留倾向、医学状况、红旗细节、自由文本或未授权伴侣数据而改变。
+
+| 主角色 | 可作为次角色的 personaId |
+| --- | --- |
+| `P01` | `P02`, `P03`, `P10` |
+| `P02` | `P01`, `P08`, `P12` |
+| `P03` | `P01`, `P06`, `P10` |
+| `P04` | `P05`, `P07`, `P08` |
+| `P05` | `P04`, `P06`, `P10` |
+| `P06` | `P03`, `P05`, `P11` |
+| `P07` | `P04`, `P08`, `P09` |
+| `P08` | `P02`, `P07`, `P12` |
+| `P09` | `P07`, `P11`, `P12` |
+| `P10` | `P01`, `P03`, `P11` |
+| `P11` | `P06`, `P09`, `P10` |
+| `P12` | `P02`, `P08`, `P09` |
+
+### 9.5 状态标签触发与显示顺序
+
+状态标签不是人格分数。R3/R4 时不计算、不返回任何标签。无 R3/R4 时，按下表的 `priority` 升序选取所有命中标签中的前 7 个；少于 5 个时不填充无关标签，报告显示实际数量并使用中性校准提示。
+
+| tagId | 精确触发条件 | priority |
+| --- | --- | ---: |
+| `S01` | `personalWillClaritySupport.certaintyLevel=low` 或 `financialPolicySupport.certaintyLevel=low` | 30 |
+| `S02` | `personalWillClaritySupport<50` 且 `Q-ROLE-NEED-SPACE in {A,SA}` | 50 |
+| `S03` | `personalWillClaritySupport<50` | 40 |
+| `S04` | `partnerCommitmentSupport<50` | 35 |
+| `S05` | `familySocialSupport<50` 或 `Q-ROLE-BOUNDARY-NEED in {A,SA}` | 45 |
+| `S06` | `Q-ROLE-NEED-SUPPORT in {A,SA}` 且 `Q-ROLE-EMOTION-EXPRESSION in {A,SA}` | 70 |
+| `S07` | `lifeDevelopmentSupport<50` | 25 |
+| `S08` | `childcareLoadSupport<50` | 55 |
+| `S09` | `financialPolicySupport<50` | 20 |
+| `S10` | `Q-ROLE-LONG-TERM-REVIEW in {A,SA}` 且 `personalWillClaritySupport<75` | 65 |
+| `S11` | `partnerCommitmentSupport<50` 且 `Q-ROLE-SHARED-PARTICIPATION in {A,SA}` | 60 |
+| `S12` | `Q-ROLE-NEED-SPACE in {A,SA}` 或 `Q-ROLE-LIFE-CONTINUITY in {A,SA}` | 75 |
+
+### 9.6 R3/R4 抑制与报告边界
+
+当 `redFlagLevel in {R3_professional_support_soon,R4_immediate_support}` 时，输出固定为：
+
+```text
+primaryPersonaId=null
+secondaryPersonaId=null
+candidatePersonaIds=[]
+personaConfidence=0
+statusTagIds=[]
+suppressedReason=red_flag_R3_or_R4
+```
+
+R1/R2 时角色可使用上述计算结果，但呈现模式必须为 `neutral`：不播放插画动效、不使用轻幽默描述风险、不把角色置于红旗或行动项之前。角色、状态标签和其模型润色文本只可进入个人报告，默认不得进入伴侣摘要或共同讨论包。
+
+后续测试夹具必须覆盖：12 行权重逐项换算；`validCount=7`、`informativeCount=5`、置信度 69 的拒绝边界；2 分平分；每个兼容/不兼容次角色；每个状态标签；R3/R4 固定抑制；以及禁止字段变化不影响结果。
