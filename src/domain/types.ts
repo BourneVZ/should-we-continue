@@ -60,12 +60,12 @@ export type SupportDimensionId =
   | "medicalSafetySupport"
   | "autonomySafetySupport"
   | "mentalHealthSupport"
-  | "partnerSupport"
+  | "partnerCommitmentSupport"
   | "familySocialSupport"
   | "financialPolicySupport"
   | "lifeDevelopmentSupport"
   | "childcareLoadSupport"
-  | "valuesAlignmentSupport";
+  | "personalWillClaritySupport";
 
 export type SupportLevel = "high" | "medium" | "low" | "insufficient";
 export type CertaintyLevel = "high" | "medium" | "low" | "uncertain" | "deferred";
