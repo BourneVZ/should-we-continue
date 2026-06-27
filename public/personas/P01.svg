@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" role="img" aria-labelledby="title desc">
+  <title id="title">P01 雾灯校准师</title>
+  <desc id="desc">原创抽象人物与指南针组合插画。</desc>
+  <rect width="240" height="240" rx="32" fill="#f4fffd"/>
+  <circle cx="120" cy="88" r="34" fill="#99f6e4"/>
+  <path d="M70 188c12-34 38-52 50-52s38 18 50 52" fill="#0f766e" opacity=".92"/>
+  <circle cx="176" cy="62" r="22" fill="#ffffff" stroke="#0f766e" stroke-width="6"/>
+  <path d="M176 46l8 16-8 16-8-16z" fill="#0f766e"/>
+</svg>

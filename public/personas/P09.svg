@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" role="img" aria-labelledby="title desc">
+  <title id="title">P09 边界园丁</title>
+  <desc id="desc">原创抽象人物与栅栏植物组合插画。</desc>
+  <rect width="240" height="240" rx="32" fill="#fffaf1"/>
+  <circle cx="118" cy="84" r="34" fill="#fde68a"/>
+  <path d="M66 190c10-32 34-52 52-52 18 0 42 20 52 52" fill="#78350f"/>
+  <path d="M156 98V54M172 98V54M188 98V54M204 98V54M156 72h48" stroke="#78350f" stroke-width="6" stroke-linecap="round"/>
+</svg>

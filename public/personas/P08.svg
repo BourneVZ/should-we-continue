@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" role="img" aria-labelledby="title desc">
+  <title id="title">P08 承诺验收员</title>
+  <desc id="desc">原创抽象人物与核对板组合插画。</desc>
+  <rect width="240" height="240" rx="32" fill="#fffbf2"/>
+  <circle cx="118" cy="84" r="34" fill="#fef3c7"/>
+  <path d="M66 190c10-32 34-52 52-52 18 0 42 20 52 52" fill="#92400e"/>
+  <rect x="156" y="50" width="48" height="58" rx="10" fill="#ffffff" stroke="#92400e" stroke-width="6"/>
+  <path d="M168 68l8 8 16-16" stroke="#92400e" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" role="img" aria-labelledby="title desc">
+  <title id="title">P05 心事折纸师</title>
+  <desc id="desc">原创抽象人物与折纸鹤组合插画。</desc>
+  <rect width="240" height="240" rx="32" fill="#fff7fb"/>
+  <circle cx="118" cy="84" r="34" fill="#fbcfe8"/>
+  <path d="M66 190c10-32 34-52 52-52 18 0 42 20 52 52" fill="#9f1239"/>
+  <path d="M176 52l20 16-20 8-12-8z" fill="#ffffff" stroke="#9f1239" stroke-width="6" stroke-linejoin="round"/>
+</svg>

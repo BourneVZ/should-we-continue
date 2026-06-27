@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" role="img" aria-labelledby="title desc">
+  <title id="title">P03 风向捕手</title>
+  <desc id="desc">原创抽象人物与风向飘带组合插画。</desc>
+  <rect width="240" height="240" rx="32" fill="#f2fffb"/>
+  <circle cx="118" cy="86" r="34" fill="#a7f3d0"/>
+  <path d="M66 188c12-34 36-50 52-50 16 0 40 16 54 50" fill="#115e59"/>
+  <path d="M156 54c14-12 28-12 42 0M150 72c18-14 38-14 58 0M160 92c12-8 24-8 36 0" stroke="#115e59" stroke-width="6" fill="none" stroke-linecap="round"/>
+</svg>

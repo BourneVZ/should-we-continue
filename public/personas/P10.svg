@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" role="img" aria-labelledby="title desc">
+  <title id="title">P10 未来预告片导演</title>
+  <desc id="desc">原创抽象人物与场记板组合插画。</desc>
+  <rect width="240" height="240" rx="32" fill="#f6fff8"/>
+  <circle cx="118" cy="84" r="34" fill="#bbf7d0"/>
+  <path d="M66 190c10-32 34-52 52-52 18 0 42 20 52 52" fill="#166534"/>
+  <rect x="154" y="56" width="52" height="42" rx="8" fill="#ffffff" stroke="#166534" stroke-width="6"/>
+  <path d="M154 64h52" stroke="#166534" stroke-width="6"/>
+</svg>

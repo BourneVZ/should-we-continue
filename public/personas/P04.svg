@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" role="img" aria-labelledby="title desc">
+  <title id="title">P04 软垫筑巢师</title>
+  <desc id="desc">原创抽象人物与靠垫组合插画。</desc>
+  <rect width="240" height="240" rx="32" fill="#fff6f8"/>
+  <circle cx="118" cy="84" r="34" fill="#fecdd3"/>
+  <path d="M66 190c10-32 34-52 52-52 18 0 42 20 52 52" fill="#be123c"/>
+  <rect x="154" y="54" width="52" height="44" rx="14" fill="#ffffff" stroke="#be123c" stroke-width="6"/>
+</svg>

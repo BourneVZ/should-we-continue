@@ -59,7 +59,7 @@ export async function handleReportRequest(request: ReportRequest, { llm }: Handl
     });
   }
 
-  const baseReport = request.payload;
+  const baseReport = request.payload as ReportViewModel;
   const llmResult = await llm.complete({
     modelRole: "report",
     prompt: JSON.stringify({ certainty: baseReport.certainty }),

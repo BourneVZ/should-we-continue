@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" role="img" aria-labelledby="title desc">
+  <title id="title">P12 地基巡检员</title>
+  <desc id="desc">原创抽象人物与锤子工具组合插画。</desc>
+  <rect width="240" height="240" rx="32" fill="#f6fff4"/>
+  <circle cx="118" cy="84" r="34" fill="#86efac"/>
+  <path d="M66 190c10-32 34-52 52-52 18 0 42 20 52 52" fill="#14532d"/>
+  <path d="M176 48h20v12h-12v26h-8V60h-8z" fill="#14532d"/>
+</svg>

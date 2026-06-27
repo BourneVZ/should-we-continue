@@ -43,7 +43,12 @@ export async function handleRegionRefreshRequest(
       throw new Error("candidates must be an array");
     }
 
-    const candidates = parsed.candidates.map((candidate) => parseRegionCandidate(candidate, REGION_ALLOWLIST));
+    const candidates = parsed.candidates.map((candidate) =>
+      parseRegionCandidate(
+        candidate as Parameters<typeof parseRegionCandidate>[0],
+        REGION_ALLOWLIST,
+      ),
+    );
     return {
       cache: buildRegionCache(candidates, today, { cacheTtlDays: REGION_CONFIG.cacheTtlDays }),
     };
