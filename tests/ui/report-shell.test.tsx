@@ -16,8 +16,32 @@ describe("ReportShell", () => {
     );
 
     expect(html).toContain("ACT-URGENT-MEDICAL");
-    expect(html).not.toContain("概览");
-    expect(html).not.toContain("深入分析");
-    expect(html).not.toContain("伴侣讨论");
+    expect(html).not.toContain("姒傝");
+    expect(html).not.toContain("娣卞叆鍒嗘瀽");
+    expect(html).not.toContain("浼翠荆璁ㄨ");
+  });
+
+  it("renders the partner discussion page when the partner tab is active and enabled", () => {
+    const html = renderToStaticMarkup(
+      <ReportShell
+        activeTab="partner"
+        partnerTabEnabled={true}
+        report={createReportViewModel()}
+        partnerDiscussionProps={{
+          discussionTopicIds: ["topic:medical_summary", "topic:partner_needs", "topic:note:1"],
+          commitmentCategoryIds: ["medical_support", "emotional_support"],
+          sharedPathContinue: [{ conditionId: "continue-1", status: "pending", labelId: "RPT-PATH-CONTINUE" }],
+          sharedPathEnd: [],
+          unsharedPlaceholderCount: 1,
+          selectedCommitmentIds: ["medical_support"],
+          onToggleCommitment: () => undefined,
+        }}
+      />,
+    );
+
+    expect(html).toContain("topic:medical_summary");
+    expect(html).toContain("medical_support");
+    expect(html).toContain("continue-1");
+    expect(html).not.toContain("reason:medical");
   });
 });
