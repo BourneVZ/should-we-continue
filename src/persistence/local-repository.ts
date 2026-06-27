@@ -34,6 +34,10 @@ export function createEmptyWorkspaceDocument(): WorkspaceDocument {
     shared: {
       discussion: null,
     },
+    deepDive: {
+      completedModuleIds: [],
+      skippedAll: false,
+    },
     regionCache: {
       status: "empty",
       checkedAt: null,

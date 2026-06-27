@@ -84,6 +84,10 @@ export function createWorkspaceDocument(overrides: Partial<WorkspaceDocument> = 
     shared: {
       discussion: null,
     },
+    deepDive: {
+      completedModuleIds: [],
+      skippedAll: false,
+    },
     regionCache: createRegionCache(),
     ...overrides,
   };

@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+import { WORKSPACE_SCHEMA_VERSION } from "@/config/version";
 import { createReportViewModel, createSharedDiscussionInput, createWorkspaceDocument } from "../fixtures/factories";
 import {
   parseRegionFieldCandidate,
@@ -11,7 +12,7 @@ import {
 describe("parseWorkspaceDocument", () => {
   it("accepts a valid workspace document", () => {
     const parsed = parseWorkspaceDocument(createWorkspaceDocument());
-    expect(parsed.schemaVersion).toBe("2026-06-26.workspace.v1");
+    expect(parsed.schemaVersion).toBe(WORKSPACE_SCHEMA_VERSION);
   });
 
   it("rejects unknown top-level fields", () => {

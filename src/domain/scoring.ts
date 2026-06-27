@@ -56,6 +56,20 @@ function toDisplayLevel(score: number): DimensionScore["displayLevel"] {
   return "insufficient";
 }
 
+function toCertaintyLevel(answeredWeight: number, configuredWeight: number): DimensionScore["certaintyLevel"] {
+  if (configuredWeight <= 0) {
+    return "uncertain";
+  }
+  const coverage = answeredWeight / configuredWeight;
+  if (coverage >= 0.85) {
+    return "high";
+  }
+  if (coverage >= 0.6) {
+    return "medium";
+  }
+  return "low";
+}
+
 function scoreAnswer(answerKey: string, answer: AnswerValue | undefined): number | null {
   const value = getAnsweredValue(answer);
   if (value === null) {
@@ -90,6 +104,8 @@ export function calculateSupportScores(
   const results: DimensionScore[] = [];
 
   for (const dimension of dimensions) {
+    const configuredWeight = dimension.factors.reduce((sum, factor) => sum + factor.weight, 0);
+
     if (dimension.dimensionId === "childcareLoadSupport") {
       const childCountValue = getAnsweredValue(answers["Q-CHILD-COUNT"]);
       if (childCountValue === "none") {
@@ -97,6 +113,7 @@ export function calculateSupportScores(
           dimensionId: "childcareLoadSupport",
           supportScore: 100,
           displayLevel: "high",
+          certaintyLevel: "high",
           reasonIds: ["Q-CHILD-COUNT"],
         });
         continue;
@@ -118,14 +135,24 @@ export function calculateSupportScores(
     }
 
     if (totalWeight === 0) {
+      results.push({
+        dimensionId: dimension.dimensionId,
+        supportScore: 0,
+        displayLevel: "insufficient",
+        certaintyLevel: "low",
+        reasonIds,
+      });
       continue;
     }
 
-    const supportScore = Math.round(weightedScore / totalWeight);
+    const certaintyLevel = toCertaintyLevel(totalWeight, configuredWeight);
+    const rawSupportScore = Math.round(weightedScore / totalWeight);
+    const supportScore = certaintyLevel === "low" ? Math.min(rawSupportScore, 50) : rawSupportScore;
     results.push({
       dimensionId: dimension.dimensionId,
       supportScore,
       displayLevel: toDisplayLevel(supportScore),
+      certaintyLevel,
       reasonIds,
     });
   }
@@ -137,6 +164,7 @@ export function toReportDimensions(dimensions: readonly DimensionScore[]): Repor
   return dimensions.map((dimension) => ({
     dimensionId: dimension.dimensionId,
     displayLevel: dimension.displayLevel,
+    certaintyLevel: dimension.certaintyLevel,
     reasonIds: dimension.reasonIds,
   }));
 }

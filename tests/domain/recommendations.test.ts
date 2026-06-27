@@ -8,6 +8,7 @@ function dimension(dimensionId: DimensionScore["dimensionId"], supportScore: num
     dimensionId,
     supportScore,
     displayLevel,
+    certaintyLevel: "high",
     reasonIds: [],
   };
 }
@@ -34,5 +35,19 @@ describe("getDeepDiveRecommendations", () => {
     );
 
     expect(recommendations).toEqual([]);
+  });
+
+  it("recommends low-certainty dimensions even when support score is not low", () => {
+    const recommendations = getDeepDiveRecommendations(
+      [
+        {
+          ...dimension("medicalSafetySupport", 70, "medium"),
+          certaintyLevel: "low",
+        },
+      ],
+      RECOMMENDATION_CONFIG,
+    );
+
+    expect(recommendations).toEqual(["medical-deep"]);
   });
 });

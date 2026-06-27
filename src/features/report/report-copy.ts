@@ -1,4 +1,5 @@
 import { QUESTION_CATALOG } from "@/config/questionnaire";
+import { getModuleLabel } from "@/config/questionnaire/_shared";
 import { PERSONA_CATALOG } from "@/config/personas/catalog";
 import type { PathConditionView, ReportDimensionView } from "@/domain/types";
 
@@ -20,7 +21,7 @@ const LEVEL_LABELS: Readonly<Record<ReportDimensionView["displayLevel"], string>
   high: "支持度较高",
   medium: "支持度中等",
   low: "需要优先补强",
-  insufficient: "信息仍不足",
+  insufficient: "信息仍不够",
 };
 
 const ACTION_LABELS: Readonly<Record<string, string>> = {
@@ -43,11 +44,17 @@ const ACTION_LABELS: Readonly<Record<string, string>> = {
 
 const PATH_LABELS: Readonly<Record<string, string>> = {
   "continue-medical": "若继续妊娠，先确认检查、复诊与风险排查安排。",
+  "continue-partner": "若继续妊娠，先确认伴侣支持是否具体、可执行。",
+  "continue-finance": "若继续妊娠，先确认收入、缓冲和预算能否支撑。",
   "continue-care": "若继续妊娠，先确认照料、人力与生活节奏是否接得住。",
+  "continue-life": "若继续妊娠，先确认个人发展节奏和现实支持是否匹配。",
   "continue-boundary": "若继续妊娠，先确认你能否在边界清晰的前提下做决定。",
   "end-medical": "若终止妊娠，先确认正规就医路径、时间点与术前准备。",
-  "end-recovery": "若终止妊娠，先确认恢复期休息、照料与支持安排。",
-  "end-boundary": "若终止妊娠，先确认是否有足够空间保护隐私和边界。",
+  "end-support": "若终止妊娠，先确认陪同、请假、交通或情绪支持安排。",
+  "end-safety": "若终止妊娠，先确认你能安全、独立地保护隐私和边界。",
+  "end-finance": "若终止妊娠，先确认医疗、恢复和后续安排成本。",
+  "end-aftercare": "若终止妊娠，先确认恢复期休息、照料与支持安排。",
+  "end-future": "若终止妊娠，先确认未来回看时最在意的事项和复盘节点。",
   "RPT-PATH-CONTINUE": "已授权共享的继续妊娠条件",
   "RPT-PATH-END": "已授权共享的终止妊娠条件",
 };
@@ -75,12 +82,29 @@ const COMMITMENT_LABELS: Readonly<Record<string, string>> = {
 
 const PERSONA_LABELS = new Map(PERSONA_CATALOG.map((persona) => [persona.personaId, persona.title] as const));
 
+const RECOMMENDED_MODULE_LABELS: Readonly<Record<string, string>> = {
+  "medical-deep": "医学安排细化",
+  "mental-deep": "情绪支持细化",
+  "finance-deep": "经济预算细化",
+  "partner-deep": "伴侣承诺细化",
+  "life-deep": "个人发展细化",
+  "care-deep": "照料安排细化",
+  "values-deep": "价值澄清细化",
+  "aftercare-deep": "恢复安排细化",
+  "safety-deep": "安全边界细化",
+  "persona-deep": "互动风格校准",
+};
+
 export function getDimensionLabel(dimensionId: ReportDimensionView["dimensionId"]): string {
   return DIMENSION_LABELS[dimensionId];
 }
 
 export function getDimensionLevelLabel(level: ReportDimensionView["displayLevel"]): string {
   return LEVEL_LABELS[level];
+}
+
+export function getRecommendedModuleLabel(moduleId: string): string {
+  return RECOMMENDED_MODULE_LABELS[moduleId] ?? getModuleLabel(moduleId);
 }
 
 export function getActionLabel(actionId: string): string {

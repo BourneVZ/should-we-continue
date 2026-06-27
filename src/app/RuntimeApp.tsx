@@ -13,18 +13,20 @@ import { PERSONA_MAPPING } from "@/config/personas/mapping";
 import { PATH_CONDITION_CONFIG } from "@/config/scoring/path-conditions";
 import { SCORING_DIMENSIONS } from "@/config/scoring/dimensions";
 import { SAFETY_RULES } from "@/config/scoring/safety";
+import { DeepDiveScreen } from "@/features/deep-dives/DeepDiveScreen";
+import type { DeepDiveModuleCard } from "@/features/deep-dives/DeepDiveScreen";
 import { QuestionnaireScreen } from "@/features/questionnaire/QuestionnaireScreen";
 import { getAnswerStatus } from "@/domain/answers";
 import { calculatePersonaResult } from "@/domain/personas";
 import { buildPathConditionChecklists } from "@/domain/path-conditions";
-import { getQuestionnaireSnapshot, validateQuestionPage } from "@/domain/questionnaire";
+import { getQuestionnaireSnapshot, isDeepDiveModuleComplete, validateQuestionPage } from "@/domain/questionnaire";
 import { getDeepDiveRecommendations } from "@/domain/recommendations";
 import { buildStaticRegionCache } from "@/domain/region";
 import { calculateSupportScores, toReportDimensions } from "@/domain/scoring";
 import { evaluateSafety } from "@/domain/safety";
 import type { AnswerValue, ReportViewModel, WorkspaceDocument } from "@/domain/types";
 import type { DeepDiveModuleEntry, SuggestedQuestionLink } from "@/features/report/AnalysisPage";
-import { createRuntimeSnapshot } from "./runtime-state";
+import { createRuntimeSnapshot, getCoreCompletionRoute } from "./runtime-state";
 
 interface RuntimeAppProps {
   services: AppServices;
@@ -37,6 +39,18 @@ const DIMENSION_PRIORITY_ACTIONS: Partial<Record<(typeof SCORING_DIMENSIONS)[num
   medicalSafetySupport: "ACT-CLARIFY-MEDICAL",
   autonomySafetySupport: "ACT-CLARIFY-AUTONOMY",
   mentalHealthSupport: "ACT-CLARIFY-MENTAL",
+};
+
+const DIMENSION_RECOMMENDED_MODULES: Partial<Record<(typeof SCORING_DIMENSIONS)[number]["dimensionId"], string>> = {
+  autonomySafetySupport: "safety-deep",
+  medicalSafetySupport: "medical-deep",
+  mentalHealthSupport: "mental-deep",
+  financialPolicySupport: "finance-deep",
+  partnerCommitmentSupport: "partner-deep",
+  lifeDevelopmentSupport: "life-deep",
+  childcareLoadSupport: "care-deep",
+  personalWillClaritySupport: "values-deep",
+  familySocialSupport: "aftercare-deep",
 };
 
 function getFirstIncompleteLocation(answers: WorkspaceDocument["user"]["answers"]): {
@@ -90,8 +104,7 @@ export function RuntimeApp({ services, diagnosticsPanel }: RuntimeAppProps) {
   const reportNeedsRefresh =
     hasSavedAnswers &&
     (workspace.user.reportView === null ||
-      (workspace.user.reportSourceRevision !== null &&
-        workspace.user.reportSourceRevision !== workspace.user.answersRevision));
+      workspace.user.reportSourceRevision !== workspace.user.answersRevision);
 
   const viewState: AppState = {
     ...appState,
@@ -122,11 +135,34 @@ export function RuntimeApp({ services, diagnosticsPanel }: RuntimeAppProps) {
     return true;
   }
 
+  function buildReportAnswers(sourceWorkspace: WorkspaceDocument): WorkspaceDocument["user"]["answers"] {
+    const completedModuleIds = new Set(sourceWorkspace.deepDive.completedModuleIds);
+    const allowedAnswerKeys = new Set(
+      QUESTION_CATALOG.filter(
+        (question) =>
+          question.phase === "core" ||
+          (question.phase === "deepDive" && completedModuleIds.has(question.moduleId)) ||
+          (question.phase === "personaAssessment" && completedModuleIds.has(question.moduleId)),
+      ).map((question) => question.answerKey),
+    );
+
+    return Object.fromEntries(
+      Object.entries(sourceWorkspace.user.answers).filter(([answerKey]) => allowedAnswerKeys.has(answerKey)),
+    );
+  }
+
   function buildReportFromAnswers(answers: WorkspaceDocument["user"]["answers"]): ReportViewModel {
     const safety = evaluateSafety(answers, SAFETY_RULES);
     const scoring = calculateSupportScores(answers, SCORING_DIMENSIONS);
-    const dimensions = toReportDimensions(scoring.dimensions);
-    const pathConditions = buildPathConditionChecklists(PATH_CONDITION_CONFIG);
+    const dimensions = toReportDimensions(scoring.dimensions).map((dimension) =>
+      dimension.certaintyLevel === "low"
+        ? {
+            ...dimension,
+            recommendedModuleId: DIMENSION_RECOMMENDED_MODULES[dimension.dimensionId],
+          }
+        : dimension,
+    );
+    const pathConditions = buildPathConditionChecklists(PATH_CONDITION_CONFIG, answers);
     const persona = calculatePersonaResult(
       answers,
       scoring.dimensions,
@@ -182,6 +218,69 @@ export function RuntimeApp({ services, diagnosticsPanel }: RuntimeAppProps) {
     setActiveDeepDiveModuleId(moduleId);
     setPageIndex(0);
     dispatch({ type: "NAVIGATE", route: "questionnaire" });
+  }
+
+  function getModuleStatus(moduleId: string, sourceWorkspace: WorkspaceDocument = workspace): DeepDiveModuleCard["status"] {
+    if (sourceWorkspace.deepDive.completedModuleIds.includes(moduleId)) {
+      return "completed";
+    }
+
+    const snapshot = getQuestionnaireSnapshot({
+      questions: QUESTION_CATALOG,
+      answers: sourceWorkspace.user.answers,
+      moduleId,
+    });
+    const hasAnyAnswer = snapshot.visibleQuestions.some(
+      (question) => getAnswerStatus(sourceWorkspace.user.answers[question.answerKey]) !== "unanswered",
+    );
+    return hasAnyAnswer ? "in-progress" : "not-started";
+  }
+
+  function buildDeepDiveRecommendations(): readonly DeepDiveModuleCard[] {
+    const safety = evaluateSafety(workspace.user.answers, SAFETY_RULES);
+    if (safety.level === "R3" || safety.level === "R4") {
+      return [];
+    }
+
+    const scoring = calculateSupportScores(workspace.user.answers, SCORING_DIMENSIONS);
+    const recommendedIds = getDeepDiveRecommendations(scoring.dimensions, RECOMMENDATION_CONFIG);
+    const fallbackIds = ["medical-deep", "mental-deep", "values-deep"];
+    const moduleIds = [...new Set([...recommendedIds, ...fallbackIds])]
+      .filter((moduleId) => moduleId !== "persona-deep")
+      .filter((moduleId) => DEEP_DIVE_MODULE_IDS.includes(moduleId as (typeof DEEP_DIVE_MODULE_IDS)[number]))
+      .slice(0, 3);
+
+    return moduleIds.map((moduleId) => {
+      const snapshot = getQuestionnaireSnapshot({
+        questions: QUESTION_CATALOG,
+        answers: workspace.user.answers,
+        moduleId,
+      });
+
+      return {
+        moduleId,
+        title: getModuleLabel(moduleId),
+        estimatedQuestions: snapshot.totalVisibleCount,
+        purpose: "补充更细的现实条件、支持安排和行动清单。",
+        status: getModuleStatus(moduleId),
+      };
+    });
+  }
+
+  function buildPersonaExtra(): DeepDiveModuleCard {
+    const moduleId = "persona-deep";
+    const snapshot = getQuestionnaireSnapshot({
+      questions: QUESTION_CATALOG,
+      answers: workspace.user.answers,
+      moduleId,
+    });
+    return {
+      moduleId,
+      title: getModuleLabel(moduleId),
+      estimatedQuestions: snapshot.totalVisibleCount,
+      purpose: "补充 12 道互动风格题，完成后才会在报告中显示主/次角色。",
+      status: getModuleStatus(moduleId),
+    };
   }
 
   function navigateToQuestion(answerKey: string) {
@@ -265,6 +364,28 @@ export function RuntimeApp({ services, diagnosticsPanel }: RuntimeAppProps) {
     });
   }
 
+  async function generateAndOpenReport(nextWorkspace: WorkspaceDocument) {
+    const reportAnswers = buildReportAnswers(nextWorkspace);
+    const nextTemplateReport = buildReportFromAnswers(reportAnswers);
+    const nextReport = await generatePersonalReport(nextTemplateReport);
+    const persistedWorkspace: WorkspaceDocument = {
+      ...nextWorkspace,
+      user: {
+        ...nextWorkspace.user,
+        reportView: nextReport,
+        reportSourceRevision: nextWorkspace.user.answersRevision,
+      },
+    };
+
+    if (!persistWorkspace(persistedWorkspace, nextReport)) {
+      return;
+    }
+
+    setActiveTab("overview");
+    setActiveDeepDiveModuleId(null);
+    dispatch({ type: "NAVIGATE", route: "report" });
+  }
+
   async function ensureLatestReportAndOpen() {
     if (!hasSavedAnswers && workspace.user.reportView === null) {
       return;
@@ -277,23 +398,7 @@ export function RuntimeApp({ services, diagnosticsPanel }: RuntimeAppProps) {
       return;
     }
 
-    const nextTemplateReport = buildReportFromAnswers(workspace.user.answers);
-    const nextReport = await generatePersonalReport(nextTemplateReport);
-    const nextWorkspace: WorkspaceDocument = {
-      ...workspace,
-      user: {
-        ...workspace.user,
-        reportView: nextReport,
-        reportSourceRevision: workspace.user.answersRevision,
-      },
-    };
-
-    if (!persistWorkspace(nextWorkspace, nextReport)) {
-      return;
-    }
-
-    setActiveTab("overview");
-    dispatch({ type: "NAVIGATE", route: "report" });
+    await generateAndOpenReport(workspace);
   }
 
   function handleAnswerChange(answerKey: string, value: AnswerValue) {
@@ -327,45 +432,51 @@ export function RuntimeApp({ services, diagnosticsPanel }: RuntimeAppProps) {
     const lastPage = pageIndex >= questionnaireSnapshot.pages.length - 1;
     const lastModule = moduleIndex >= CORE_MODULE_IDS.length - 1;
     if (activeDeepDiveModuleId && lastPage) {
-      const nextTemplateReport = buildReportFromAnswers(workspace.user.answers);
-      const nextReport = await generatePersonalReport(nextTemplateReport);
+      const nextCompletedModuleIds = isDeepDiveModuleComplete({
+        questions: QUESTION_CATALOG,
+        answers: workspace.user.answers,
+        moduleId: activeDeepDiveModuleId,
+      })
+        ? [...new Set([...workspace.deepDive.completedModuleIds, activeDeepDiveModuleId])]
+        : workspace.deepDive.completedModuleIds;
       const nextWorkspace: WorkspaceDocument = {
         ...workspace,
-        user: {
-          ...workspace.user,
-          reportView: nextReport,
-          reportSourceRevision: workspace.user.answersRevision,
+        deepDive: {
+          ...workspace.deepDive,
+          completedModuleIds: nextCompletedModuleIds,
         },
       };
 
-      if (!persistWorkspace(nextWorkspace, nextReport)) {
-        return;
-      }
-
-      setActiveTab("overview");
+      if (!persistWorkspace(nextWorkspace, report)) return;
       setActiveDeepDiveModuleId(null);
-      dispatch({ type: "NAVIGATE", route: "report" });
+      dispatch({ type: "NAVIGATE", route: "deep-dives" });
       return;
     }
 
     if (lastPage && lastModule) {
-      const nextTemplateReport = buildReportFromAnswers(workspace.user.answers);
-      const nextReport = await generatePersonalReport(nextTemplateReport);
-      const nextWorkspace: WorkspaceDocument = {
-        ...workspace,
-        user: {
-          ...workspace.user,
-          reportView: nextReport,
-          reportSourceRevision: workspace.user.answersRevision,
-        },
-      };
+      const completionRoute = getCoreCompletionRoute({
+        answers: workspace.user.answers,
+        safetyRules: SAFETY_RULES,
+      });
 
-      if (!persistWorkspace(nextWorkspace, nextReport)) {
+      if (completionRoute === "safety-priority") {
+        const nextReport = buildReportFromAnswers(workspace.user.answers);
+        const nextWorkspace: WorkspaceDocument = {
+          ...workspace,
+          user: {
+            ...workspace.user,
+            reportView: nextReport,
+            reportSourceRevision: workspace.user.answersRevision,
+          },
+        };
+
+        if (!persistWorkspace(nextWorkspace, nextReport)) return;
+        setActiveTab("overview");
+        dispatch({ type: "NAVIGATE", route: "safety-priority" });
         return;
       }
 
-      setActiveTab("overview");
-      dispatch({ type: "NAVIGATE", route: "report" });
+      dispatch({ type: "NAVIGATE", route: "deep-dives" });
       return;
     }
 
@@ -386,8 +497,7 @@ export function RuntimeApp({ services, diagnosticsPanel }: RuntimeAppProps) {
 
     if (activeDeepDiveModuleId) {
       setActiveDeepDiveModuleId(null);
-      setActiveTab("analysis");
-      dispatch({ type: "NAVIGATE", route: "report" });
+      dispatch({ type: "NAVIGATE", route: "deep-dives" });
       return;
     }
 
@@ -418,6 +528,18 @@ export function RuntimeApp({ services, diagnosticsPanel }: RuntimeAppProps) {
     dispatch({ type: "NAVIGATE", route: "home" });
   }
 
+  async function handleConfirmSkipAllDeepDives() {
+    const nextWorkspace: WorkspaceDocument = {
+      ...workspace,
+      deepDive: {
+        ...workspace.deepDive,
+        skippedAll: true,
+      },
+    };
+    dispatch({ type: "CONFIRM_SKIP_DEEP_DIVES" });
+    await generateAndOpenReport(nextWorkspace);
+  }
+
   if (appState.route === "questionnaire") {
     return (
       <QuestionnaireScreen
@@ -430,6 +552,19 @@ export function RuntimeApp({ services, diagnosticsPanel }: RuntimeAppProps) {
         onAnswerChange={handleAnswerChange}
         onNext={handleNextQuestionPage}
         onBack={handleBackQuestionPage}
+      />
+    );
+  }
+
+  if (appState.route === "deep-dives") {
+    return (
+      <DeepDiveScreen
+        recommendations={buildDeepDiveRecommendations()}
+        personaExtra={buildPersonaExtra()}
+        skipConfirmationOpen={appState.skipDeepDiveConfirmationOpen}
+        onSelectModule={navigateToDeepDiveModule}
+        onRequestSkipAll={() => dispatch({ type: "REQUEST_SKIP_DEEP_DIVES" })}
+        onConfirmSkipAll={handleConfirmSkipAllDeepDives}
       />
     );
   }

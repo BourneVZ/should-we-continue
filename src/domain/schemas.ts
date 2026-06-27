@@ -60,17 +60,62 @@ function expectStringArray(value: unknown, fieldName: string): string[] {
 
 function parsePathConditionView(value: unknown): PathConditionView {
   const record = expectRecord(value, "path condition");
-  rejectUnknownFields(record, ["conditionId", "status", "labelId"]);
+  rejectUnknownFields(record, ["conditionId", "status", "derivedStatus", "readingStatus", "labelId"]);
 
   const status = expectString(requireField(record, "status"), "path condition status");
   if (!["confirmed", "pending", "deferred"].includes(status)) {
     throw new Error("invalid enum value for path condition status");
   }
+  const derivedStatus =
+    record.derivedStatus === undefined
+      ? status === "confirmed"
+        ? "confirmed"
+        : "pending"
+      : expectString(record.derivedStatus, "path condition derivedStatus");
+  if (!["confirmed", "pending"].includes(derivedStatus)) {
+    throw new Error("invalid enum value for path condition derivedStatus");
+  }
+  const readingStatus =
+    record.readingStatus === undefined
+      ? status
+      : expectString(record.readingStatus, "path condition readingStatus");
+  if (!["confirmed", "pending", "deferred"].includes(readingStatus)) {
+    throw new Error("invalid enum value for path condition readingStatus");
+  }
 
   return {
     conditionId: expectString(requireField(record, "conditionId"), "conditionId"),
     status: status as PathConditionView["status"],
+    derivedStatus: derivedStatus as PathConditionView["derivedStatus"],
+    readingStatus: readingStatus as PathConditionView["readingStatus"],
     labelId: expectString(requireField(record, "labelId"), "labelId"),
+  };
+}
+
+function parseReportDimensionView(value: unknown): ReportViewModel["dimensions"][number] {
+  const record = expectRecord(value, "report dimension");
+  rejectUnknownFields(record, ["dimensionId", "displayLevel", "certaintyLevel", "recommendedModuleId", "reasonIds"]);
+
+  const displayLevel = expectString(requireField(record, "displayLevel"), "displayLevel");
+  if (!["high", "medium", "low", "insufficient"].includes(displayLevel)) {
+    throw new Error("invalid enum value for dimension displayLevel");
+  }
+
+  const certaintyLevel =
+    record.certaintyLevel === undefined ? "medium" : expectString(record.certaintyLevel, "certaintyLevel");
+  if (!["high", "medium", "low", "uncertain", "deferred"].includes(certaintyLevel)) {
+    throw new Error("invalid enum value for dimension certaintyLevel");
+  }
+
+  return {
+    dimensionId: expectString(requireField(record, "dimensionId"), "dimensionId") as ReportViewModel["dimensions"][number]["dimensionId"],
+    displayLevel: displayLevel as ReportViewModel["dimensions"][number]["displayLevel"],
+    certaintyLevel: certaintyLevel as ReportViewModel["dimensions"][number]["certaintyLevel"],
+    recommendedModuleId:
+      record.recommendedModuleId === undefined
+        ? undefined
+        : expectString(record.recommendedModuleId, "recommendedModuleId"),
+    reasonIds: expectStringArray(requireField(record, "reasonIds"), "reasonIds"),
   };
 }
 
@@ -142,7 +187,11 @@ function parseReportViewModel(value: unknown): ReportViewModel {
       level: redFlagLevel as ReportViewModel["redFlag"]["level"],
       actionIds: expectStringArray(requireField(redFlagRecord, "actionIds"), "redFlag.actionIds"),
     },
-    dimensions: [],
+    dimensions: Array.isArray(requireField(record, "dimensions"))
+      ? (record.dimensions as unknown[]).map(parseReportDimensionView)
+      : (() => {
+          throw new Error("dimensions must be an array");
+        })(),
     certainty: expectString(requireField(record, "certainty"), "certainty") as ReportViewModel["certainty"],
     priorityActionIds: expectStringArray(requireField(record, "priorityActionIds"), "priorityActionIds"),
     pathContinue: Array.isArray(requireField(record, "pathContinue"))
@@ -247,12 +296,19 @@ export function parseSharedDiscussionInput(value: unknown): SharedDiscussionInpu
 
 export function parseWorkspaceDocument(value: unknown): WorkspaceDocument {
   const record = expectRecord(value, "workspace document");
-  rejectUnknownFields(record, ["schemaVersion", "user", "partner", "shared", "regionCache"]);
+  rejectUnknownFields(record, ["schemaVersion", "user", "partner", "shared", "deepDive", "regionCache"]);
 
   const sharedRecord = expectRecord(requireField(record, "shared"), "shared");
   rejectUnknownFields(sharedRecord, ["discussion"]);
 
   const discussionValue = requireField(sharedRecord, "discussion");
+  const deepDiveRecord = record.deepDive === undefined ? { completedModuleIds: [], skippedAll: false } : expectRecord(record.deepDive, "deepDive");
+  rejectUnknownFields(deepDiveRecord, ["completedModuleIds", "skippedAll"]);
+
+  const skippedAll = requireField(deepDiveRecord, "skippedAll");
+  if (typeof skippedAll !== "boolean") {
+    throw new Error("deepDive.skippedAll must be a boolean");
+  }
 
   return {
     schemaVersion: expectString(requireField(record, "schemaVersion"), "schemaVersion"),
@@ -260,6 +316,13 @@ export function parseWorkspaceDocument(value: unknown): WorkspaceDocument {
     partner: parseWorkspaceParticipant(requireField(record, "partner")),
     shared: {
       discussion: discussionValue === null ? null : parseSharedDiscussionInput(discussionValue),
+    },
+    deepDive: {
+      completedModuleIds: expectStringArray(
+        requireField(deepDiveRecord, "completedModuleIds"),
+        "deepDive.completedModuleIds",
+      ),
+      skippedAll,
     },
     regionCache: parseRegionCache(requireField(record, "regionCache")),
   };

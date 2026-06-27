@@ -74,18 +74,23 @@ export interface DimensionScore {
   dimensionId: SupportDimensionId;
   supportScore: number;
   displayLevel: SupportLevel;
+  certaintyLevel?: CertaintyLevel;
   reasonIds: readonly string[];
 }
 
 export interface ReportDimensionView {
   dimensionId: SupportDimensionId;
   displayLevel: SupportLevel;
+  certaintyLevel?: CertaintyLevel;
+  recommendedModuleId?: string;
   reasonIds: readonly string[];
 }
 
 export interface PathConditionView {
   conditionId: string;
   status: "confirmed" | "pending" | "deferred";
+  derivedStatus?: "confirmed" | "pending";
+  readingStatus?: "confirmed" | "pending" | "deferred";
   labelId: string;
 }
 
@@ -176,6 +181,10 @@ export interface WorkspaceDocument {
   partner: WorkspaceParticipant;
   shared: {
     discussion: SharedDiscussionInput | null;
+  };
+  deepDive: {
+    completedModuleIds: readonly string[];
+    skippedAll: boolean;
   };
   regionCache: RegionCache;
 }

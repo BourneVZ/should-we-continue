@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
-import { createRuntimeSnapshot } from "@/app/runtime-state";
-import { createReportViewModel, createSharedDiscussionInput, createWorkspaceDocument } from "../fixtures/factories";
+import { getCoreCompletionRoute, createRuntimeSnapshot } from "@/app/runtime-state";
+import { SAFETY_RULES } from "@/config/scoring/safety";
+import { createAnswered, createReportViewModel, createSharedDiscussionInput, createWorkspaceDocument } from "../fixtures/factories";
 
 describe("runtime state", () => {
   it("hydrates initial app state and report from the saved workspace document", () => {
@@ -39,5 +40,23 @@ describe("runtime state", () => {
     expect(snapshot.state.reportStatus).toBe("none");
     expect(snapshot.state.canOpenPartnerDiscussion).toBe(false);
     expect(snapshot.workspace.user.answersRevision).toBe(0);
+  });
+
+  it("routes R3/R4 answers to the safety substitute instead of deep-dive recommendations", () => {
+    expect(
+      getCoreCompletionRoute({
+        answers: {
+          "Q-SAFE-COERCION": createAnswered("pressure_or_fear"),
+        },
+        safetyRules: SAFETY_RULES,
+      }),
+    ).toBe("safety-priority");
+
+    expect(
+      getCoreCompletionRoute({
+        answers: {},
+        safetyRules: SAFETY_RULES,
+      }),
+    ).toBe("deep-dives");
   });
 });

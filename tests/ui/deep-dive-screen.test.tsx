@@ -7,10 +7,10 @@ describe("DeepDiveScreen", () => {
     const html = renderToStaticMarkup(
       <DeepDiveScreen
         recommendations={[
-          { moduleId: "mental-health", title: "情绪与支持", estimatedQuestions: 8, purpose: "补齐支持信息" },
-          { moduleId: "values", title: "价值冲突", estimatedQuestions: 6, purpose: "澄清个人意愿" },
+          { moduleId: "mental-health", title: "情绪与支持", estimatedQuestions: 8, purpose: "补齐支持信息", status: "not-started" },
+          { moduleId: "values", title: "价值冲突", estimatedQuestions: 6, purpose: "澄清个人意愿", status: "completed" },
         ]}
-        personaExtra={{ moduleId: "persona-deep", title: "角色细化", estimatedQuestions: 12, purpose: "帮助沟通偏好校准" }}
+        personaExtra={{ moduleId: "persona-deep", title: "角色细化", estimatedQuestions: 12, purpose: "帮助沟通偏好校准", status: "in-progress" }}
         skipConfirmationOpen
         onSelectModule={() => undefined}
         onRequestSkipAll={() => undefined}
@@ -20,6 +20,9 @@ describe("DeepDiveScreen", () => {
 
     expect(html).toContain("情绪与支持");
     expect(html).toContain("角色细化");
+    expect(html).toContain("未开始");
+    expect(html).toContain("进行中");
+    expect(html).toContain("已完成");
     expect(html).toContain("未完成不参与报告");
     expect(html).toContain("确认跳过");
   });
