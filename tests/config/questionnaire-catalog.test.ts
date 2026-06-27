@@ -45,7 +45,12 @@ describe("questionnaire catalog integrity", () => {
     expect(QUESTION_CATALOG_BY_MODULE.childcare.some((question) => question.answerKey === "Q-CHILD-COUNT")).toBe(
       true,
     );
-    expect(QUESTION_CATALOG_BY_MODULE.sharing.some((question) => question.answerKey === "Q-SHARE-INTENT")).toBe(true);
+    expect(QUESTION_CATALOG_BY_MODULE.sharing.some((question) => question.answerKey === "Q-FREE-OTHER-TEXT")).toBe(
+      true,
+    );
+    expect(QUESTION_CATALOG_BY_MODULE.sharing.some((question) => question.answerKey === "Q-SHARE-INTENT")).toBe(
+      false,
+    );
   });
 
   it("contains deep-dive module metadata and a partner-independent flow", () => {
@@ -78,6 +83,15 @@ describe("questionnaire catalog integrity", () => {
         if (refKey.length > 0) {
           expect(answerKeys.has(refKey)).toBe(true);
         }
+      }
+    }
+  });
+
+  it("does not fall back to answer keys or raw option codes for displayed Chinese copy", () => {
+    for (const question of QUESTION_CATALOG) {
+      expect(question.title).not.toBe(question.answerKey);
+      for (const option of question.options ?? []) {
+        expect(option.label).not.toBe(option.code);
       }
     }
   });

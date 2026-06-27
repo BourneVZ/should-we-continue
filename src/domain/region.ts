@@ -1,5 +1,5 @@
 import type { RegionFieldCandidate, RegionCache } from "@/domain/types";
-import type { RegionAllowlistEntry } from "@/config/region/hangzhou-bingjiang";
+import type { RegionAllowlistEntry, RegionStaticField } from "@/config/region/hangzhou-bingjiang";
 
 function isAllowlisted(fieldId: string, sourceUrl: string, allowlist: readonly RegionAllowlistEntry[]): boolean {
   return allowlist.some(
@@ -81,4 +81,23 @@ export function buildRegionCache(
     expiresAt,
     verifiedFields: [...verifiedFields],
   };
+}
+
+export function buildStaticRegionCache(
+  staticFields: readonly RegionStaticField[],
+  today: string,
+  cacheTtlDays = 7,
+): RegionCache {
+  return buildRegionCache(
+    staticFields.map((field) => ({
+      fieldId: field.fieldId,
+      value: field.value,
+      sourceUrl: field.sourceUrl,
+      checkedAt: field.lastVerifiedAt,
+      applicableIf: field.applicability,
+      uncertaintyNote: field.uncertainty,
+    })),
+    today,
+    { cacheTtlDays },
+  );
 }

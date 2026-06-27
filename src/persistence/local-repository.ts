@@ -16,7 +16,7 @@ export interface LocalWorkspaceRepository {
   clear(scope: ClearScope): void;
 }
 
-function createEmptyWorkspaceDocument(): WorkspaceDocument {
+export function createEmptyWorkspaceDocument(): WorkspaceDocument {
   return {
     schemaVersion: WORKSPACE_SCHEMA_VERSION,
     user: {

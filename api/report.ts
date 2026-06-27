@@ -37,3 +37,24 @@ export function createReportHandler({ maxBytes, handle }: CreateReportHandlerInp
     }
   };
 }
+
+export default async function reportEntry(request: Request): Promise<Response> {
+  const { createRuntimeApiEntries } = await import("./_lib/runtime");
+  const entry = createRuntimeApiEntries({
+    env: process.env as Record<string, string | undefined>,
+    now: () => Date.now(),
+    sleep: (ms) => new Promise((resolve) => setTimeout(resolve, ms)),
+    fetchImpl: (url, init) => fetch(url, init),
+  }).reportEntry;
+
+  const response = await entry({
+    method: request.method,
+    headers: Object.fromEntries(request.headers.entries()),
+    body: await request.text(),
+  });
+
+  return new Response(JSON.stringify(response.body), {
+    status: response.status,
+    headers: { "content-type": "application/json" },
+  });
+}

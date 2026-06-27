@@ -72,8 +72,7 @@ function chunkQuestions(questions: readonly QuestionMeta[], pageSize: number): Q
 export function getQuestionnaireSnapshot(input: QuestionnaireSnapshotInput): QuestionnaireSnapshot {
   const moduleQuestions = input.questions.filter((question) => question.moduleId === input.moduleId);
   const visibleQuestions = moduleQuestions.filter((question) => isVisible(question, input.answers));
-  const pageSize = input.moduleId === "safety" ? 1 : 5;
-  const pages = chunkQuestions(visibleQuestions, pageSize);
+  const pages = chunkQuestions(visibleQuestions, 1);
   const answeredCount = visibleQuestions.filter(
     (question) => getAnswerStatus(input.answers[question.answerKey]) !== "unanswered",
   ).length;

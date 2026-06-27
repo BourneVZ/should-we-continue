@@ -1,0 +1,22 @@
+
+> should-we-continue@0.1.0 dev
+> vite --host 127.0.0.1 --port 4173
+
+
+  [32m[1mVITE[22m v7.3.6[39m  [2mready in [0m[1m379[22m[2m[0m ms[22m
+
+  [32m➜[39m  [1mLocal[22m:   [36mhttp://127.0.0.1:[1m4173[22m/[39m
+[2m12:05:38[22m [36m[1m[vite][22m[39m [32msrc/domain/region.ts changed, restarting server...[39m
+[2m12:05:38[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/styles/index.css, /src/features/report/AnalysisPage.tsx[22m
+[2m12:05:38[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/styles/index.css, /src/features/home/HomeScreen.tsx[22m
+[2m12:05:38[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/app/App.tsx, /src/styles/index.css[22m
+[2m12:05:38[22m [36m[1m[vite][22m[39m [32msrc/domain/region.ts changed, restarting server...[39m
+[2m12:05:38[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/styles/index.css, /src/features/report/ReportShell.tsx[22m
+[2m12:05:38[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/app/RuntimeApp.tsx, /src/styles/index.css[22m
+[2m12:05:39[22m [36m[1m[vite][22m[39m server restarted.
+[2m12:06:34[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/app/App.tsx, /src/styles/index.css[22m
+[2m12:24:57[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/styles/index.css, /src/features/report/AnalysisPage.tsx[22m
+[2m12:24:57[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/features/report/ReportShell.tsx, /src/styles/index.css[22m
+[2m12:24:57[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/app/App.tsx, /src/styles/index.css[22m
+[2m12:24:57[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/styles/index.css, /src/features/report/OverviewPage.tsx[22m
+[2m12:25:28[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/styles/index.css, /src/app/RuntimeApp.tsx[22m

@@ -1,4 +1,4 @@
-import type { ReportViewModel, SharedDiscussionInput } from "@/domain/types";
+import type { ReportViewModel, SharedDiscussionInput } from "../../src/domain/types";
 
 export interface PromptContext {
   system: string;

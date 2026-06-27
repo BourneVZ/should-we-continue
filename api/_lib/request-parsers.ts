@@ -1,6 +1,6 @@
-import { REPORT_CONTENT } from "@/config/report/content";
-import { parseReportRequest, parseRegionFieldCandidate } from "@/domain/schemas";
-import type { RegionFieldCandidate, ReportRequest } from "@/domain/types";
+import { REPORT_CONTENT } from "../../src/config/report/content";
+import { parseReportRequest, parseRegionFieldCandidate } from "../../src/domain/schemas";
+import type { RegionFieldCandidate, ReportRequest } from "../../src/domain/types";
 
 const OVERLAY_SECTION_IDS = ["overview", "analysis", "discussion"] as const;
 const CONTRADICTION_TYPES = ["timeline_gap", "support_mismatch", "priority_conflict"] as const;

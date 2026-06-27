@@ -10,18 +10,18 @@ const baseQuestion: QuestionMeta = {
   phase: "core",
   moduleId: "mod",
   questionType: "singleSelect",
-  title: "测试问题",
+  title: "我现在能比较清楚地表达自己的想法。",
   required: true,
   privacy: "private",
   sensitivity: "none",
   options: [
-    { code: "A", label: "选项A" },
-    { code: "B", label: "选项B" },
+    { code: "A", label: "比较符合" },
+    { code: "B", label: "不太符合" },
   ],
 };
 
 describe("QuestionRenderer", () => {
-  it("renders labels for single, multi, scale, date, currency, and free-text inputs", () => {
+  it("renders Chinese labels for single, multi, scale, date, currency, and free-text inputs", () => {
     const html = renderToStaticMarkup(
       <div>
         <QuestionRenderer question={baseQuestion} value={{ status: "answered", value: "A" }} onChange={() => undefined} />
@@ -53,9 +53,9 @@ describe("QuestionRenderer", () => {
       </div>,
     );
 
-    expect(html).toContain("测试问题");
-    expect(html).toContain("选项A");
-    expect(html).toContain("textarea");
+    expect(html).toContain("我现在能比较清楚地表达自己的想法。");
+    expect(html).toContain("比较符合");
+    expect(html).toContain("如果愿意，可以用自己的话补充。");
     expect(html).toContain("type=\"date\"");
     expect(html).toContain("type=\"number\"");
   });
@@ -69,8 +69,8 @@ describe("QuestionRenderer", () => {
       />,
     );
 
-    expect(html).toContain("必答");
-    expect(html).toContain("暂时不想回答");
+    expect(html).toContain("必答题");
+    expect(html).toContain("这题我暂时不想回答");
     expect(html).not.toContain("错误");
   });
 });

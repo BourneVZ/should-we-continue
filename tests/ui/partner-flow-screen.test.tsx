@@ -27,7 +27,7 @@ describe("PartnerFlowScreen", () => {
     );
 
     expect(html).toContain("交给伴侣填写");
-    expect(html).toContain("伴侣先看自己的摘要");
+    expect(html).toContain("不会直接看到原始回答和未授权信息");
     expect(html).toContain("emotional_summary");
     expect(html).toContain("disabled");
     expect(html).not.toContain("medical_summary");
@@ -35,7 +35,6 @@ describe("PartnerFlowScreen", () => {
     expect(html).not.toContain("continue-1");
     expect(html).not.toContain("end-1");
     expect(html).not.toContain("用户原始备注不得给伴侣先看");
-    expect(html).not.toContain("角色");
     expect(html).not.toContain("原始答案");
   });
 

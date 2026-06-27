@@ -38,7 +38,7 @@ export function createInitialAppState(input: {
   redFlagLevel: RedFlagLevel;
 }): AppState {
   return {
-    route: "safety-check",
+    route: "home",
     redFlagLevel: input.redFlagLevel,
     save: { status: "idle" },
     hasExistingReport: input.hasExistingReport,
@@ -72,7 +72,7 @@ export function reduceAppState(state: AppState, action: AppAction): AppState {
       }
       return {
         ...state,
-        route: "home",
+        route: "questionnaire",
         blockedReason: null,
       };
     case "NAVIGATE":

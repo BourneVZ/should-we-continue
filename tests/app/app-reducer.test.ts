@@ -5,7 +5,7 @@ import {
 } from "@/app/app-reducer";
 
 describe("app reducer", () => {
-  it("starts with a mandatory safety-check route before questionnaire flow", () => {
+  it("starts on the landing page before entering questionnaire flow", () => {
     const state = createInitialAppState({
       hasExistingReport: false,
       reportStale: false,
@@ -13,7 +13,7 @@ describe("app reducer", () => {
       redFlagLevel: "none",
     });
 
-    expect(state.route).toBe("safety-check");
+    expect(state.route).toBe("home");
   });
 
   it("blocks navigation when save has failed", () => {
@@ -70,7 +70,7 @@ describe("app reducer", () => {
     expect(confirmed.route).toBe("report");
   });
 
-  it("surfaces stale reports instead of silently opening the old report", () => {
+  it("keeps stale reports from silently opening the old report", () => {
     const state = reduceAppState(
       createInitialAppState({
         hasExistingReport: true,
@@ -81,7 +81,7 @@ describe("app reducer", () => {
       { type: "COMPLETE_SAFETY_CHECK" },
     );
 
-    expect(state.route).toBe("home");
+    expect(state.route).toBe("questionnaire");
     expect(state.reportStatus).toBe("stale");
   });
 

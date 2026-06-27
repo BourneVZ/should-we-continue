@@ -1,9 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { createInitialAppState } from "./app/app-reducer";
-import { App } from "./app/App";
-import { createAppServices } from "./app/services";
-import type { ReportViewModel } from "./domain/types";
+import { createApiClient } from "@/app/api-client";
+import { RuntimeApp } from "@/app/RuntimeApp";
+import { createAppServices } from "@/app/services";
+import type { AppDiagnostics } from "@/app/services";
+import { createLocalWorkspaceRepository } from "@/persistence/local-repository";
 import "./styles/index.css";
 
 const rootElement = document.getElementById("root");
@@ -12,49 +13,7 @@ if (!rootElement) {
   throw new Error("Root element #root was not found.");
 }
 
-const initialState = createInitialAppState({
-  hasExistingReport: false,
-  reportStale: false,
-  canOpenPartnerDiscussion: false,
-  redFlagLevel: "none",
-});
-
-const initialReport: ReportViewModel = {
-  redFlag: { level: "none", actionIds: [] },
-  dimensions: [],
-  certainty: "medium",
-  priorityActionIds: [],
-  pathContinue: [],
-  pathEnd: [],
-  persona: {
-    primaryPersonaId: null,
-    secondaryPersonaId: null,
-    candidatePersonaIds: [],
-    personaConfidence: 0,
-    statusTagIds: [],
-    suppressedReason: null,
-  },
-  region: {
-    status: "empty" as const,
-    checkedAt: null,
-    expiresAt: null,
-    verifiedFields: [],
-  },
-  measures: [],
-};
-
-const services = createAppServices({
-  repository: {},
-  clock: { now: () => Date.now() },
-  apiClient: {},
-  diagnostics: {
-    isDev: import.meta.env.DEV,
-    configAvailable: false,
-    templateFallbackActive: false,
-    errorCategory: null,
-    schemaStatus: "valid" as const,
-  },
-});
+const appRoot = rootElement;
 
 interface RootFallbackProps {
   children: React.ReactNode;
@@ -93,10 +52,58 @@ class RootErrorBoundary extends React.Component<RootFallbackProps, RootFallbackS
   }
 }
 
-ReactDOM.createRoot(rootElement).render(
-  <React.StrictMode>
-    <RootErrorBoundary>
-      <App report={initialReport} services={services} state={initialState} />
-    </RootErrorBoundary>
-  </React.StrictMode>,
-);
+async function loadDiagnosticsPanel(diagnostics: AppDiagnostics) {
+  if (!import.meta.env.DEV) {
+    return null;
+  }
+
+  const { DiagnosticsPanel } = await import("./features/diagnostics/DiagnosticsPanel");
+  return (
+    <DiagnosticsPanel
+      isDev={diagnostics.isDev}
+      configAvailable={diagnostics.configAvailable}
+      templateFallbackActive={diagnostics.templateFallbackActive}
+      errorCategory={diagnostics.errorCategory}
+      schemaStatus={diagnostics.schemaStatus}
+    />
+  );
+}
+
+async function bootstrap() {
+  const diagnostics: AppDiagnostics = {
+    isDev: import.meta.env.DEV,
+    configAvailable: false,
+    templateFallbackActive: !import.meta.env.DEV,
+    errorCategory: null,
+    schemaStatus: "valid",
+  };
+
+  const services = createAppServices({
+    repository: createLocalWorkspaceRepository({
+      storage: window.localStorage,
+      storageKey: "should-we-continue:workspace",
+    }),
+    clock: { now: () => Date.now() },
+    apiClient: createApiClient({
+      fetcher: (url, init) =>
+        fetch(url, init).then(async (response) => ({
+          ok: response.ok,
+          status: response.status,
+          json: async () => response.json(),
+        })),
+    }),
+    diagnostics,
+  });
+
+  const diagnosticsPanel = await loadDiagnosticsPanel(diagnostics);
+
+  ReactDOM.createRoot(appRoot).render(
+    <React.StrictMode>
+      <RootErrorBoundary>
+        <RuntimeApp diagnosticsPanel={diagnosticsPanel} services={services} />
+      </RootErrorBoundary>
+    </React.StrictMode>,
+  );
+}
+
+void bootstrap();

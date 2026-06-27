@@ -1,4 +1,4 @@
-import { REGION_ALLOWLIST, type RegionAllowlistEntry } from "@/config/region/hangzhou-bingjiang";
+import { REGION_ALLOWLIST, type RegionAllowlistEntry } from "../../src/config/region/hangzhou-bingjiang";
 
 interface FetchLikeResponse {
   redirected: boolean;

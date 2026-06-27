@@ -4,8 +4,20 @@ import { createInitialAppState } from "@/app/app-reducer";
 import { App } from "@/app/App";
 import { createReportViewModel } from "../fixtures/factories";
 
+const baseHandlers = {
+  onCompleteSafetyCheck: () => undefined,
+  onStartOrResume: () => undefined,
+  onOpenLatestReport: () => undefined,
+  onClearData: () => undefined,
+  onReturnFromSafetyPriority: () => undefined,
+  onContinueSafely: () => undefined,
+  onOpenOverview: () => undefined,
+  onOpenAnalysis: () => undefined,
+  onOpenPartnerDiscussion: () => undefined,
+};
+
 describe("App", () => {
-  it("starts on the safety-check screen before opening the rest of the flow", () => {
+  it("starts on the landing page instead of the old empty safety-gate screen", () => {
     const html = renderToStaticMarkup(
       <App
         state={createInitialAppState({
@@ -19,13 +31,20 @@ describe("App", () => {
           repository: {},
           clock: {},
           apiClient: {},
-          diagnostics: { isDev: false, configAvailable: true, templateFallbackActive: false, errorCategory: null, schemaStatus: "valid" },
+          diagnostics: {
+            isDev: false,
+            configAvailable: true,
+            templateFallbackActive: false,
+            errorCategory: null,
+            schemaStatus: "valid",
+          },
         }}
+        {...baseHandlers}
       />,
     );
 
-    expect(html).toContain("安全检查");
-    expect(html).not.toContain("Should We Continue");
+    expect(html).toContain("把混乱拆成一题一题");
+    expect(html).not.toContain("先完成安全检查");
   });
 
   it("renders save gate blocking risky actions when persistence failed", () => {
@@ -39,25 +58,32 @@ describe("App", () => {
             redFlagLevel: "none",
           }),
           route: "report",
-          save: { status: "error", message: "保存失败，请重试" },
+          save: { status: "error", message: "本地保存失败，请先重试保存后再继续。" },
         }}
         report={createReportViewModel()}
         services={{
           repository: {},
           clock: {},
           apiClient: {},
-          diagnostics: { isDev: false, configAvailable: true, templateFallbackActive: false, errorCategory: null, schemaStatus: "valid" },
+          diagnostics: {
+            isDev: false,
+            configAvailable: true,
+            templateFallbackActive: false,
+            errorCategory: null,
+            schemaStatus: "valid",
+          },
         }}
+        {...baseHandlers}
       />,
     );
 
-    expect(html).toContain("保存失败，请重试");
+    expect(html).toContain("本地保存失败，请先重试保存后再继续。");
     expect(html).toContain("稍后继续");
     expect(html).toContain("生成报告");
     expect(html).toContain("disabled");
   });
 
-  it("prioritizes the R3/R4 substitute page and mounts diagnostics only in normal dev report mode", () => {
+  it("prioritizes the R3/R4 substitute page and hides diagnostics unless explicitly requested", () => {
     const safetyHtml = renderToStaticMarkup(
       <App
         state={{
@@ -76,8 +102,16 @@ describe("App", () => {
           repository: {},
           clock: {},
           apiClient: {},
-          diagnostics: { isDev: true, configAvailable: false, templateFallbackActive: true, errorCategory: "missing_config", schemaStatus: "valid" },
+          diagnostics: {
+            isDev: true,
+            configAvailable: false,
+            templateFallbackActive: true,
+            errorCategory: "missing_config",
+            schemaStatus: "valid",
+          },
         }}
+        diagnosticsPanel={<aside>开发诊断</aside>}
+        {...baseHandlers}
       />,
     );
 
@@ -100,13 +134,21 @@ describe("App", () => {
           repository: {},
           clock: {},
           apiClient: {},
-          diagnostics: { isDev: true, configAvailable: false, templateFallbackActive: true, errorCategory: "missing_config", schemaStatus: "valid" },
+          diagnostics: {
+            isDev: true,
+            configAvailable: false,
+            templateFallbackActive: true,
+            errorCategory: "missing_config",
+            schemaStatus: "valid",
+          },
         }}
+        diagnosticsPanel={<aside>开发诊断</aside>}
+        {...baseHandlers}
       />,
     );
 
     expect(reportHtml).toContain("概览");
-    expect(reportHtml).toContain("开发诊断");
+    expect(reportHtml).not.toContain("开发诊断");
     expect(reportHtml).not.toContain("LLM_API_KEY");
   });
 });

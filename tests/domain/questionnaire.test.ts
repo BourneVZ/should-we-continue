@@ -16,7 +16,7 @@ describe("getQuestionnaireSnapshot", () => {
     expect(snapshot.visibleQuestions.map((question) => question.answerKey)).toEqual(["Q-CHILD-COUNT"]);
   });
 
-  it("keeps safety pages to a single question and normal pages to at most five questions", () => {
+  it("keeps every questionnaire page to a single focused question", () => {
     const safetySnapshot = getQuestionnaireSnapshot({
       questions: QUESTION_CATALOG,
       answers: {},
@@ -29,7 +29,7 @@ describe("getQuestionnaireSnapshot", () => {
     });
 
     expect(safetySnapshot.pages.every((page) => page.length === 1)).toBe(true);
-    expect(medicalSnapshot.pages.every((page) => page.length >= 3 && page.length <= 5)).toBe(true);
+    expect(medicalSnapshot.pages.every((page) => page.length === 1)).toBe(true);
   });
 
   it("computes exact progress from currently visible questions", () => {

@@ -3,9 +3,9 @@
 @tailwind utilities;
 
 :root {
-  color: #1f2937;
-  background-color: #f7f3ee;
-  font-family: ui-sans-serif, system-ui, sans-serif;
+  color: #17202a;
+  background-color: #f6f2e8;
+  font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
   font-size: 16px;
   line-height: 1.6;
   text-rendering: optimizeLegibility;
@@ -36,9 +36,18 @@ textarea {
   font: inherit;
 }
 
+button {
+  border: 0;
+  cursor: pointer;
+}
+
 textarea {
   min-height: 8rem;
   resize: vertical;
+}
+
+.font-serif {
+  font-family: "Iowan Old Style", "Palatino Linotype", "Songti SC", "STSong", serif;
 }
 
 @media (prefers-reduced-motion: reduce) {

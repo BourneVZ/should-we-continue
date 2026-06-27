@@ -11,8 +11,8 @@ const questions: QuestionMeta[] = [
     phase: "core",
     moduleId: "module-a",
     questionType: "singleSelect",
-    title: "第一页题目",
-    options: [{ code: "A", label: "选项A" }],
+    title: "你现在是否能安全、独立地继续作答？",
+    options: [{ code: "A", label: "可以" }],
     required: true,
     privacy: "private",
     sensitivity: "none",
@@ -20,14 +20,14 @@ const questions: QuestionMeta[] = [
 ];
 
 describe("QuestionnaireScreen", () => {
-  it("renders safety messaging before analysis language and disables defer when save failed", () => {
+  it("renders Chinese progress messaging and disables next when save failed", () => {
     const html = renderToStaticMarkup(
       <QuestionnaireScreen
-        title="核心问卷"
+        title="安全与自主"
         questions={questions}
-        progressLabel="1 / 10"
-        pageRangeLabel="第 1 页，共 1 页"
-        safetyBanner="请先完成安全检查"
+        progressLabel="已完成 1 / 10"
+        pageRangeLabel="第 1 题，共 1 题"
+        safetyBanner="请先确认当前环境安全，再继续填写。"
         saveStatus="error"
         onAnswerChange={() => undefined}
         onNext={() => undefined}
@@ -35,9 +35,10 @@ describe("QuestionnaireScreen", () => {
       />,
     );
 
-    expect(html).toContain("请先完成安全检查");
-    expect(html).toContain("1 / 10");
-    expect(html).toContain("稍后继续");
+    expect(html).toContain("请先确认当前环境安全，再继续填写。");
+    expect(html).toContain("已完成 1 / 10");
+    expect(html).toContain("第 1 题，共 1 题");
+    expect(html).toContain("下一题");
     expect(html).toContain("disabled");
   });
 });

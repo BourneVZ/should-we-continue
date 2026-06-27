@@ -1,5 +1,5 @@
-import { REGION_ALLOWLIST, REGION_CONFIG } from "@/config/region/hangzhou-bingjiang";
-import { buildRegionCache, parseRegionCandidate } from "@/domain/region";
+import { REGION_ALLOWLIST, REGION_CONFIG } from "../../src/config/region/hangzhou-bingjiang";
+import { buildRegionCache, parseRegionCandidate } from "../../src/domain/region";
 import { parseRegionRefreshRequest } from "./request-parsers";
 
 interface RegionRefreshDependencies {

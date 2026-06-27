@@ -23,16 +23,16 @@ export function PartnerFlowScreen({
   partnerSelectedSummaryIds,
   partnerEditedSummary,
   userDiscussionInput: _userDiscussionInput,
-  onStart: _onStart,
-  onPartnerSelectionChange: _onPartnerSelectionChange,
+  onStart,
+  onPartnerSelectionChange,
   onPartnerEditedSummaryChange,
-  onPartnerShare: _onPartnerShare,
+  onPartnerShare,
 }: PartnerFlowScreenProps): ReactElement {
   if (!discussionReady) {
     return (
-      <section className="rounded-3xl border border-accentSoft bg-white p-6">
-        <h2 className="text-xl font-semibold text-ink">伴侣填写入口未开启</h2>
-        <p className="mt-3 text-sm text-slate-700">生成共同讨论页后，才会显示伴侣交接入口。</p>
+      <section className="rounded-[32px] border border-[#dce7e3] bg-white p-8 shadow-[0_16px_50px_rgba(31,56,68,0.08)]">
+        <h2 className="text-2xl font-semibold text-slate-900">伴侣填写入口未开启</h2>
+        <p className="mt-3 text-sm leading-7 text-slate-600">生成共同讨论页后，才会显示伴侣交接入口。</p>
       </section>
     );
   }
@@ -40,42 +40,65 @@ export function PartnerFlowScreen({
   const shareDisabled = partnerEditedSummary.trim().length === 0;
 
   return (
-    <section className="rounded-3xl border border-accentSoft bg-white p-6">
-      <header className="space-y-2">
-        <h2 className="text-xl font-semibold text-ink">交给伴侣填写</h2>
-        <p className="text-sm text-slate-700">伴侣先看自己的摘要，再决定是否主动分享。</p>
+    <section className="space-y-6 rounded-[32px] border border-[#dce7e3] bg-white p-8 shadow-[0_16px_50px_rgba(31,56,68,0.08)]">
+      <header className="space-y-3">
+        <h2 className="text-2xl font-semibold text-slate-900">交给伴侣填写</h2>
+        <p className="text-sm leading-7 text-slate-600">
+          伴侣只会看到她主动选择共享的摘要内容，不会直接看到原始回答和未授权信息。
+        </p>
       </header>
 
-      <div className="mt-6 rounded-2xl border border-slate-200 px-4 py-4">
-        <h3 className="text-sm font-medium text-slate-900">伴侣可分享摘要</h3>
-        <ul className="mt-3 space-y-2 text-sm text-slate-800">
-          {partnerSelectedSummaryIds.map((summaryId) => (
-            <li key={summaryId}>{summaryId}</li>
-          ))}
-          {partnerSelectedSummaryIds.length === 0 ? <li>尚未选择</li> : null}
-        </ul>
+      <div className="flex flex-wrap gap-3 text-xs text-slate-500">
+        <span className="rounded-full bg-slate-100 px-3 py-1">{partnerStarted ? "已开始" : "未开始"}</span>
+        <span className="rounded-full bg-slate-100 px-3 py-1">{partnerCompleted ? "已完成" : "未完成"}</span>
+        <span className="rounded-full bg-slate-100 px-3 py-1">
+          {partnerSummaryIds.length > 0 ? "已有共享摘要" : "暂未共享摘要"}
+        </span>
       </div>
 
-      <div className="mt-6 rounded-2xl border border-slate-200 px-4 py-4">
-        <label className="block text-sm font-medium text-slate-900" htmlFor="partner-summary">
+      <button
+        className="rounded-full border border-slate-200 px-5 py-3 text-sm font-medium text-slate-700 transition hover:bg-slate-50"
+        type="button"
+        onClick={onStart}
+      >
+        开始伴侣填写
+      </button>
+
+      <div className="rounded-[26px] bg-slate-50 p-6">
+        <h3 className="text-lg font-semibold text-slate-900">伴侣可共享摘要</h3>
+        <div className="mt-4 space-y-3">
+          {partnerSelectedSummaryIds.map((summaryId) => (
+            <label
+              key={summaryId}
+              className="flex cursor-pointer items-center gap-3 rounded-[18px] border border-slate-200 bg-white px-4 py-3 text-sm text-slate-700"
+            >
+              <input checked type="checkbox" onChange={() => onPartnerSelectionChange(summaryId)} />
+              {summaryId}
+            </label>
+          ))}
+          {partnerSelectedSummaryIds.length === 0 ? <p className="text-sm text-slate-500">尚未选择</p> : null}
+        </div>
+      </div>
+
+      <div className="rounded-[26px] bg-slate-50 p-6">
+        <label className="block text-lg font-semibold text-slate-900" htmlFor="partner-summary">
           伴侣摘要
         </label>
         <textarea
-          className="mt-3 min-h-24 w-full rounded-2xl border border-slate-300 px-3 py-2 text-sm"
+          className="mt-4 min-h-28 w-full rounded-[20px] border border-slate-200 bg-white px-4 py-4 text-sm leading-7 text-slate-900"
           id="partner-summary"
           onChange={(event) => onPartnerEditedSummaryChange(event.target.value)}
           value={partnerEditedSummary}
         />
       </div>
 
-      <div className="mt-6 flex flex-wrap gap-2 text-xs text-slate-500">
-        <span>{partnerStarted ? "started" : "not-started"}</span>
-        <span>{partnerCompleted ? "completed" : "not-completed"}</span>
-        <span>{partnerSummaryIds.length > 0 ? "shared" : "private"}</span>
-      </div>
-
-      <button className="mt-6 rounded-full border px-4 py-2 text-sm" disabled={shareDisabled} type="button">
-        {shareDisabled ? "disabled" : "分享给共同讨论页"}
+      <button
+        className="rounded-full bg-[#14344b] px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#19415d] disabled:cursor-not-allowed disabled:bg-slate-300"
+        disabled={shareDisabled}
+        type="button"
+        onClick={onPartnerShare}
+      >
+        分享给共同讨论页
       </button>
     </section>
   );
