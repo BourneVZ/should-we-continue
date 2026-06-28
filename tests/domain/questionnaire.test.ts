@@ -74,4 +74,18 @@ describe("isDeepDiveModuleComplete", () => {
       }),
     ).toBe(false);
   });
+
+  it("does not let optional deep-dive free text block module completion", () => {
+    expect(
+      isDeepDiveModuleComplete({
+        questions: QUESTION_CATALOG,
+        answers: {
+          "Q-DEEP-MED-NEXT-STEPS": createAnswered("yes"),
+          "Q-DEEP-MED-APPOINTMENT-SUPPORT": createAnswered("arranged"),
+          "Q-DEEP-MED-EMERGENCY-PLAN": createAnswered("arranged"),
+        },
+        moduleId: "medical-deep",
+      }),
+    ).toBe(true);
+  });
 });

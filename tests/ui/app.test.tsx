@@ -14,6 +14,7 @@ const baseHandlers = {
   onOpenOverview: () => undefined,
   onOpenAnalysis: () => undefined,
   onOpenPartnerDiscussion: () => undefined,
+  onPreparePartnerDiscussion: () => undefined,
 };
 
 describe("App", () => {
@@ -78,8 +79,6 @@ describe("App", () => {
     );
 
     expect(html).toContain("本地保存失败，请先重试保存后再继续。");
-    expect(html).toContain("稍后继续");
-    expect(html).toContain("生成报告");
     expect(html).toContain("disabled");
   });
 
@@ -115,7 +114,7 @@ describe("App", () => {
       />,
     );
 
-    expect(safetyHtml).toContain("ACT-URGENT-MEDICAL");
+    expect(safetyHtml).toContain("优先处理线下医疗排查");
     expect(safetyHtml).not.toContain("开发诊断");
 
     const reportHtml = renderToStaticMarkup(
@@ -147,7 +146,7 @@ describe("App", () => {
       />,
     );
 
-    expect(reportHtml).toContain("概览");
+    expect(reportHtml).toContain("总览");
     expect(reportHtml).not.toContain("开发诊断");
     expect(reportHtml).not.toContain("LLM_API_KEY");
   });

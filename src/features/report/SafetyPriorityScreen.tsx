@@ -1,5 +1,6 @@
 import type { ReactElement } from "react";
 import type { RedFlagLevel } from "@/domain/types";
+import { getActionLabel } from "./report-copy";
 
 interface SafetyPriorityScreenProps {
   level: RedFlagLevel;
@@ -35,7 +36,7 @@ export function SafetyPriorityScreen({
           <ul className="mt-5 space-y-3">
             {actionIds.map((actionId) => (
               <li key={actionId} className="rounded-[22px] bg-slate-50 px-5 py-4 text-base leading-8 text-slate-800">
-                {actionId}
+                {getActionLabel(actionId)}
               </li>
             ))}
           </ul>

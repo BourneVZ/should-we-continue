@@ -4,6 +4,7 @@ import { createApiClient } from "@/app/api-client";
 import { RuntimeApp } from "@/app/RuntimeApp";
 import { createAppServices } from "@/app/services";
 import type { AppDiagnostics } from "@/app/services";
+import { createBrowserStorageAdapter } from "@/persistence/browser-storage";
 import { createLocalWorkspaceRepository } from "@/persistence/local-repository";
 import "./styles/index.css";
 
@@ -80,7 +81,7 @@ async function bootstrap() {
 
   const services = createAppServices({
     repository: createLocalWorkspaceRepository({
-      storage: window.localStorage,
+      storage: createBrowserStorageAdapter(() => window.localStorage),
       storageKey: "should-we-continue:workspace",
     }),
     clock: { now: () => Date.now() },

@@ -61,6 +61,19 @@ describe("createLocalWorkspaceRepository", () => {
     expect(storage.getItem("workspace")).toBeNull();
   });
 
+  it("returns null when persisted storage cannot be read", () => {
+    const storage = {
+      getItem: () => {
+        throw new Error("SecurityError");
+      },
+      setItem: () => undefined,
+      removeItem: () => undefined,
+    };
+    const repository = createLocalWorkspaceRepository({ storage, storageKey: "workspace" });
+
+    expect(repository.load()).toBeNull();
+  });
+
   it("clears incompatible persisted data instead of loading it", () => {
     const storage = new FakeStorage();
     storage.setItem(

@@ -14,10 +14,10 @@ describe("SafetyPriorityScreen", () => {
       />,
     );
 
-    expect(html).toContain("ACT-URGENT-MEDICAL");
-    expect(html).toContain("返回");
+    expect(html).toContain("优先处理线下医疗排查");
+    expect(html).toContain("返回首页");
     expect(html).toContain("清除本机数据");
-    expect(html).not.toContain("伴侣讨论");
+    expect(html).not.toContain("共同讨论");
     expect(html).not.toContain("P10");
   });
 });

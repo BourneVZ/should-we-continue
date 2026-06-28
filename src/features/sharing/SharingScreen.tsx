@@ -1,6 +1,7 @@
 import type { ReactElement } from "react";
 import { SHARE_CATEGORY_IDS } from "@/config/report/content";
 import type { ReportViewModel } from "@/domain/types";
+import { getActionLabel } from "@/features/report/report-copy";
 
 interface SharingScreenProps {
   report: ReportViewModel;
@@ -15,6 +16,23 @@ interface SharingScreenProps {
   onConfirm: () => void;
 }
 
+const SUMMARY_LABELS: Readonly<Record<string, string>> = {
+  medical_summary: "医学状态摘要",
+  emotional_summary: "情绪状态摘要",
+  life_summary: "人生节奏摘要",
+  financial_summary: "经济现实摘要",
+  partner_needs: "希望伴侣如何支持",
+  family_boundary_summary: "家庭边界摘要",
+  childcare_summary: "照料安排摘要",
+  values_summary: "价值排序摘要",
+  path_conditions: "路径条件",
+  edited_note_summary: "可共享备注摘要",
+};
+
+function getSummaryLabel(summaryId: string): string {
+  return SUMMARY_LABELS[summaryId] ?? summaryId;
+}
+
 export function SharingScreen({
   report,
   selectedSummaryIds,
@@ -22,25 +40,25 @@ export function SharingScreen({
   editedNoteSummary,
   requireReauthorization,
   rawNotePreview: _rawNotePreview,
-  onSelectionChange: _onSelectionChange,
-  onSharePathConditionsChange: _onSharePathConditionsChange,
+  onSelectionChange,
+  onSharePathConditionsChange,
   onEditedNoteSummaryChange,
-  onConfirm: _onConfirm,
+  onConfirm,
 }: SharingScreenProps): ReactElement {
   if (report.redFlag.level === "R3" || report.redFlag.level === "R4") {
     return (
       <section className="rounded-3xl border border-danger/20 bg-white p-6">
-        <h2 className="text-xl font-semibold text-ink">共享已禁用</h2>
-        <p className="mt-3 text-sm text-slate-700">当前风险等级下不生成共同讨论材料。</p>
+        <h2 className="text-xl font-semibold text-ink">当前不可共享</h2>
+        <p className="mt-3 text-sm text-slate-700">当前安全等级下，共同讨论与共享功能已被关闭。</p>
         <div className="mt-4 flex flex-wrap gap-2">
           {report.redFlag.actionIds.map((actionId) => (
             <span className="rounded-full bg-slate-100 px-3 py-1 text-xs text-slate-700" key={actionId}>
-              {actionId}
+              {getActionLabel(actionId)}
             </span>
           ))}
         </div>
         <button className="mt-6 rounded-full border px-4 py-2 text-sm" disabled type="button">
-          disabled
+          已禁用
         </button>
       </section>
     );
@@ -52,33 +70,51 @@ export function SharingScreen({
   return (
     <section className="rounded-3xl border border-accentSoft bg-white p-6">
       <header className="space-y-2">
-        <h2 className="text-xl font-semibold text-ink">分享授权</h2>
-        <p className="text-sm text-slate-700">每项都需要主动选择，未选即不共享。</p>
-        {requireReauthorization ? <p className="text-sm text-slate-700">重新授权</p> : null}
+        <h2 className="text-xl font-semibold text-ink">共享授权</h2>
+        <p className="text-sm text-slate-700">每一项都需要你主动勾选授权；未勾选的内容默认保持私密。</p>
+        {requireReauthorization ? (
+          <p className="text-sm text-slate-700">报告内容有更新，需要重新确认这次共享授权。</p>
+        ) : null}
       </header>
 
       <ul className="mt-6 grid gap-3">
         {SHARE_CATEGORY_IDS.filter((summaryId) => summaryId !== "path_conditions").map((summaryId) => (
           <li className="rounded-2xl border border-slate-200 px-4 py-3 text-sm text-slate-800" key={summaryId}>
-            <div className="font-medium">{summaryId}</div>
-            <div className="mt-1 text-xs text-slate-500">
-              {selectedSummaryIds.includes(summaryId) ? "selected" : "not-selected"}
-            </div>
+            <label className="flex cursor-pointer items-start gap-3">
+              <input
+                checked={selectedSummaryIds.includes(summaryId)}
+                type="checkbox"
+                onChange={() => onSelectionChange(summaryId)}
+              />
+              <span>
+                <span className="block font-medium">{getSummaryLabel(summaryId)}</span>
+                <span className="mt-1 block text-xs text-slate-500">
+                  {selectedSummaryIds.includes(summaryId) ? "已授权" : "未授权"}
+                </span>
+              </span>
+            </label>
           </li>
         ))}
       </ul>
 
       <section className="mt-6 rounded-2xl border border-slate-200 px-4 py-4">
-        <div className="font-medium text-slate-900">path_conditions</div>
-        <p className="mt-1 text-sm text-slate-700">路径条件需要独立授权，不会直接复制原始回答。</p>
-        <p className="mt-2 text-xs text-slate-500">{sharePathConditions ? "authorized" : "not-authorized"}</p>
+        <div className="font-medium text-slate-900">{getSummaryLabel("path_conditions")}</div>
+        <p className="mt-1 text-sm text-slate-700">路径条件需要单独授权共享，且不会直接暴露你的原始回答。</p>
+        <label className="mt-3 flex cursor-pointer items-center gap-3 text-sm text-slate-800">
+          <input
+            checked={sharePathConditions}
+            type="checkbox"
+            onChange={(event) => onSharePathConditionsChange(event.target.checked)}
+          />
+          <span>{sharePathConditions ? "已授权共享" : "未授权"}</span>
+        </label>
       </section>
 
       <section className="mt-6 rounded-2xl border border-slate-200 px-4 py-4">
         <label className="block text-sm font-medium text-slate-900" htmlFor="edited-note-summary">
-          编辑摘要
+          可共享摘要
         </label>
-        <p className="mt-1 text-sm text-slate-700">总体备注必须先整理成独立摘要。</p>
+        <p className="mt-1 text-sm text-slate-700">请先把私人备注改写成单独摘要后再共享；原始备注不会自动带入。</p>
         <textarea
           className="mt-3 min-h-24 w-full rounded-2xl border border-slate-300 px-3 py-2 text-sm"
           id="edited-note-summary"
@@ -87,8 +123,13 @@ export function SharingScreen({
         />
       </section>
 
-      <button className="mt-6 rounded-full border px-4 py-2 text-sm" disabled={confirmDisabled} type="button">
-        {confirmDisabled ? "disabled" : "确认分享"}
+      <button
+        className="mt-6 rounded-full border px-4 py-2 text-sm"
+        disabled={confirmDisabled}
+        type="button"
+        onClick={onConfirm}
+      >
+        {confirmDisabled ? "请先填写可共享摘要" : "确认共享"}
       </button>
     </section>
   );

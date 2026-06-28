@@ -3,17 +3,31 @@ import { SaveStatusGate } from "@/components/SaveStatusGate";
 import type { AppState } from "@/app/app-reducer";
 import { HomeScreen } from "@/features/home/HomeScreen";
 import { ReportShell } from "@/features/report/ReportShell";
-import type { DeepDiveModuleEntry, SuggestedQuestionLink } from "@/features/report/AnalysisPage";
+import type { DeepDiveModuleEntry } from "@/features/report/AnalysisPage";
+import type { PartnerDiscussionPageProps } from "@/features/report/PartnerDiscussionPage";
 import { SafetyPriorityScreen } from "@/features/report/SafetyPriorityScreen";
 import type { ReportViewModel } from "@/domain/types";
 import type { AppServices, AppDiagnostics } from "./services";
+
+interface SharingProps {
+  selectedSummaryIds: readonly string[];
+  sharePathConditions: boolean;
+  editedNoteSummary: string;
+  requireReauthorization: boolean;
+  onSelectionChange: (summaryId: string) => void;
+  onSharePathConditionsChange: (nextValue: boolean) => void;
+  onEditedNoteSummaryChange: (value: string) => void;
+  onConfirm: () => void;
+}
 
 interface AppProps {
   state: AppState;
   report: ReportViewModel;
   services: AppServices<unknown, unknown, unknown, AppDiagnostics>;
   diagnosticsPanel?: ReactNode;
-  activeReportTab?: "overview" | "analysis" | "partner";
+  activeReportTab?: "overview" | "analysis" | "sharing" | "partner";
+  partnerDiscussionProps?: PartnerDiscussionPageProps;
+  sharingProps?: SharingProps;
   onCompleteSafetyCheck: () => void;
   onStartOrResume: () => void;
   onOpenLatestReport: () => void;
@@ -23,8 +37,8 @@ interface AppProps {
   onOpenOverview: () => void;
   onOpenAnalysis: () => void;
   onOpenPartnerDiscussion: () => void;
+  onPreparePartnerDiscussion: () => void;
   onReturnHome?: () => void;
-  suggestedQuestionLinks?: readonly SuggestedQuestionLink[];
   deepDiveModules?: readonly DeepDiveModuleEntry[];
 }
 
@@ -33,8 +47,9 @@ function renderRoute(
   report: ReportViewModel,
   handlers: Pick<
     AppProps,
-    | "onCompleteSafetyCheck"
     | "activeReportTab"
+    | "partnerDiscussionProps"
+    | "sharingProps"
     | "onStartOrResume"
     | "onOpenLatestReport"
     | "onClearData"
@@ -43,8 +58,8 @@ function renderRoute(
     | "onOpenOverview"
     | "onOpenAnalysis"
     | "onOpenPartnerDiscussion"
+    | "onPreparePartnerDiscussion"
     | "onReturnHome"
-    | "suggestedQuestionLinks"
     | "deepDiveModules"
   >,
 ): ReactElement {
@@ -77,14 +92,16 @@ function renderRoute(
       activeTab={handlers.activeReportTab ?? "overview"}
       partnerTabEnabled={state.canOpenPartnerDiscussion}
       report={report}
+      partnerDiscussionProps={handlers.partnerDiscussionProps}
+      sharingProps={handlers.sharingProps}
       onOpenOverview={handlers.onOpenOverview}
       onOpenAnalysis={handlers.onOpenAnalysis}
       onOpenPartnerDiscussion={handlers.onOpenPartnerDiscussion}
+      onPreparePartnerDiscussion={handlers.onPreparePartnerDiscussion}
       onReturnHome={handlers.onReturnHome}
       onReturnFromSafetyPriority={handlers.onReturnFromSafetyPriority}
       onClearData={handlers.onClearData}
       onContinueSafely={handlers.onContinueSafely}
-      suggestedQuestionLinks={handlers.suggestedQuestionLinks}
       deepDiveModules={handlers.deepDiveModules}
     />
   );
@@ -96,7 +113,9 @@ export function App({
   services,
   diagnosticsPanel,
   activeReportTab = "overview",
-  onCompleteSafetyCheck,
+  partnerDiscussionProps,
+  sharingProps,
+  onCompleteSafetyCheck: _onCompleteSafetyCheck,
   onStartOrResume,
   onOpenLatestReport,
   onClearData,
@@ -105,8 +124,8 @@ export function App({
   onOpenOverview,
   onOpenAnalysis,
   onOpenPartnerDiscussion,
+  onPreparePartnerDiscussion,
   onReturnHome = () => undefined,
-  suggestedQuestionLinks = [],
   deepDiveModules = [],
 }: AppProps): ReactElement {
   const showsSafetySubstitute =
@@ -129,15 +148,16 @@ export function App({
             message={state.save.message}
             onRetry={() => undefined}
             riskyActions={[
-              { id: "resume-later", label: "稍后继续" },
+              { id: "resume-later", label: "稍后继续填写" },
               { id: "generate-report", label: "生成报告" },
             ]}
           />
         </div>
       ) : null}
       {renderRoute(state, report, {
-        onCompleteSafetyCheck,
         activeReportTab,
+        partnerDiscussionProps,
+        sharingProps,
         onStartOrResume,
         onOpenLatestReport,
         onClearData,
@@ -146,8 +166,8 @@ export function App({
         onOpenOverview,
         onOpenAnalysis,
         onOpenPartnerDiscussion,
+        onPreparePartnerDiscussion,
         onReturnHome,
-        suggestedQuestionLinks,
         deepDiveModules,
       })}
       {showDiagnostics ? <div className="mx-auto max-w-5xl px-6 pb-8">{diagnosticsPanel}</div> : null}

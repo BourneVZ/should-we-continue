@@ -61,4 +61,30 @@ describe("OverviewPage", () => {
     expect(html).toContain("先补足关键医学信息");
     expect(html).not.toContain("还没有可展示的报告内容");
   });
+
+  it("renders the calibrated persona visual when persona assessment is complete", () => {
+    const html = renderToStaticMarkup(
+      <OverviewPage
+        report={createReportViewModel({
+          dimensions: [
+            { dimensionId: "personalWillClaritySupport", displayLevel: "high", certaintyLevel: "high", reasonIds: ["Q-ROLE-FACT-CHECK"] },
+          ],
+          persona: {
+            primaryPersonaId: "P01",
+            secondaryPersonaId: "P03",
+            candidatePersonaIds: ["P01", "P03"],
+            personaConfidence: 78,
+            statusTagIds: [],
+            suppressedReason: null,
+          },
+        })}
+        partnerPerspectiveAuthorized={false}
+      />,
+    );
+
+    expect(html).toContain("当前更接近：雾灯校准师");
+    expect(html).toContain("/personas/P01.svg");
+    expect(html).toContain("雾灯校准师的抽象插画");
+    expect(html).toContain("次要参考：风向捕手");
+  });
 });

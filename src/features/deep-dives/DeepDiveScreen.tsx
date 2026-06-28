@@ -15,6 +15,7 @@ interface DeepDiveScreenProps {
   onSelectModule: (moduleId: string) => void;
   onRequestSkipAll: () => void;
   onConfirmSkipAll: () => void;
+  onContinueToReport: () => void;
 }
 
 const STATUS_LABELS: Record<DeepDiveModuleCard["status"], string> = {
@@ -30,8 +31,13 @@ export function DeepDiveScreen({
   onSelectModule,
   onRequestSkipAll,
   onConfirmSkipAll,
+  onContinueToReport,
 }: DeepDiveScreenProps): ReactElement {
   const allModules = [...recommendations, personaExtra];
+  const completedCount = allModules.filter((module) => module.status === "completed").length;
+  const allCompleted = allModules.length > 0 && completedCount === allModules.length;
+  const hasCompleted = completedCount > 0;
+  const actionLabel = allCompleted ? "进入下一环节" : hasCompleted ? "跳过剩余" : "跳过全部";
 
   return (
     <main className="mx-auto flex max-w-5xl flex-col gap-5 px-6 py-8">
@@ -71,13 +77,17 @@ export function DeepDiveScreen({
       </section>
 
       <section className="rounded-[24px] border border-[#dce7e3] bg-white p-5">
-        <button type="button" className="rounded-full border border-ink px-5 py-2 text-sm font-semibold" onClick={onRequestSkipAll}>
-          跳过全部
+        <button
+          type="button"
+          className="rounded-full border border-ink px-5 py-2 text-sm font-semibold"
+          onClick={allCompleted ? onContinueToReport : onRequestSkipAll}
+        >
+          {actionLabel}
         </button>
         {skipConfirmationOpen ? (
           <div className="mt-4 rounded-2xl border border-amber-300 bg-amber-50 p-4">
             <p className="text-sm leading-7 text-amber-950">
-              未完成的深入模块不会参与报告。确认后将根据当前已完成内容生成最终个人报告。
+              未完成的深入模块不会参与报告；已完成的模块会进入下一环节。确认后将根据当前已完成内容生成最终个人报告。
             </p>
             <button
               type="button"

@@ -17,6 +17,7 @@ import { DeepDiveScreen } from "@/features/deep-dives/DeepDiveScreen";
 import type { DeepDiveModuleCard } from "@/features/deep-dives/DeepDiveScreen";
 import { QuestionnaireScreen } from "@/features/questionnaire/QuestionnaireScreen";
 import { getAnswerStatus } from "@/domain/answers";
+import { buildPartnerDiscussionWorkflow } from "@/domain/partner-discussion-workflow";
 import { calculatePersonaResult } from "@/domain/personas";
 import { buildPathConditionChecklists } from "@/domain/path-conditions";
 import { getQuestionnaireSnapshot, isDeepDiveModuleComplete, validateQuestionPage } from "@/domain/questionnaire";
@@ -24,8 +25,10 @@ import { getDeepDiveRecommendations } from "@/domain/recommendations";
 import { buildStaticRegionCache } from "@/domain/region";
 import { calculateSupportScores, toReportDimensions } from "@/domain/scoring";
 import { evaluateSafety } from "@/domain/safety";
+import { buildSharedDiscussionInput } from "@/domain/sharing";
 import type { AnswerValue, ReportViewModel, WorkspaceDocument } from "@/domain/types";
-import type { DeepDiveModuleEntry, SuggestedQuestionLink } from "@/features/report/AnalysisPage";
+import type { DeepDiveModuleEntry } from "@/features/report/AnalysisPage";
+import { SHARE_CATEGORY_IDS } from "@/config/report/content";
 import { createRuntimeSnapshot, getCoreCompletionRoute } from "./runtime-state";
 
 interface RuntimeAppProps {
@@ -96,8 +99,12 @@ export function RuntimeApp({ services, diagnosticsPanel }: RuntimeAppProps) {
   const [appState, dispatch] = useReducer(reduceAppState, initialSnapshot.state);
   const [moduleIndex, setModuleIndex] = useState(0);
   const [pageIndex, setPageIndex] = useState(0);
-  const [activeTab, setActiveTab] = useState<"overview" | "analysis" | "partner">("overview");
+  const [activeTab, setActiveTab] = useState<"overview" | "analysis" | "sharing" | "partner">("overview");
   const [activeDeepDiveModuleId, setActiveDeepDiveModuleId] = useState<string | null>(null);
+  const [selectedSummaryIds, setSelectedSummaryIds] = useState<readonly string[]>([]);
+  const [sharePathConditions, setSharePathConditions] = useState(false);
+  const [editedNoteSummary, setEditedNoteSummary] = useState("");
+  const [selectedCommitmentIds, setSelectedCommitmentIds] = useState<readonly string[]>([]);
 
   const hasSavedAnswers = workspace.user.answersRevision > 0;
   const hasGeneratedReport = workspace.user.reportView !== null;
@@ -305,40 +312,6 @@ export function RuntimeApp({ services, diagnosticsPanel }: RuntimeAppProps) {
     navigateToQuestionnaire();
   }
 
-  function buildSuggestedQuestionLinks(): readonly SuggestedQuestionLink[] {
-    const suggestions: SuggestedQuestionLink[] = [];
-
-    for (const moduleId of CORE_MODULE_IDS) {
-      const snapshot = getQuestionnaireSnapshot({
-        questions: QUESTION_CATALOG,
-        answers: workspace.user.answers,
-        moduleId,
-      });
-
-      for (const page of snapshot.pages) {
-        const question = page.find(
-          (item) =>
-            item.required &&
-            item.questionType !== "freeText" &&
-            getAnswerStatus(workspace.user.answers[item.answerKey]) === "unanswered",
-        );
-        if (question) {
-          suggestions.push({
-            answerKey: question.answerKey,
-            label: question.title,
-            moduleLabel: getModuleLabel(question.moduleId),
-            onSelect: () => navigateToQuestion(question.answerKey),
-          });
-        }
-        if (suggestions.length >= 5) {
-          return suggestions;
-        }
-      }
-    }
-
-    return suggestions;
-  }
-
   function buildDeepDiveModules(): readonly DeepDiveModuleEntry[] {
     const scoring = calculateSupportScores(workspace.user.answers, SCORING_DIMENSIONS);
     const recommendedIds = getDeepDiveRecommendations(scoring.dimensions, RECOMMENDATION_CONFIG);
@@ -359,6 +332,7 @@ export function RuntimeApp({ services, diagnosticsPanel }: RuntimeAppProps) {
         title: getModuleLabel(moduleId),
         estimatedQuestions: snapshot.totalVisibleCount,
         purpose: "补齐更细的现实条件、支持安排和行动清单。",
+        status: getModuleStatus(moduleId),
         onSelect: () => navigateToDeepDiveModule(moduleId),
       };
     });
@@ -383,6 +357,51 @@ export function RuntimeApp({ services, diagnosticsPanel }: RuntimeAppProps) {
 
     setActiveTab("overview");
     setActiveDeepDiveModuleId(null);
+    dispatch({ type: "NAVIGATE", route: "report" });
+  }
+
+  function resetSharingDraft() {
+    setSelectedSummaryIds([]);
+    setSharePathConditions(false);
+    setEditedNoteSummary("");
+  }
+
+  function openSharingFlow() {
+    resetSharingDraft();
+    setActiveTab("sharing");
+    dispatch({ type: "NAVIGATE", route: "report" });
+  }
+
+  function handleSharingSelectionChange(summaryId: string) {
+    setSelectedSummaryIds((current) =>
+      current.includes(summaryId) ? current.filter((item) => item !== summaryId) : [...current, summaryId],
+    );
+  }
+
+  function handleConfirmPartnerDiscussion() {
+    const allowedSummaryIds = selectedSummaryIds.filter((summaryId) =>
+      SHARE_CATEGORY_IDS.includes(summaryId as (typeof SHARE_CATEGORY_IDS)[number]),
+    );
+    const discussion = buildSharedDiscussionInput({
+      report,
+      allowedSummaryIds,
+      sharePathConditions,
+      editedNoteSummary: allowedSummaryIds.includes("edited_note_summary") ? editedNoteSummary.trim() : undefined,
+    });
+    const nextWorkspace: WorkspaceDocument = {
+      ...workspace,
+      shared: {
+        discussion,
+      },
+    };
+
+    if (!persistWorkspace(nextWorkspace, report)) {
+      return;
+    }
+
+    resetSharingDraft();
+    setSelectedCommitmentIds([]);
+    setActiveTab("partner");
     dispatch({ type: "NAVIGATE", route: "report" });
   }
 
@@ -420,6 +439,7 @@ export function RuntimeApp({ services, diagnosticsPanel }: RuntimeAppProps) {
     };
 
     persistWorkspace(nextWorkspace, report);
+    setSelectedCommitmentIds([]);
   }
 
   async function handleNextQuestionPage() {
@@ -525,6 +545,8 @@ export function RuntimeApp({ services, diagnosticsPanel }: RuntimeAppProps) {
     setPageIndex(0);
     setActiveDeepDiveModuleId(null);
     setActiveTab("overview");
+    resetSharingDraft();
+    setSelectedCommitmentIds([]);
     dispatch({ type: "NAVIGATE", route: "home" });
   }
 
@@ -565,9 +587,39 @@ export function RuntimeApp({ services, diagnosticsPanel }: RuntimeAppProps) {
         onSelectModule={navigateToDeepDiveModule}
         onRequestSkipAll={() => dispatch({ type: "REQUEST_SKIP_DEEP_DIVES" })}
         onConfirmSkipAll={handleConfirmSkipAllDeepDives}
+        onContinueToReport={() => void generateAndOpenReport(workspace)}
       />
     );
   }
+
+  const partnerDiscussionWorkflow =
+    workspace.shared.discussion !== null
+      ? buildPartnerDiscussionWorkflow({
+          userReport: report,
+          userShared: workspace.shared.discussion,
+          partnerSharedSummaryIds: [],
+          redFlagLevel: report.redFlag.level,
+        })
+      : null;
+
+  const partnerDiscussionProps =
+    workspace.shared.discussion !== null && partnerDiscussionWorkflow !== null
+      ? {
+          discussionTopicIds: partnerDiscussionWorkflow.discussionTopicIds,
+          commitmentCategoryIds: partnerDiscussionWorkflow.commitmentCategoryIds,
+          sharedPathContinue: workspace.shared.discussion.pathContinue,
+          sharedPathEnd: workspace.shared.discussion.pathEnd,
+          unsharedPlaceholderCount:
+            workspace.shared.discussion.pathContinue.length === 0 && workspace.shared.discussion.pathEnd.length === 0 ? 2 : 0,
+          selectedCommitmentIds,
+          onToggleCommitment: (commitmentId: string) =>
+            setSelectedCommitmentIds((current) =>
+              current.includes(commitmentId)
+                ? current.filter((item) => item !== commitmentId)
+                : [...current, commitmentId],
+            ),
+        }
+      : undefined;
 
   return (
     <App
@@ -585,9 +637,20 @@ export function RuntimeApp({ services, diagnosticsPanel }: RuntimeAppProps) {
       onOpenOverview={() => setActiveTab("overview")}
       onOpenAnalysis={() => setActiveTab("analysis")}
       onOpenPartnerDiscussion={() => setActiveTab("partner")}
+      onPreparePartnerDiscussion={openSharingFlow}
       onReturnHome={() => dispatch({ type: "NAVIGATE", route: "home" })}
-      suggestedQuestionLinks={buildSuggestedQuestionLinks()}
       deepDiveModules={buildDeepDiveModules()}
+      partnerDiscussionProps={partnerDiscussionProps}
+      sharingProps={{
+        selectedSummaryIds,
+        sharePathConditions,
+        editedNoteSummary,
+        requireReauthorization: true,
+        onSelectionChange: handleSharingSelectionChange,
+        onSharePathConditionsChange: setSharePathConditions,
+        onEditedNoteSummaryChange: setEditedNoteSummary,
+        onConfirm: handleConfirmPartnerDiscussion,
+      }}
     />
   );
 }

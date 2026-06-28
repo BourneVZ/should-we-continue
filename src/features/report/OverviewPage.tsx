@@ -1,4 +1,5 @@
 import type { ReactElement } from "react";
+import { PERSONA_VISUALS } from "@/config/personas/visuals";
 import type { ReportViewModel } from "@/domain/types";
 import {
   getActionLabel,
@@ -20,6 +21,10 @@ export function OverviewPage({ report, partnerPerspectiveAuthorized }: OverviewP
     report.pathContinue.length > 0 ||
     report.pathEnd.length > 0;
   const primaryPersonaLabel = getPersonaLabel(report.persona.primaryPersonaId);
+  const secondaryPersonaLabel = getPersonaLabel(report.persona.secondaryPersonaId);
+  const primaryPersonaVisual = report.persona.primaryPersonaId
+    ? PERSONA_VISUALS[report.persona.primaryPersonaId]
+    : null;
   const headline = primaryPersonaLabel
     ? `当前更接近：${primaryPersonaLabel}`
     : hasReportContent
@@ -73,6 +78,28 @@ export function OverviewPage({ report, partnerPerspectiveAuthorized }: OverviewP
                 </p>
               </article>
             ))}
+          </div>
+        </section>
+      ) : null}
+
+      {primaryPersonaLabel && primaryPersonaVisual ? (
+        <section className="grid gap-6 rounded-[32px] border border-[#dce7e3] bg-white p-8 shadow-[0_16px_50px_rgba(31,56,68,0.08)] md:grid-cols-[220px_1fr]">
+          <div className="rounded-[28px] bg-slate-50 p-4">
+            <img
+              src={primaryPersonaVisual.illustrationPath}
+              alt={primaryPersonaVisual.alt}
+              className="aspect-square w-full object-contain"
+            />
+          </div>
+          <div>
+            <h3 className="text-2xl font-semibold text-slate-900">互动风格画像</h3>
+            <p className="mt-3 text-lg font-semibold text-sky-800">主角色：{primaryPersonaLabel}</p>
+            {secondaryPersonaLabel ? (
+              <p className="mt-2 text-base font-medium text-slate-700">次要参考：{secondaryPersonaLabel}</p>
+            ) : null}
+            <p className="mt-4 text-base leading-8 text-slate-700">
+              这张画像只用于理解沟通偏好和不确定性处理方式，不代表妊娠去留判断，也不替代专业支持。
+            </p>
           </div>
         </section>
       ) : null}

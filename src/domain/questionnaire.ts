@@ -101,7 +101,17 @@ export function validateQuestionPage(
 
 export function isDeepDiveModuleComplete(input: QuestionnaireSnapshotInput): boolean {
   const snapshot = getQuestionnaireSnapshot(input);
-  return snapshot.visibleQuestions.every(
+  const completionQuestions = snapshot.visibleQuestions.filter(
+    (question) => question.required || question.questionType !== "freeText",
+  );
+  const hasAnyAnswer = snapshot.visibleQuestions.some(
     (question) => getAnswerStatus(input.answers[question.answerKey]) !== "unanswered",
+  );
+
+  return (
+    hasAnyAnswer &&
+    completionQuestions.every(
+      (question) => getAnswerStatus(input.answers[question.answerKey]) !== "unanswered",
+    )
   );
 }

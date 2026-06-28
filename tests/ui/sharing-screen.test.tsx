@@ -15,7 +15,7 @@ describe("SharingScreen", () => {
         sharePathConditions={false}
         editedNoteSummary=""
         requireReauthorization={true}
-        rawNotePreview="原始备注不应直接显示"
+        rawNotePreview="raw private note should never render"
         onSelectionChange={() => undefined}
         onSharePathConditionsChange={() => undefined}
         onEditedNoteSummaryChange={() => undefined}
@@ -23,18 +23,17 @@ describe("SharingScreen", () => {
       />,
     );
 
-    expect(html).toContain("medical_summary");
-    expect(html).toContain("path_conditions");
-    expect(html).toContain("重新授权");
-    expect(html).toContain("编辑摘要");
-    expect(html).toContain("disabled");
-    expect(html).not.toContain("checked");
+    expect(html).toContain("医学状态摘要");
+    expect(html).toContain("路径条件");
+    expect(html).toContain("需要重新确认这次共享授权");
+    expect(html).toContain("可共享摘要");
+    expect(html).toContain("请先填写可共享摘要");
     expect(html).not.toContain("continue-1");
     expect(html).not.toContain("end-1");
-    expect(html).not.toContain("原始备注不应直接显示");
-    expect(html).not.toContain("医疗详情");
-    expect(html).not.toContain("真实倾向");
-    expect(html).not.toContain("量表");
+    expect(html).not.toContain("raw private note should never render");
+    expect(html).not.toContain("medical detail");
+    expect(html).not.toContain("real preference");
+    expect(html).not.toContain("measure data");
   });
 
   it("shows risk-disabled messaging instead of active sharing controls for R3 or R4", () => {
@@ -54,9 +53,10 @@ describe("SharingScreen", () => {
       />,
     );
 
-    expect(html).toContain("ACT-SOON-SAFETY");
-    expect(html).toContain("disabled");
+    expect(html).toContain('尽快梳理安全与边界保护');
+    expect(html).toContain("当前不可共享");
+    expect(html).toContain("已禁用");
     expect(html).not.toContain("continue-1");
-    expect(html).not.toContain("path_conditions");
+    expect(html).not.toContain("路径条件");
   });
 });

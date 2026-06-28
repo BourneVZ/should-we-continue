@@ -1,0 +1,1094 @@
+[2m17:26:02[22m [31m[1m[vite][22m[39m [31m[2m(client)[22m[39m Pre-transform error: Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\src\features\report\AnalysisPage.tsx: Unterminated string constant. (31:26)
+
+[0m [90m 29 |[39m
+ [90m 30 |[39m [36mconst[39m [33mREGION_FIELD_LABELS[39m[33m:[39m [33mReadonly[39m[33m<[39m[33mRecord[39m[33m<[39m[33mstring[39m[33m,[39m string[33m>>[39m [33m=[39m {
+[31m[1m>[22m[39m[90m 31 |[39m   [32m"leave.zj.birth.first"[39m[33m:[39m [32m"娴欐睙涓€瀛╀骇鍋囧弬鑰冨ぉ鏁?,[39m
+ [90m    |[39m                           [31m[1m^[22m[39m
+ [90m 32 |[39m   [32m"leave.cn.miscarriage_under_4_months"[39m[33m:[39m [32m"娴佷骇鍋囧弬鑰冨ぉ鏁?,[39m
+ [90m 33 |[39m   [32m"benefit.hz.under3_annual"[39m[33m:[39m [32m"鏉窞 3 宀佷互涓嬪┐骞煎効鍏昏偛琛ュ姪鍙傝€?,[39m
+ [90m 34 |[39m }[33m;[39m[0m
+  Plugin: [35mvite:react-babel[39m
+  File: [36mZ:/Users/BVZ/WorkSpace/101Doodle/VibeCoding/should-we-continue/src/features/report/AnalysisPage.tsx[39m:31:26
+[33m  29 |  
+  30 |  const REGION_FIELD_LABELS: Readonly<Record<string, string>> = {
+  31 |    "leave.zj.birth.first": "娴欐睙涓€瀛╀骇鍋囧弬鑰冨ぉ鏁?,
+     |                            ^
+  32 |    "leave.cn.miscarriage_under_4_months": "娴佷骇鍋囧弬鑰冨ぉ鏁?,
+  33 |    "benefit.hz.under3_annual": "鏉窞 3 宀佷互涓嬪┐骞煎効鍏昏偛琛ュ姪鍙傝€?,[39m
+[2m17:26:02[22m [31m[1m[vite][22m[39m [31mInternal server error: Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\src\features\report\AnalysisPage.tsx: Unterminated string constant. (31:26)
+
+[0m [90m 29 |[31m
+ [90m 30 |[31m [36mconst[31m [33mREGION_FIELD_LABELS[31m[33m:[31m [33mReadonly[31m[33m<[31m[33mRecord[31m[33m<[31m[33mstring[31m[33m,[31m string[33m>>[31m [33m=[31m {
+[31m[1m>[22m[31m[90m 31 |[31m   [32m"leave.zj.birth.first"[31m[33m:[31m [32m"娴欐睙涓€瀛╀骇鍋囧弬鑰冨ぉ鏁?,[31m
+ [90m    |[31m                           [31m[1m^[22m[31m
+ [90m 32 |[31m   [32m"leave.cn.miscarriage_under_4_months"[31m[33m:[31m [32m"娴佷骇鍋囧弬鑰冨ぉ鏁?,[31m
+ [90m 33 |[31m   [32m"benefit.hz.under3_annual"[31m[33m:[31m [32m"鏉窞 3 宀佷互涓嬪┐骞煎効鍏昏偛琛ュ姪鍙傝€?,[31m
+ [90m 34 |[31m }[33m;[31m[0m[39m
+  Plugin: [35mvite:react-babel[39m
+  File: [36mZ:/Users/BVZ/WorkSpace/101Doodle/VibeCoding/should-we-continue/src/features/report/AnalysisPage.tsx[39m:31:26
+[33m  29 |  
+  30 |  const REGION_FIELD_LABELS: Readonly<Record<string, string>> = {
+  31 |    "leave.zj.birth.first": "娴欐睙涓€瀛╀骇鍋囧弬鑰冨ぉ鏁?,
+     |                            ^
+  32 |    "leave.cn.miscarriage_under_4_months": "娴佷骇鍋囧弬鑰冨ぉ鏁?,
+  33 |    "benefit.hz.under3_annual": "鏉窞 3 宀佷互涓嬪┐骞煎効鍏昏偛琛ュ姪鍙傝€?,[39m
+      at constructor (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:365:19)
+      at TypeScriptParserMixin.raise (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:6616:19)
+      at Object.unterminated (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:5681:20)
+      at readStringContents (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:5423:16)
+      at TypeScriptParserMixin.readString (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:6515:9)
+      at TypeScriptParserMixin.getTokenFromCode (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:6275:14)
+      at TypeScriptParserMixin.getTokenFromCode (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:4809:11)
+      at TypeScriptParserMixin.getTokenFromCode (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10004:11)
+      at TypeScriptParserMixin.nextToken (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:5799:10)
+      at TypeScriptParserMixin.next (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:5709:10)
+      at TypeScriptParserMixin.eat (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:5713:12)
+      at TypeScriptParserMixin.parseObjectProperty (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:11966:14)
+      at TypeScriptParserMixin.parseObjPropValue (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:11995:100)
+      at TypeScriptParserMixin.parseObjPropValue (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:9761:18)
+      at TypeScriptParserMixin.parsePropertyDefinition (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:11932:17)
+      at TypeScriptParserMixin.parseObjectLike (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:11849:21)
+      at TypeScriptParserMixin.parseExprAtom (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:11356:23)
+      at TypeScriptParserMixin.parseExprAtom (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:4776:20)
+      at TypeScriptParserMixin.parseExprSubscripts (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:11098:23)
+      at TypeScriptParserMixin.parseUpdate (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:11083:21)
+      at TypeScriptParserMixin.parseMaybeUnary (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:11063:23)
+      at TypeScriptParserMixin.parseMaybeUnary (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:9854:18)
+      at TypeScriptParserMixin.parseMaybeUnaryOrPrivate (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10916:61)
+      at TypeScriptParserMixin.parseExprOps (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10921:23)
+      at TypeScriptParserMixin.parseMaybeConditional (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10898:23)
+      at TypeScriptParserMixin.parseMaybeAssign (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10848:21)
+      at TypeScriptParserMixin.parseMaybeAssign (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:9803:20)
+      at Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10817:39
+      at TypeScriptParserMixin.allowInAnd (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:12438:16)
+      at TypeScriptParserMixin.parseMaybeAssignAllowIn (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10817:17)
+      at TypeScriptParserMixin.parseVar (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:13401:91)
+      at TypeScriptParserMixin.parseVarStatement (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:13247:10)
+      at TypeScriptParserMixin.parseVarStatement (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:9425:31)
+      at TypeScriptParserMixin.parseStatementContent (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:12868:23)
+      at TypeScriptParserMixin.parseStatementContent (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:9525:18)
+      at TypeScriptParserMixin.parseStatementLike (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:12784:17)
+      at TypeScriptParserMixin.parseModuleItem (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:12761:17)
+      at TypeScriptParserMixin.parseBlockOrModuleBlockBody (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:13333:36)
+      at TypeScriptParserMixin.parseBlockBody (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:13326:10)
+      at TypeScriptParserMixin.parseProgram (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:12639:10)
+      at TypeScriptParserMixin.parseTopLevel (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:12629:25)
+      at TypeScriptParserMixin.parse (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:14505:25)
+      at TypeScriptParserMixin.parse (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10143:18)
+      at parse (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:14539:38)
+      at parser (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\core\lib\parser\index.js:41:34)
+      at parser.next (<anonymous>)
+      at normalizeFile (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\core\lib\transformation\normalize-file.js:51:37)
+      at normalizeFile.next (<anonymous>)
+      at run (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\core\lib\transformation\index.js:22:50)
+      at run.next (<anonymous>)
+[2m17:26:07[22m [31m[1m[vite][22m[39m [31m[2m(client)[22m[39m Pre-transform error: Failed to load url /src/features/report/ReportShell.tsx (resolved id: Z:/Users/BVZ/WorkSpace/101Doodle/VibeCoding/should-we-continue/src/features/report/ReportShell.tsx) in Z:/Users/BVZ/WorkSpace/101Doodle/VibeCoding/should-we-continue/src/app/App.tsx. Does the file exist?
+[2m17:26:39[22m [31m[1m[vite][22m[39m [31m[2m(client)[22m[39m Pre-transform error: Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\src\features\report\AnalysisPage.tsx: Unterminated string constant. (31:26)
+
+[0m [90m 29 |[39m
+ [90m 30 |[39m [36mconst[39m [33mREGION_FIELD_LABELS[39m[33m:[39m [33mReadonly[39m[33m<[39m[33mRecord[39m[33m<[39m[33mstring[39m[33m,[39m string[33m>>[39m [33m=[39m {
+[31m[1m>[22m[39m[90m 31 |[39m   [32m"leave.zj.birth.first"[39m[33m:[39m [32m"娴欐睙涓€瀛╀骇鍋囧弬鑰冨ぉ鏁?,[39m
+ [90m    |[39m                           [31m[1m^[22m[39m
+ [90m 32 |[39m   [32m"leave.cn.miscarriage_under_4_months"[39m[33m:[39m [32m"娴佷骇鍋囧弬鑰冨ぉ鏁?,[39m
+ [90m 33 |[39m   [32m"benefit.hz.under3_annual"[39m[33m:[39m [32m"鏉窞 3 宀佷互涓嬪┐骞煎効鍏昏偛琛ュ姪鍙傝€?,[39m
+ [90m 34 |[39m }[33m;[39m[0m
+  Plugin: [35mvite:react-babel[39m
+  File: [36mZ:/Users/BVZ/WorkSpace/101Doodle/VibeCoding/should-we-continue/src/features/report/AnalysisPage.tsx[39m:31:26
+[33m  29 |  
+  30 |  const REGION_FIELD_LABELS: Readonly<Record<string, string>> = {
+  31 |    "leave.zj.birth.first": "娴欐睙涓€瀛╀骇鍋囧弬鑰冨ぉ鏁?,
+     |                            ^
+  32 |    "leave.cn.miscarriage_under_4_months": "娴佷骇鍋囧弬鑰冨ぉ鏁?,
+  33 |    "benefit.hz.under3_annual": "鏉窞 3 宀佷互涓嬪┐骞煎効鍏昏偛琛ュ姪鍙傝€?,[39m
+[2m17:26:39[22m [31m[1m[vite][22m[39m [31m[2m(client)[22m[39m Pre-transform error: Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\src\features\sharing\SharingScreen.tsx: Expected corresponding JSX closing tag for <p>. (45:6)
+
+[0m [90m 43 |[39m           disabled
+ [90m 44 |[39m         [33m<[39m[33m/[39m[33mbutton[39m[33m>[39m
+[31m[1m>[22m[39m[90m 45 |[39m       [33m<[39m[33m/[39m[33msection[39m[33m>[39m
+ [90m    |[39m       [31m[1m^[22m[39m
+ [90m 46 |[39m     )[33m;[39m
+ [90m 47 |[39m   }
+ [90m 48 |[39m[0m
+  Plugin: [35mvite:react-babel[39m
+  File: [36mZ:/Users/BVZ/WorkSpace/101Doodle/VibeCoding/should-we-continue/src/features/sharing/SharingScreen.tsx[39m:45:6
+[33m  43 |            disabled
+  44 |          </button>
+  45 |        </section>
+     |        ^
+  46 |      );
+  47 |    }[39m
+[2m17:26:39[22m [31m[1m[vite][22m[39m [31mInternal server error: Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\src\features\sharing\SharingScreen.tsx: Expected corresponding JSX closing tag for <p>. (45:6)
+
+[0m [90m 43 |[31m           disabled
+ [90m 44 |[31m         [33m<[31m[33m/[31m[33mbutton[31m[33m>[31m
+[31m[1m>[22m[31m[90m 45 |[31m       [33m<[31m[33m/[31m[33msection[31m[33m>[31m
+ [90m    |[31m       [31m[1m^[22m[31m
+ [90m 46 |[31m     )[33m;[31m
+ [90m 47 |[31m   }
+ [90m 48 |[31m[0m[39m
+  Plugin: [35mvite:react-babel[39m
+  File: [36mZ:/Users/BVZ/WorkSpace/101Doodle/VibeCoding/should-we-continue/src/features/sharing/SharingScreen.tsx[39m:45:6
+[33m  43 |            disabled
+  44 |          </button>
+  45 |        </section>
+     |        ^
+  46 |      );
+  47 |    }[39m
+      at constructor (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:365:19)
+      at TypeScriptParserMixin.raise (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:6616:19)
+      at TypeScriptParserMixin.jsxParseElementAt (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:4739:16)
+      at TypeScriptParserMixin.jsxParseElementAt (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:4710:32)
+      at TypeScriptParserMixin.jsxParseElementAt (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:4710:32)
+      at TypeScriptParserMixin.jsxParseElement (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:4761:17)
+      at TypeScriptParserMixin.parseExprAtom (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:4771:19)
+      at TypeScriptParserMixin.parseExprSubscripts (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:11098:23)
+      at TypeScriptParserMixin.parseUpdate (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:11083:21)
+      at TypeScriptParserMixin.parseMaybeUnary (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:11063:23)
+      at TypeScriptParserMixin.parseMaybeUnary (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:9854:18)
+      at TypeScriptParserMixin.parseMaybeUnaryOrPrivate (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10916:61)
+      at TypeScriptParserMixin.parseExprOps (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10921:23)
+      at TypeScriptParserMixin.parseMaybeConditional (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10898:23)
+      at TypeScriptParserMixin.parseMaybeAssign (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10848:21)
+      at Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:9792:39
+      at TypeScriptParserMixin.tryParse (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:6924:20)
+      at TypeScriptParserMixin.parseMaybeAssign (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:9792:18)
+      at Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10817:39
+      at TypeScriptParserMixin.allowInAnd (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:12443:12)
+      at TypeScriptParserMixin.parseMaybeAssignAllowIn (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10817:17)
+      at TypeScriptParserMixin.parseMaybeAssignAllowInOrVoidPattern (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:12510:17)
+      at TypeScriptParserMixin.parseParenAndDistinguishExpression (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:11692:28)
+      at TypeScriptParserMixin.parseExprAtom (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:11348:23)
+      at TypeScriptParserMixin.parseExprAtom (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:4776:20)
+      at TypeScriptParserMixin.parseExprSubscripts (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:11098:23)
+      at TypeScriptParserMixin.parseUpdate (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:11083:21)
+      at TypeScriptParserMixin.parseMaybeUnary (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:11063:23)
+      at TypeScriptParserMixin.parseMaybeUnary (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:9854:18)
+      at TypeScriptParserMixin.parseMaybeUnaryOrPrivate (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10916:61)
+      at TypeScriptParserMixin.parseExprOps (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10921:23)
+      at TypeScriptParserMixin.parseMaybeConditional (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10898:23)
+      at TypeScriptParserMixin.parseMaybeAssign (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10848:21)
+      at TypeScriptParserMixin.parseMaybeAssign (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:9803:20)
+      at TypeScriptParserMixin.parseExpressionBase (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10801:23)
+      at Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10797:39
+      at TypeScriptParserMixin.allowInAnd (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:12438:16)
+      at TypeScriptParserMixin.parseExpression (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10797:17)
+      at TypeScriptParserMixin.parseReturnStatement (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:13159:28)
+      at TypeScriptParserMixin.parseStatementContent (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:12815:21)
+      at TypeScriptParserMixin.parseStatementContent (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:9525:18)
+      at TypeScriptParserMixin.parseStatementLike (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:12784:17)
+      at TypeScriptParserMixin.parseStatementListItem (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:12764:17)
+      at TypeScriptParserMixin.parseBlockOrModuleBlockBody (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:13333:61)
+      at TypeScriptParserMixin.parseBlockBody (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:13326:10)
+      at TypeScriptParserMixin.parseBlock (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:13314:10)
+      at TypeScriptParserMixin.parseStatementContent (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:12875:21)
+      at TypeScriptParserMixin.parseStatementContent (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:9525:18)
+      at TypeScriptParserMixin.parseStatementLike (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:12784:17)
+      at TypeScriptParserMixin.parseStatementOrSloppyAnnexBFunctionDeclaration (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:12774:17)
+[2m17:26:39[22m [31m[1m[vite][22m[39m [31mInternal server error: Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\src\features\report\AnalysisPage.tsx: Unterminated string constant. (31:26)
+
+[0m [90m 29 |[31m
+ [90m 30 |[31m [36mconst[31m [33mREGION_FIELD_LABELS[31m[33m:[31m [33mReadonly[31m[33m<[31m[33mRecord[31m[33m<[31m[33mstring[31m[33m,[31m string[33m>>[31m [33m=[31m {
+[31m[1m>[22m[31m[90m 31 |[31m   [32m"leave.zj.birth.first"[31m[33m:[31m [32m"娴欐睙涓€瀛╀骇鍋囧弬鑰冨ぉ鏁?,[31m
+ [90m    |[31m                           [31m[1m^[22m[31m
+ [90m 32 |[31m   [32m"leave.cn.miscarriage_under_4_months"[31m[33m:[31m [32m"娴佷骇鍋囧弬鑰冨ぉ鏁?,[31m
+ [90m 33 |[31m   [32m"benefit.hz.under3_annual"[31m[33m:[31m [32m"鏉窞 3 宀佷互涓嬪┐骞煎効鍏昏偛琛ュ姪鍙傝€?,[31m
+ [90m 34 |[31m }[33m;[31m[0m[39m
+  Plugin: [35mvite:react-babel[39m
+  File: [36mZ:/Users/BVZ/WorkSpace/101Doodle/VibeCoding/should-we-continue/src/features/report/AnalysisPage.tsx[39m:31:26
+[33m  29 |  
+  30 |  const REGION_FIELD_LABELS: Readonly<Record<string, string>> = {
+  31 |    "leave.zj.birth.first": "娴欐睙涓€瀛╀骇鍋囧弬鑰冨ぉ鏁?,
+     |                            ^
+  32 |    "leave.cn.miscarriage_under_4_months": "娴佷骇鍋囧弬鑰冨ぉ鏁?,
+  33 |    "benefit.hz.under3_annual": "鏉窞 3 宀佷互涓嬪┐骞煎効鍏昏偛琛ュ姪鍙傝€?,[39m
+      at constructor (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:365:19)
+      at TypeScriptParserMixin.raise (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:6616:19)
+      at Object.unterminated (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:5681:20)
+      at readStringContents (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:5423:16)
+      at TypeScriptParserMixin.readString (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:6515:9)
+      at TypeScriptParserMixin.getTokenFromCode (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:6275:14)
+      at TypeScriptParserMixin.getTokenFromCode (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:4809:11)
+      at TypeScriptParserMixin.getTokenFromCode (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10004:11)
+      at TypeScriptParserMixin.nextToken (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:5799:10)
+      at TypeScriptParserMixin.next (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:5709:10)
+      at TypeScriptParserMixin.eat (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:5713:12)
+      at TypeScriptParserMixin.parseObjectProperty (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:11966:14)
+      at TypeScriptParserMixin.parseObjPropValue (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:11995:100)
+      at TypeScriptParserMixin.parseObjPropValue (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:9761:18)
+      at TypeScriptParserMixin.parsePropertyDefinition (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:11932:17)
+      at TypeScriptParserMixin.parseObjectLike (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:11849:21)
+      at TypeScriptParserMixin.parseExprAtom (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:11356:23)
+      at TypeScriptParserMixin.parseExprAtom (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:4776:20)
+      at TypeScriptParserMixin.parseExprSubscripts (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:11098:23)
+      at TypeScriptParserMixin.parseUpdate (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:11083:21)
+      at TypeScriptParserMixin.parseMaybeUnary (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:11063:23)
+      at TypeScriptParserMixin.parseMaybeUnary (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:9854:18)
+      at TypeScriptParserMixin.parseMaybeUnaryOrPrivate (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10916:61)
+      at TypeScriptParserMixin.parseExprOps (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10921:23)
+      at TypeScriptParserMixin.parseMaybeConditional (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10898:23)
+      at TypeScriptParserMixin.parseMaybeAssign (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10848:21)
+      at TypeScriptParserMixin.parseMaybeAssign (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:9803:20)
+      at Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10817:39
+      at TypeScriptParserMixin.allowInAnd (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:12438:16)
+      at TypeScriptParserMixin.parseMaybeAssignAllowIn (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10817:17)
+      at TypeScriptParserMixin.parseVar (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:13401:91)
+      at TypeScriptParserMixin.parseVarStatement (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:13247:10)
+      at TypeScriptParserMixin.parseVarStatement (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:9425:31)
+      at TypeScriptParserMixin.parseStatementContent (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:12868:23)
+      at TypeScriptParserMixin.parseStatementContent (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:9525:18)
+      at TypeScriptParserMixin.parseStatementLike (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:12784:17)
+      at TypeScriptParserMixin.parseModuleItem (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:12761:17)
+      at TypeScriptParserMixin.parseBlockOrModuleBlockBody (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:13333:36)
+      at TypeScriptParserMixin.parseBlockBody (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:13326:10)
+      at TypeScriptParserMixin.parseProgram (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:12639:10)
+      at TypeScriptParserMixin.parseTopLevel (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:12629:25)
+      at TypeScriptParserMixin.parse (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:14505:25)
+      at TypeScriptParserMixin.parse (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10143:18)
+      at parse (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:14539:38)
+      at parser (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\core\lib\parser\index.js:41:34)
+      at parser.next (<anonymous>)
+      at normalizeFile (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\core\lib\transformation\normalize-file.js:51:37)
+      at normalizeFile.next (<anonymous>)
+      at run (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\core\lib\transformation\index.js:22:50)
+      at run.next (<anonymous>)
+[2m17:26:43[22m [31m[1m[vite][22m[39m [31m[2m(client)[22m[39m Pre-transform error: Failed to load url /src/app/App.tsx (resolved id: Z:/Users/BVZ/WorkSpace/101Doodle/VibeCoding/should-we-continue/src/app/App.tsx) in Z:/Users/BVZ/WorkSpace/101Doodle/VibeCoding/should-we-continue/src/app/RuntimeApp.tsx. Does the file exist?
+[2m17:27:16[22m [31m[1m[vite][22m[39m [31mInternal server error: Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\src\features\sharing\SharingScreen.tsx: Expected corresponding JSX closing tag for <p>. (45:6)
+
+[0m [90m 43 |[31m           disabled
+ [90m 44 |[31m         [33m<[31m[33m/[31m[33mbutton[31m[33m>[31m
+[31m[1m>[22m[31m[90m 45 |[31m       [33m<[31m[33m/[31m[33msection[31m[33m>[31m
+ [90m    |[31m       [31m[1m^[22m[31m
+ [90m 46 |[31m     )[33m;[31m
+ [90m 47 |[31m   }
+ [90m 48 |[31m[0m[39m
+  Plugin: [35mvite:react-babel[39m
+  File: [36mZ:/Users/BVZ/WorkSpace/101Doodle/VibeCoding/should-we-continue/src/features/sharing/SharingScreen.tsx[39m:45:6
+[33m  43 |            disabled
+  44 |          </button>
+  45 |        </section>
+     |        ^
+  46 |      );
+  47 |    }[39m
+      at constructor (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:365:19)
+      at TypeScriptParserMixin.raise (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:6616:19)
+      at TypeScriptParserMixin.jsxParseElementAt (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:4739:16)
+      at TypeScriptParserMixin.jsxParseElementAt (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:4710:32)
+      at TypeScriptParserMixin.jsxParseElementAt (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:4710:32)
+      at TypeScriptParserMixin.jsxParseElement (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:4761:17)
+      at TypeScriptParserMixin.parseExprAtom (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:4771:19)
+      at TypeScriptParserMixin.parseExprSubscripts (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:11098:23)
+      at TypeScriptParserMixin.parseUpdate (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:11083:21)
+      at TypeScriptParserMixin.parseMaybeUnary (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:11063:23)
+      at TypeScriptParserMixin.parseMaybeUnary (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:9854:18)
+      at TypeScriptParserMixin.parseMaybeUnaryOrPrivate (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10916:61)
+      at TypeScriptParserMixin.parseExprOps (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10921:23)
+      at TypeScriptParserMixin.parseMaybeConditional (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10898:23)
+      at TypeScriptParserMixin.parseMaybeAssign (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10848:21)
+      at Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:9792:39
+      at TypeScriptParserMixin.tryParse (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:6924:20)
+      at TypeScriptParserMixin.parseMaybeAssign (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:9792:18)
+      at Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10817:39
+      at TypeScriptParserMixin.allowInAnd (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:12443:12)
+      at TypeScriptParserMixin.parseMaybeAssignAllowIn (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10817:17)
+      at TypeScriptParserMixin.parseMaybeAssignAllowInOrVoidPattern (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:12510:17)
+      at TypeScriptParserMixin.parseParenAndDistinguishExpression (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:11692:28)
+      at TypeScriptParserMixin.parseExprAtom (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:11348:23)
+      at TypeScriptParserMixin.parseExprAtom (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:4776:20)
+      at TypeScriptParserMixin.parseExprSubscripts (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:11098:23)
+      at TypeScriptParserMixin.parseUpdate (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:11083:21)
+      at TypeScriptParserMixin.parseMaybeUnary (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:11063:23)
+      at TypeScriptParserMixin.parseMaybeUnary (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:9854:18)
+      at TypeScriptParserMixin.parseMaybeUnaryOrPrivate (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10916:61)
+      at TypeScriptParserMixin.parseExprOps (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10921:23)
+      at TypeScriptParserMixin.parseMaybeConditional (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10898:23)
+      at TypeScriptParserMixin.parseMaybeAssign (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10848:21)
+      at TypeScriptParserMixin.parseMaybeAssign (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:9803:20)
+      at TypeScriptParserMixin.parseExpressionBase (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10801:23)
+      at Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10797:39
+      at TypeScriptParserMixin.allowInAnd (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:12438:16)
+      at TypeScriptParserMixin.parseExpression (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10797:17)
+      at TypeScriptParserMixin.parseReturnStatement (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:13159:28)
+      at TypeScriptParserMixin.parseStatementContent (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:12815:21)
+      at TypeScriptParserMixin.parseStatementContent (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:9525:18)
+      at TypeScriptParserMixin.parseStatementLike (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:12784:17)
+      at TypeScriptParserMixin.parseStatementListItem (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:12764:17)
+      at TypeScriptParserMixin.parseBlockOrModuleBlockBody (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:13333:61)
+      at TypeScriptParserMixin.parseBlockBody (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:13326:10)
+      at TypeScriptParserMixin.parseBlock (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:13314:10)
+      at TypeScriptParserMixin.parseStatementContent (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:12875:21)
+      at TypeScriptParserMixin.parseStatementContent (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:9525:18)
+      at TypeScriptParserMixin.parseStatementLike (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:12784:17)
+      at TypeScriptParserMixin.parseStatementOrSloppyAnnexBFunctionDeclaration (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:12774:17)
+[2m17:27:16[22m [31m[1m[vite][22m[39m [31mInternal server error: Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\src\features\report\AnalysisPage.tsx: Unterminated string constant. (31:26)
+
+[0m [90m 29 |[31m
+ [90m 30 |[31m [36mconst[31m [33mREGION_FIELD_LABELS[31m[33m:[31m [33mReadonly[31m[33m<[31m[33mRecord[31m[33m<[31m[33mstring[31m[33m,[31m string[33m>>[31m [33m=[31m {
+[31m[1m>[22m[31m[90m 31 |[31m   [32m"leave.zj.birth.first"[31m[33m:[31m [32m"娴欐睙涓€瀛╀骇鍋囧弬鑰冨ぉ鏁?,[31m
+ [90m    |[31m                           [31m[1m^[22m[31m
+ [90m 32 |[31m   [32m"leave.cn.miscarriage_under_4_months"[31m[33m:[31m [32m"娴佷骇鍋囧弬鑰冨ぉ鏁?,[31m
+ [90m 33 |[31m   [32m"benefit.hz.under3_annual"[31m[33m:[31m [32m"鏉窞 3 宀佷互涓嬪┐骞煎効鍏昏偛琛ュ姪鍙傝€?,[31m
+ [90m 34 |[31m }[33m;[31m[0m[39m
+  Plugin: [35mvite:react-babel[39m
+  File: [36mZ:/Users/BVZ/WorkSpace/101Doodle/VibeCoding/should-we-continue/src/features/report/AnalysisPage.tsx[39m:31:26
+[33m  29 |  
+  30 |  const REGION_FIELD_LABELS: Readonly<Record<string, string>> = {
+  31 |    "leave.zj.birth.first": "娴欐睙涓€瀛╀骇鍋囧弬鑰冨ぉ鏁?,
+     |                            ^
+  32 |    "leave.cn.miscarriage_under_4_months": "娴佷骇鍋囧弬鑰冨ぉ鏁?,
+  33 |    "benefit.hz.under3_annual": "鏉窞 3 宀佷互涓嬪┐骞煎効鍏昏偛琛ュ姪鍙傝€?,[39m
+      at constructor (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:365:19)
+      at TypeScriptParserMixin.raise (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:6616:19)
+      at Object.unterminated (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:5681:20)
+      at readStringContents (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:5423:16)
+      at TypeScriptParserMixin.readString (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:6515:9)
+      at TypeScriptParserMixin.getTokenFromCode (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:6275:14)
+      at TypeScriptParserMixin.getTokenFromCode (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:4809:11)
+      at TypeScriptParserMixin.getTokenFromCode (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10004:11)
+      at TypeScriptParserMixin.nextToken (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:5799:10)
+      at TypeScriptParserMixin.next (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:5709:10)
+      at TypeScriptParserMixin.eat (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:5713:12)
+      at TypeScriptParserMixin.parseObjectProperty (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:11966:14)
+      at TypeScriptParserMixin.parseObjPropValue (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:11995:100)
+      at TypeScriptParserMixin.parseObjPropValue (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:9761:18)
+      at TypeScriptParserMixin.parsePropertyDefinition (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:11932:17)
+      at TypeScriptParserMixin.parseObjectLike (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:11849:21)
+      at TypeScriptParserMixin.parseExprAtom (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:11356:23)
+      at TypeScriptParserMixin.parseExprAtom (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:4776:20)
+      at TypeScriptParserMixin.parseExprSubscripts (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:11098:23)
+      at TypeScriptParserMixin.parseUpdate (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:11083:21)
+      at TypeScriptParserMixin.parseMaybeUnary (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:11063:23)
+      at TypeScriptParserMixin.parseMaybeUnary (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:9854:18)
+      at TypeScriptParserMixin.parseMaybeUnaryOrPrivate (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10916:61)
+      at TypeScriptParserMixin.parseExprOps (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10921:23)
+      at TypeScriptParserMixin.parseMaybeConditional (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10898:23)
+      at TypeScriptParserMixin.parseMaybeAssign (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10848:21)
+      at TypeScriptParserMixin.parseMaybeAssign (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:9803:20)
+      at Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10817:39
+      at TypeScriptParserMixin.allowInAnd (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:12438:16)
+      at TypeScriptParserMixin.parseMaybeAssignAllowIn (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10817:17)
+      at TypeScriptParserMixin.parseVar (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:13401:91)
+      at TypeScriptParserMixin.parseVarStatement (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:13247:10)
+      at TypeScriptParserMixin.parseVarStatement (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:9425:31)
+      at TypeScriptParserMixin.parseStatementContent (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:12868:23)
+      at TypeScriptParserMixin.parseStatementContent (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:9525:18)
+      at TypeScriptParserMixin.parseStatementLike (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:12784:17)
+      at TypeScriptParserMixin.parseModuleItem (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:12761:17)
+      at TypeScriptParserMixin.parseBlockOrModuleBlockBody (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:13333:36)
+      at TypeScriptParserMixin.parseBlockBody (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:13326:10)
+      at TypeScriptParserMixin.parseProgram (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:12639:10)
+      at TypeScriptParserMixin.parseTopLevel (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:12629:25)
+      at TypeScriptParserMixin.parse (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:14505:25)
+      at TypeScriptParserMixin.parse (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10143:18)
+      at parse (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:14539:38)
+      at parser (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\core\lib\parser\index.js:41:34)
+      at parser.next (<anonymous>)
+      at normalizeFile (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\core\lib\transformation\normalize-file.js:51:37)
+      at normalizeFile.next (<anonymous>)
+      at run (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\core\lib\transformation\index.js:22:50)
+      at run.next (<anonymous>)
+[2m17:27:35[22m [31m[1m[vite][22m[39m [31mInternal server error: Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\src\features\sharing\SharingScreen.tsx: Expected corresponding JSX closing tag for <p>. (45:6)
+
+[0m [90m 43 |[31m           disabled
+ [90m 44 |[31m         [33m<[31m[33m/[31m[33mbutton[31m[33m>[31m
+[31m[1m>[22m[31m[90m 45 |[31m       [33m<[31m[33m/[31m[33msection[31m[33m>[31m
+ [90m    |[31m       [31m[1m^[22m[31m
+ [90m 46 |[31m     )[33m;[31m
+ [90m 47 |[31m   }
+ [90m 48 |[31m[0m[39m
+  Plugin: [35mvite:react-babel[39m
+  File: [36mZ:/Users/BVZ/WorkSpace/101Doodle/VibeCoding/should-we-continue/src/features/sharing/SharingScreen.tsx[39m:45:6
+[33m  43 |            disabled
+  44 |          </button>
+  45 |        </section>
+     |        ^
+  46 |      );
+  47 |    }[39m
+      at constructor (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:365:19)
+      at TypeScriptParserMixin.raise (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:6616:19)
+      at TypeScriptParserMixin.jsxParseElementAt (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:4739:16)
+      at TypeScriptParserMixin.jsxParseElementAt (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:4710:32)
+      at TypeScriptParserMixin.jsxParseElementAt (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:4710:32)
+      at TypeScriptParserMixin.jsxParseElement (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:4761:17)
+      at TypeScriptParserMixin.parseExprAtom (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:4771:19)
+      at TypeScriptParserMixin.parseExprSubscripts (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:11098:23)
+      at TypeScriptParserMixin.parseUpdate (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:11083:21)
+      at TypeScriptParserMixin.parseMaybeUnary (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:11063:23)
+      at TypeScriptParserMixin.parseMaybeUnary (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:9854:18)
+      at TypeScriptParserMixin.parseMaybeUnaryOrPrivate (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10916:61)
+      at TypeScriptParserMixin.parseExprOps (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10921:23)
+      at TypeScriptParserMixin.parseMaybeConditional (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10898:23)
+      at TypeScriptParserMixin.parseMaybeAssign (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10848:21)
+      at Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:9792:39
+      at TypeScriptParserMixin.tryParse (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:6924:20)
+      at TypeScriptParserMixin.parseMaybeAssign (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:9792:18)
+      at Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10817:39
+      at TypeScriptParserMixin.allowInAnd (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:12443:12)
+      at TypeScriptParserMixin.parseMaybeAssignAllowIn (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10817:17)
+      at TypeScriptParserMixin.parseMaybeAssignAllowInOrVoidPattern (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:12510:17)
+      at TypeScriptParserMixin.parseParenAndDistinguishExpression (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:11692:28)
+      at TypeScriptParserMixin.parseExprAtom (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:11348:23)
+      at TypeScriptParserMixin.parseExprAtom (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:4776:20)
+      at TypeScriptParserMixin.parseExprSubscripts (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:11098:23)
+      at TypeScriptParserMixin.parseUpdate (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:11083:21)
+      at TypeScriptParserMixin.parseMaybeUnary (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:11063:23)
+      at TypeScriptParserMixin.parseMaybeUnary (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:9854:18)
+      at TypeScriptParserMixin.parseMaybeUnaryOrPrivate (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10916:61)
+      at TypeScriptParserMixin.parseExprOps (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10921:23)
+      at TypeScriptParserMixin.parseMaybeConditional (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10898:23)
+      at TypeScriptParserMixin.parseMaybeAssign (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10848:21)
+      at TypeScriptParserMixin.parseMaybeAssign (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:9803:20)
+      at TypeScriptParserMixin.parseExpressionBase (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10801:23)
+      at Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10797:39
+      at TypeScriptParserMixin.allowInAnd (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:12438:16)
+      at TypeScriptParserMixin.parseExpression (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10797:17)
+      at TypeScriptParserMixin.parseReturnStatement (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:13159:28)
+      at TypeScriptParserMixin.parseStatementContent (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:12815:21)
+      at TypeScriptParserMixin.parseStatementContent (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:9525:18)
+      at TypeScriptParserMixin.parseStatementLike (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:12784:17)
+      at TypeScriptParserMixin.parseStatementListItem (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:12764:17)
+      at TypeScriptParserMixin.parseBlockOrModuleBlockBody (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:13333:61)
+      at TypeScriptParserMixin.parseBlockBody (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:13326:10)
+      at TypeScriptParserMixin.parseBlock (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:13314:10)
+      at TypeScriptParserMixin.parseStatementContent (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:12875:21)
+      at TypeScriptParserMixin.parseStatementContent (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:9525:18)
+      at TypeScriptParserMixin.parseStatementLike (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:12784:17)
+      at TypeScriptParserMixin.parseStatementOrSloppyAnnexBFunctionDeclaration (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:12774:17)
+[2m17:27:35[22m [31m[1m[vite][22m[39m [31mInternal server error: Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\src\features\report\AnalysisPage.tsx: Unterminated string constant. (31:26)
+
+[0m [90m 29 |[31m
+ [90m 30 |[31m [36mconst[31m [33mREGION_FIELD_LABELS[31m[33m:[31m [33mReadonly[31m[33m<[31m[33mRecord[31m[33m<[31m[33mstring[31m[33m,[31m string[33m>>[31m [33m=[31m {
+[31m[1m>[22m[31m[90m 31 |[31m   [32m"leave.zj.birth.first"[31m[33m:[31m [32m"娴欐睙涓€瀛╀骇鍋囧弬鑰冨ぉ鏁?,[31m
+ [90m    |[31m                           [31m[1m^[22m[31m
+ [90m 32 |[31m   [32m"leave.cn.miscarriage_under_4_months"[31m[33m:[31m [32m"娴佷骇鍋囧弬鑰冨ぉ鏁?,[31m
+ [90m 33 |[31m   [32m"benefit.hz.under3_annual"[31m[33m:[31m [32m"鏉窞 3 宀佷互涓嬪┐骞煎効鍏昏偛琛ュ姪鍙傝€?,[31m
+ [90m 34 |[31m }[33m;[31m[0m[39m
+  Plugin: [35mvite:react-babel[39m
+  File: [36mZ:/Users/BVZ/WorkSpace/101Doodle/VibeCoding/should-we-continue/src/features/report/AnalysisPage.tsx[39m:31:26
+[33m  29 |  
+  30 |  const REGION_FIELD_LABELS: Readonly<Record<string, string>> = {
+  31 |    "leave.zj.birth.first": "娴欐睙涓€瀛╀骇鍋囧弬鑰冨ぉ鏁?,
+     |                            ^
+  32 |    "leave.cn.miscarriage_under_4_months": "娴佷骇鍋囧弬鑰冨ぉ鏁?,
+  33 |    "benefit.hz.under3_annual": "鏉窞 3 宀佷互涓嬪┐骞煎効鍏昏偛琛ュ姪鍙傝€?,[39m
+      at constructor (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:365:19)
+      at TypeScriptParserMixin.raise (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:6616:19)
+      at Object.unterminated (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:5681:20)
+      at readStringContents (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:5423:16)
+      at TypeScriptParserMixin.readString (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:6515:9)
+      at TypeScriptParserMixin.getTokenFromCode (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:6275:14)
+      at TypeScriptParserMixin.getTokenFromCode (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:4809:11)
+      at TypeScriptParserMixin.getTokenFromCode (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10004:11)
+      at TypeScriptParserMixin.nextToken (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:5799:10)
+      at TypeScriptParserMixin.next (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:5709:10)
+      at TypeScriptParserMixin.eat (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:5713:12)
+      at TypeScriptParserMixin.parseObjectProperty (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:11966:14)
+      at TypeScriptParserMixin.parseObjPropValue (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:11995:100)
+      at TypeScriptParserMixin.parseObjPropValue (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:9761:18)
+      at TypeScriptParserMixin.parsePropertyDefinition (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:11932:17)
+      at TypeScriptParserMixin.parseObjectLike (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:11849:21)
+      at TypeScriptParserMixin.parseExprAtom (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:11356:23)
+      at TypeScriptParserMixin.parseExprAtom (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:4776:20)
+      at TypeScriptParserMixin.parseExprSubscripts (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:11098:23)
+      at TypeScriptParserMixin.parseUpdate (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:11083:21)
+      at TypeScriptParserMixin.parseMaybeUnary (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:11063:23)
+      at TypeScriptParserMixin.parseMaybeUnary (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:9854:18)
+      at TypeScriptParserMixin.parseMaybeUnaryOrPrivate (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10916:61)
+      at TypeScriptParserMixin.parseExprOps (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10921:23)
+      at TypeScriptParserMixin.parseMaybeConditional (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10898:23)
+      at TypeScriptParserMixin.parseMaybeAssign (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10848:21)
+      at TypeScriptParserMixin.parseMaybeAssign (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:9803:20)
+      at Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10817:39
+      at TypeScriptParserMixin.allowInAnd (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:12438:16)
+      at TypeScriptParserMixin.parseMaybeAssignAllowIn (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10817:17)
+      at TypeScriptParserMixin.parseVar (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:13401:91)
+      at TypeScriptParserMixin.parseVarStatement (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:13247:10)
+      at TypeScriptParserMixin.parseVarStatement (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:9425:31)
+      at TypeScriptParserMixin.parseStatementContent (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:12868:23)
+      at TypeScriptParserMixin.parseStatementContent (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:9525:18)
+      at TypeScriptParserMixin.parseStatementLike (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:12784:17)
+      at TypeScriptParserMixin.parseModuleItem (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:12761:17)
+      at TypeScriptParserMixin.parseBlockOrModuleBlockBody (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:13333:36)
+      at TypeScriptParserMixin.parseBlockBody (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:13326:10)
+      at TypeScriptParserMixin.parseProgram (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:12639:10)
+      at TypeScriptParserMixin.parseTopLevel (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:12629:25)
+      at TypeScriptParserMixin.parse (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:14505:25)
+      at TypeScriptParserMixin.parse (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10143:18)
+      at parse (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:14539:38)
+      at parser (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\core\lib\parser\index.js:41:34)
+      at parser.next (<anonymous>)
+      at normalizeFile (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\core\lib\transformation\normalize-file.js:51:37)
+      at normalizeFile.next (<anonymous>)
+      at run (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\core\lib\transformation\index.js:22:50)
+      at run.next (<anonymous>)
+[2m17:27:52[22m [31m[1m[vite][22m[39m [31mInternal server error: Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\src\features\sharing\SharingScreen.tsx: Expected corresponding JSX closing tag for <p>. (45:6)
+
+[0m [90m 43 |[31m           disabled
+ [90m 44 |[31m         [33m<[31m[33m/[31m[33mbutton[31m[33m>[31m
+[31m[1m>[22m[31m[90m 45 |[31m       [33m<[31m[33m/[31m[33msection[31m[33m>[31m
+ [90m    |[31m       [31m[1m^[22m[31m
+ [90m 46 |[31m     )[33m;[31m
+ [90m 47 |[31m   }
+ [90m 48 |[31m[0m[39m
+  Plugin: [35mvite:react-babel[39m
+  File: [36mZ:/Users/BVZ/WorkSpace/101Doodle/VibeCoding/should-we-continue/src/features/sharing/SharingScreen.tsx[39m:45:6
+[33m  43 |            disabled
+  44 |          </button>
+  45 |        </section>
+     |        ^
+  46 |      );
+  47 |    }[39m
+      at constructor (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:365:19)
+      at TypeScriptParserMixin.raise (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:6616:19)
+      at TypeScriptParserMixin.jsxParseElementAt (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:4739:16)
+      at TypeScriptParserMixin.jsxParseElementAt (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:4710:32)
+      at TypeScriptParserMixin.jsxParseElementAt (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:4710:32)
+      at TypeScriptParserMixin.jsxParseElement (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:4761:17)
+      at TypeScriptParserMixin.parseExprAtom (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:4771:19)
+      at TypeScriptParserMixin.parseExprSubscripts (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:11098:23)
+      at TypeScriptParserMixin.parseUpdate (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:11083:21)
+      at TypeScriptParserMixin.parseMaybeUnary (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:11063:23)
+      at TypeScriptParserMixin.parseMaybeUnary (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:9854:18)
+      at TypeScriptParserMixin.parseMaybeUnaryOrPrivate (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10916:61)
+      at TypeScriptParserMixin.parseExprOps (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10921:23)
+      at TypeScriptParserMixin.parseMaybeConditional (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10898:23)
+      at TypeScriptParserMixin.parseMaybeAssign (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10848:21)
+      at Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:9792:39
+      at TypeScriptParserMixin.tryParse (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:6924:20)
+      at TypeScriptParserMixin.parseMaybeAssign (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:9792:18)
+      at Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10817:39
+      at TypeScriptParserMixin.allowInAnd (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:12443:12)
+      at TypeScriptParserMixin.parseMaybeAssignAllowIn (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10817:17)
+      at TypeScriptParserMixin.parseMaybeAssignAllowInOrVoidPattern (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:12510:17)
+      at TypeScriptParserMixin.parseParenAndDistinguishExpression (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:11692:28)
+      at TypeScriptParserMixin.parseExprAtom (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:11348:23)
+      at TypeScriptParserMixin.parseExprAtom (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:4776:20)
+      at TypeScriptParserMixin.parseExprSubscripts (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:11098:23)
+      at TypeScriptParserMixin.parseUpdate (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:11083:21)
+      at TypeScriptParserMixin.parseMaybeUnary (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:11063:23)
+      at TypeScriptParserMixin.parseMaybeUnary (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:9854:18)
+      at TypeScriptParserMixin.parseMaybeUnaryOrPrivate (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10916:61)
+      at TypeScriptParserMixin.parseExprOps (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10921:23)
+      at TypeScriptParserMixin.parseMaybeConditional (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10898:23)
+      at TypeScriptParserMixin.parseMaybeAssign (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10848:21)
+      at TypeScriptParserMixin.parseMaybeAssign (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:9803:20)
+      at TypeScriptParserMixin.parseExpressionBase (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10801:23)
+      at Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10797:39
+      at TypeScriptParserMixin.allowInAnd (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:12438:16)
+      at TypeScriptParserMixin.parseExpression (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10797:17)
+      at TypeScriptParserMixin.parseReturnStatement (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:13159:28)
+      at TypeScriptParserMixin.parseStatementContent (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:12815:21)
+      at TypeScriptParserMixin.parseStatementContent (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:9525:18)
+      at TypeScriptParserMixin.parseStatementLike (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:12784:17)
+      at TypeScriptParserMixin.parseStatementListItem (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:12764:17)
+      at TypeScriptParserMixin.parseBlockOrModuleBlockBody (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:13333:61)
+      at TypeScriptParserMixin.parseBlockBody (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:13326:10)
+      at TypeScriptParserMixin.parseBlock (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:13314:10)
+      at TypeScriptParserMixin.parseStatementContent (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:12875:21)
+      at TypeScriptParserMixin.parseStatementContent (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:9525:18)
+      at TypeScriptParserMixin.parseStatementLike (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:12784:17)
+      at TypeScriptParserMixin.parseStatementOrSloppyAnnexBFunctionDeclaration (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:12774:17)
+[2m17:27:52[22m [31m[1m[vite][22m[39m [31mInternal server error: Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\src\features\report\AnalysisPage.tsx: Unterminated string constant. (31:26)
+
+[0m [90m 29 |[31m
+ [90m 30 |[31m [36mconst[31m [33mREGION_FIELD_LABELS[31m[33m:[31m [33mReadonly[31m[33m<[31m[33mRecord[31m[33m<[31m[33mstring[31m[33m,[31m string[33m>>[31m [33m=[31m {
+[31m[1m>[22m[31m[90m 31 |[31m   [32m"leave.zj.birth.first"[31m[33m:[31m [32m"娴欐睙涓€瀛╀骇鍋囧弬鑰冨ぉ鏁?,[31m
+ [90m    |[31m                           [31m[1m^[22m[31m
+ [90m 32 |[31m   [32m"leave.cn.miscarriage_under_4_months"[31m[33m:[31m [32m"娴佷骇鍋囧弬鑰冨ぉ鏁?,[31m
+ [90m 33 |[31m   [32m"benefit.hz.under3_annual"[31m[33m:[31m [32m"鏉窞 3 宀佷互涓嬪┐骞煎効鍏昏偛琛ュ姪鍙傝€?,[31m
+ [90m 34 |[31m }[33m;[31m[0m[39m
+  Plugin: [35mvite:react-babel[39m
+  File: [36mZ:/Users/BVZ/WorkSpace/101Doodle/VibeCoding/should-we-continue/src/features/report/AnalysisPage.tsx[39m:31:26
+[33m  29 |  
+  30 |  const REGION_FIELD_LABELS: Readonly<Record<string, string>> = {
+  31 |    "leave.zj.birth.first": "娴欐睙涓€瀛╀骇鍋囧弬鑰冨ぉ鏁?,
+     |                            ^
+  32 |    "leave.cn.miscarriage_under_4_months": "娴佷骇鍋囧弬鑰冨ぉ鏁?,
+  33 |    "benefit.hz.under3_annual": "鏉窞 3 宀佷互涓嬪┐骞煎効鍏昏偛琛ュ姪鍙傝€?,[39m
+      at constructor (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:365:19)
+      at TypeScriptParserMixin.raise (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:6616:19)
+      at Object.unterminated (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:5681:20)
+      at readStringContents (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:5423:16)
+      at TypeScriptParserMixin.readString (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:6515:9)
+      at TypeScriptParserMixin.getTokenFromCode (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:6275:14)
+      at TypeScriptParserMixin.getTokenFromCode (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:4809:11)
+      at TypeScriptParserMixin.getTokenFromCode (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10004:11)
+      at TypeScriptParserMixin.nextToken (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:5799:10)
+      at TypeScriptParserMixin.next (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:5709:10)
+      at TypeScriptParserMixin.eat (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:5713:12)
+      at TypeScriptParserMixin.parseObjectProperty (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:11966:14)
+      at TypeScriptParserMixin.parseObjPropValue (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:11995:100)
+      at TypeScriptParserMixin.parseObjPropValue (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:9761:18)
+      at TypeScriptParserMixin.parsePropertyDefinition (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:11932:17)
+      at TypeScriptParserMixin.parseObjectLike (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:11849:21)
+      at TypeScriptParserMixin.parseExprAtom (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:11356:23)
+      at TypeScriptParserMixin.parseExprAtom (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:4776:20)
+      at TypeScriptParserMixin.parseExprSubscripts (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:11098:23)
+      at TypeScriptParserMixin.parseUpdate (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:11083:21)
+      at TypeScriptParserMixin.parseMaybeUnary (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:11063:23)
+      at TypeScriptParserMixin.parseMaybeUnary (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:9854:18)
+      at TypeScriptParserMixin.parseMaybeUnaryOrPrivate (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10916:61)
+      at TypeScriptParserMixin.parseExprOps (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10921:23)
+      at TypeScriptParserMixin.parseMaybeConditional (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10898:23)
+      at TypeScriptParserMixin.parseMaybeAssign (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10848:21)
+      at TypeScriptParserMixin.parseMaybeAssign (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:9803:20)
+      at Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10817:39
+      at TypeScriptParserMixin.allowInAnd (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:12438:16)
+      at TypeScriptParserMixin.parseMaybeAssignAllowIn (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10817:17)
+      at TypeScriptParserMixin.parseVar (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:13401:91)
+      at TypeScriptParserMixin.parseVarStatement (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:13247:10)
+      at TypeScriptParserMixin.parseVarStatement (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:9425:31)
+      at TypeScriptParserMixin.parseStatementContent (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:12868:23)
+      at TypeScriptParserMixin.parseStatementContent (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:9525:18)
+      at TypeScriptParserMixin.parseStatementLike (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:12784:17)
+      at TypeScriptParserMixin.parseModuleItem (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:12761:17)
+      at TypeScriptParserMixin.parseBlockOrModuleBlockBody (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:13333:36)
+      at TypeScriptParserMixin.parseBlockBody (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:13326:10)
+      at TypeScriptParserMixin.parseProgram (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:12639:10)
+      at TypeScriptParserMixin.parseTopLevel (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:12629:25)
+      at TypeScriptParserMixin.parse (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:14505:25)
+      at TypeScriptParserMixin.parse (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10143:18)
+      at parse (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:14539:38)
+      at parser (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\core\lib\parser\index.js:41:34)
+      at parser.next (<anonymous>)
+      at normalizeFile (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\core\lib\transformation\normalize-file.js:51:37)
+      at normalizeFile.next (<anonymous>)
+      at run (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\core\lib\transformation\index.js:22:50)
+      at run.next (<anonymous>)
+[2m17:27:59[22m [31m[1m[vite][22m[39m [31mInternal server error: Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\src\features\sharing\SharingScreen.tsx: Expected corresponding JSX closing tag for <p>. (45:6)
+
+[0m [90m 43 |[31m           disabled
+ [90m 44 |[31m         [33m<[31m[33m/[31m[33mbutton[31m[33m>[31m
+[31m[1m>[22m[31m[90m 45 |[31m       [33m<[31m[33m/[31m[33msection[31m[33m>[31m
+ [90m    |[31m       [31m[1m^[22m[31m
+ [90m 46 |[31m     )[33m;[31m
+ [90m 47 |[31m   }
+ [90m 48 |[31m[0m[39m
+  Plugin: [35mvite:react-babel[39m
+  File: [36mZ:/Users/BVZ/WorkSpace/101Doodle/VibeCoding/should-we-continue/src/features/sharing/SharingScreen.tsx[39m:45:6
+[33m  43 |            disabled
+  44 |          </button>
+  45 |        </section>
+     |        ^
+  46 |      );
+  47 |    }[39m
+      at constructor (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:365:19)
+      at TypeScriptParserMixin.raise (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:6616:19)
+      at TypeScriptParserMixin.jsxParseElementAt (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:4739:16)
+      at TypeScriptParserMixin.jsxParseElementAt (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:4710:32)
+      at TypeScriptParserMixin.jsxParseElementAt (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:4710:32)
+      at TypeScriptParserMixin.jsxParseElement (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:4761:17)
+      at TypeScriptParserMixin.parseExprAtom (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:4771:19)
+      at TypeScriptParserMixin.parseExprSubscripts (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:11098:23)
+      at TypeScriptParserMixin.parseUpdate (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:11083:21)
+      at TypeScriptParserMixin.parseMaybeUnary (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:11063:23)
+      at TypeScriptParserMixin.parseMaybeUnary (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:9854:18)
+      at TypeScriptParserMixin.parseMaybeUnaryOrPrivate (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10916:61)
+      at TypeScriptParserMixin.parseExprOps (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10921:23)
+      at TypeScriptParserMixin.parseMaybeConditional (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10898:23)
+      at TypeScriptParserMixin.parseMaybeAssign (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10848:21)
+      at Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:9792:39
+      at TypeScriptParserMixin.tryParse (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:6924:20)
+      at TypeScriptParserMixin.parseMaybeAssign (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:9792:18)
+      at Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10817:39
+      at TypeScriptParserMixin.allowInAnd (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:12443:12)
+      at TypeScriptParserMixin.parseMaybeAssignAllowIn (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10817:17)
+      at TypeScriptParserMixin.parseMaybeAssignAllowInOrVoidPattern (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:12510:17)
+      at TypeScriptParserMixin.parseParenAndDistinguishExpression (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:11692:28)
+      at TypeScriptParserMixin.parseExprAtom (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:11348:23)
+      at TypeScriptParserMixin.parseExprAtom (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:4776:20)
+      at TypeScriptParserMixin.parseExprSubscripts (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:11098:23)
+      at TypeScriptParserMixin.parseUpdate (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:11083:21)
+      at TypeScriptParserMixin.parseMaybeUnary (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:11063:23)
+      at TypeScriptParserMixin.parseMaybeUnary (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:9854:18)
+      at TypeScriptParserMixin.parseMaybeUnaryOrPrivate (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10916:61)
+      at TypeScriptParserMixin.parseExprOps (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10921:23)
+      at TypeScriptParserMixin.parseMaybeConditional (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10898:23)
+      at TypeScriptParserMixin.parseMaybeAssign (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10848:21)
+      at TypeScriptParserMixin.parseMaybeAssign (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:9803:20)
+      at TypeScriptParserMixin.parseExpressionBase (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10801:23)
+      at Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10797:39
+      at TypeScriptParserMixin.allowInAnd (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:12438:16)
+      at TypeScriptParserMixin.parseExpression (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10797:17)
+      at TypeScriptParserMixin.parseReturnStatement (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:13159:28)
+      at TypeScriptParserMixin.parseStatementContent (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:12815:21)
+      at TypeScriptParserMixin.parseStatementContent (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:9525:18)
+      at TypeScriptParserMixin.parseStatementLike (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:12784:17)
+      at TypeScriptParserMixin.parseStatementListItem (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:12764:17)
+      at TypeScriptParserMixin.parseBlockOrModuleBlockBody (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:13333:61)
+      at TypeScriptParserMixin.parseBlockBody (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:13326:10)
+      at TypeScriptParserMixin.parseBlock (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:13314:10)
+      at TypeScriptParserMixin.parseStatementContent (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:12875:21)
+      at TypeScriptParserMixin.parseStatementContent (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:9525:18)
+      at TypeScriptParserMixin.parseStatementLike (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:12784:17)
+      at TypeScriptParserMixin.parseStatementOrSloppyAnnexBFunctionDeclaration (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:12774:17)
+[2m17:27:59[22m [31m[1m[vite][22m[39m [31mInternal server error: Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\src\features\report\AnalysisPage.tsx: Unterminated string constant. (31:26)
+
+[0m [90m 29 |[31m
+ [90m 30 |[31m [36mconst[31m [33mREGION_FIELD_LABELS[31m[33m:[31m [33mReadonly[31m[33m<[31m[33mRecord[31m[33m<[31m[33mstring[31m[33m,[31m string[33m>>[31m [33m=[31m {
+[31m[1m>[22m[31m[90m 31 |[31m   [32m"leave.zj.birth.first"[31m[33m:[31m [32m"娴欐睙涓€瀛╀骇鍋囧弬鑰冨ぉ鏁?,[31m
+ [90m    |[31m                           [31m[1m^[22m[31m
+ [90m 32 |[31m   [32m"leave.cn.miscarriage_under_4_months"[31m[33m:[31m [32m"娴佷骇鍋囧弬鑰冨ぉ鏁?,[31m
+ [90m 33 |[31m   [32m"benefit.hz.under3_annual"[31m[33m:[31m [32m"鏉窞 3 宀佷互涓嬪┐骞煎効鍏昏偛琛ュ姪鍙傝€?,[31m
+ [90m 34 |[31m }[33m;[31m[0m[39m
+  Plugin: [35mvite:react-babel[39m
+  File: [36mZ:/Users/BVZ/WorkSpace/101Doodle/VibeCoding/should-we-continue/src/features/report/AnalysisPage.tsx[39m:31:26
+[33m  29 |  
+  30 |  const REGION_FIELD_LABELS: Readonly<Record<string, string>> = {
+  31 |    "leave.zj.birth.first": "娴欐睙涓€瀛╀骇鍋囧弬鑰冨ぉ鏁?,
+     |                            ^
+  32 |    "leave.cn.miscarriage_under_4_months": "娴佷骇鍋囧弬鑰冨ぉ鏁?,
+  33 |    "benefit.hz.under3_annual": "鏉窞 3 宀佷互涓嬪┐骞煎効鍏昏偛琛ュ姪鍙傝€?,[39m
+      at constructor (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:365:19)
+      at TypeScriptParserMixin.raise (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:6616:19)
+      at Object.unterminated (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:5681:20)
+      at readStringContents (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:5423:16)
+      at TypeScriptParserMixin.readString (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:6515:9)
+      at TypeScriptParserMixin.getTokenFromCode (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:6275:14)
+      at TypeScriptParserMixin.getTokenFromCode (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:4809:11)
+      at TypeScriptParserMixin.getTokenFromCode (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10004:11)
+      at TypeScriptParserMixin.nextToken (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:5799:10)
+      at TypeScriptParserMixin.next (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:5709:10)
+      at TypeScriptParserMixin.eat (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:5713:12)
+      at TypeScriptParserMixin.parseObjectProperty (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:11966:14)
+      at TypeScriptParserMixin.parseObjPropValue (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:11995:100)
+      at TypeScriptParserMixin.parseObjPropValue (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:9761:18)
+      at TypeScriptParserMixin.parsePropertyDefinition (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:11932:17)
+      at TypeScriptParserMixin.parseObjectLike (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:11849:21)
+      at TypeScriptParserMixin.parseExprAtom (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:11356:23)
+      at TypeScriptParserMixin.parseExprAtom (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:4776:20)
+      at TypeScriptParserMixin.parseExprSubscripts (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:11098:23)
+      at TypeScriptParserMixin.parseUpdate (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:11083:21)
+      at TypeScriptParserMixin.parseMaybeUnary (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:11063:23)
+      at TypeScriptParserMixin.parseMaybeUnary (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:9854:18)
+      at TypeScriptParserMixin.parseMaybeUnaryOrPrivate (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10916:61)
+      at TypeScriptParserMixin.parseExprOps (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10921:23)
+      at TypeScriptParserMixin.parseMaybeConditional (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10898:23)
+      at TypeScriptParserMixin.parseMaybeAssign (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10848:21)
+      at TypeScriptParserMixin.parseMaybeAssign (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:9803:20)
+      at Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10817:39
+      at TypeScriptParserMixin.allowInAnd (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:12438:16)
+      at TypeScriptParserMixin.parseMaybeAssignAllowIn (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10817:17)
+      at TypeScriptParserMixin.parseVar (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:13401:91)
+      at TypeScriptParserMixin.parseVarStatement (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:13247:10)
+      at TypeScriptParserMixin.parseVarStatement (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:9425:31)
+      at TypeScriptParserMixin.parseStatementContent (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:12868:23)
+      at TypeScriptParserMixin.parseStatementContent (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:9525:18)
+      at TypeScriptParserMixin.parseStatementLike (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:12784:17)
+      at TypeScriptParserMixin.parseModuleItem (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:12761:17)
+      at TypeScriptParserMixin.parseBlockOrModuleBlockBody (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:13333:36)
+      at TypeScriptParserMixin.parseBlockBody (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:13326:10)
+      at TypeScriptParserMixin.parseProgram (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:12639:10)
+      at TypeScriptParserMixin.parseTopLevel (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:12629:25)
+      at TypeScriptParserMixin.parse (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:14505:25)
+      at TypeScriptParserMixin.parse (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10143:18)
+      at parse (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:14539:38)
+      at parser (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\core\lib\parser\index.js:41:34)
+      at parser.next (<anonymous>)
+      at normalizeFile (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\core\lib\transformation\normalize-file.js:51:37)
+      at normalizeFile.next (<anonymous>)
+      at run (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\core\lib\transformation\index.js:22:50)
+      at run.next (<anonymous>)
+[2m17:28:13[22m [31m[1m[vite][22m[39m [31mInternal server error: Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\src\features\sharing\SharingScreen.tsx: Expected corresponding JSX closing tag for <p>. (45:6)
+
+[0m [90m 43 |[31m           disabled
+ [90m 44 |[31m         [33m<[31m[33m/[31m[33mbutton[31m[33m>[31m
+[31m[1m>[22m[31m[90m 45 |[31m       [33m<[31m[33m/[31m[33msection[31m[33m>[31m
+ [90m    |[31m       [31m[1m^[22m[31m
+ [90m 46 |[31m     )[33m;[31m
+ [90m 47 |[31m   }
+ [90m 48 |[31m[0m[39m
+  Plugin: [35mvite:react-babel[39m
+  File: [36mZ:/Users/BVZ/WorkSpace/101Doodle/VibeCoding/should-we-continue/src/features/sharing/SharingScreen.tsx[39m:45:6
+[33m  43 |            disabled
+  44 |          </button>
+  45 |        </section>
+     |        ^
+  46 |      );
+  47 |    }[39m
+      at constructor (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:365:19)
+      at TypeScriptParserMixin.raise (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:6616:19)
+      at TypeScriptParserMixin.jsxParseElementAt (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:4739:16)
+      at TypeScriptParserMixin.jsxParseElementAt (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:4710:32)
+      at TypeScriptParserMixin.jsxParseElementAt (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:4710:32)
+      at TypeScriptParserMixin.jsxParseElement (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:4761:17)
+      at TypeScriptParserMixin.parseExprAtom (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:4771:19)
+      at TypeScriptParserMixin.parseExprSubscripts (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:11098:23)
+      at TypeScriptParserMixin.parseUpdate (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:11083:21)
+      at TypeScriptParserMixin.parseMaybeUnary (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:11063:23)
+      at TypeScriptParserMixin.parseMaybeUnary (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:9854:18)
+      at TypeScriptParserMixin.parseMaybeUnaryOrPrivate (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10916:61)
+      at TypeScriptParserMixin.parseExprOps (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10921:23)
+      at TypeScriptParserMixin.parseMaybeConditional (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10898:23)
+      at TypeScriptParserMixin.parseMaybeAssign (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10848:21)
+      at Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:9792:39
+      at TypeScriptParserMixin.tryParse (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:6924:20)
+      at TypeScriptParserMixin.parseMaybeAssign (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:9792:18)
+      at Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10817:39
+      at TypeScriptParserMixin.allowInAnd (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:12443:12)
+      at TypeScriptParserMixin.parseMaybeAssignAllowIn (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10817:17)
+      at TypeScriptParserMixin.parseMaybeAssignAllowInOrVoidPattern (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:12510:17)
+      at TypeScriptParserMixin.parseParenAndDistinguishExpression (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:11692:28)
+      at TypeScriptParserMixin.parseExprAtom (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:11348:23)
+      at TypeScriptParserMixin.parseExprAtom (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:4776:20)
+      at TypeScriptParserMixin.parseExprSubscripts (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:11098:23)
+      at TypeScriptParserMixin.parseUpdate (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:11083:21)
+      at TypeScriptParserMixin.parseMaybeUnary (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:11063:23)
+      at TypeScriptParserMixin.parseMaybeUnary (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:9854:18)
+      at TypeScriptParserMixin.parseMaybeUnaryOrPrivate (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10916:61)
+      at TypeScriptParserMixin.parseExprOps (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10921:23)
+      at TypeScriptParserMixin.parseMaybeConditional (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10898:23)
+      at TypeScriptParserMixin.parseMaybeAssign (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10848:21)
+      at TypeScriptParserMixin.parseMaybeAssign (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:9803:20)
+      at TypeScriptParserMixin.parseExpressionBase (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10801:23)
+      at Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10797:39
+      at TypeScriptParserMixin.allowInAnd (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:12438:16)
+      at TypeScriptParserMixin.parseExpression (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10797:17)
+      at TypeScriptParserMixin.parseReturnStatement (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:13159:28)
+      at TypeScriptParserMixin.parseStatementContent (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:12815:21)
+      at TypeScriptParserMixin.parseStatementContent (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:9525:18)
+      at TypeScriptParserMixin.parseStatementLike (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:12784:17)
+      at TypeScriptParserMixin.parseStatementListItem (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:12764:17)
+      at TypeScriptParserMixin.parseBlockOrModuleBlockBody (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:13333:61)
+      at TypeScriptParserMixin.parseBlockBody (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:13326:10)
+      at TypeScriptParserMixin.parseBlock (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:13314:10)
+      at TypeScriptParserMixin.parseStatementContent (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:12875:21)
+      at TypeScriptParserMixin.parseStatementContent (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:9525:18)
+      at TypeScriptParserMixin.parseStatementLike (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:12784:17)
+      at TypeScriptParserMixin.parseStatementOrSloppyAnnexBFunctionDeclaration (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:12774:17)
+[2m17:28:13[22m [31m[1m[vite][22m[39m [31mInternal server error: Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\src\features\report\AnalysisPage.tsx: Unterminated string constant. (31:26)
+
+[0m [90m 29 |[31m
+ [90m 30 |[31m [36mconst[31m [33mREGION_FIELD_LABELS[31m[33m:[31m [33mReadonly[31m[33m<[31m[33mRecord[31m[33m<[31m[33mstring[31m[33m,[31m string[33m>>[31m [33m=[31m {
+[31m[1m>[22m[31m[90m 31 |[31m   [32m"leave.zj.birth.first"[31m[33m:[31m [32m"娴欐睙涓€瀛╀骇鍋囧弬鑰冨ぉ鏁?,[31m
+ [90m    |[31m                           [31m[1m^[22m[31m
+ [90m 32 |[31m   [32m"leave.cn.miscarriage_under_4_months"[31m[33m:[31m [32m"娴佷骇鍋囧弬鑰冨ぉ鏁?,[31m
+ [90m 33 |[31m   [32m"benefit.hz.under3_annual"[31m[33m:[31m [32m"鏉窞 3 宀佷互涓嬪┐骞煎効鍏昏偛琛ュ姪鍙傝€?,[31m
+ [90m 34 |[31m }[33m;[31m[0m[39m
+  Plugin: [35mvite:react-babel[39m
+  File: [36mZ:/Users/BVZ/WorkSpace/101Doodle/VibeCoding/should-we-continue/src/features/report/AnalysisPage.tsx[39m:31:26
+[33m  29 |  
+  30 |  const REGION_FIELD_LABELS: Readonly<Record<string, string>> = {
+  31 |    "leave.zj.birth.first": "娴欐睙涓€瀛╀骇鍋囧弬鑰冨ぉ鏁?,
+     |                            ^
+  32 |    "leave.cn.miscarriage_under_4_months": "娴佷骇鍋囧弬鑰冨ぉ鏁?,
+  33 |    "benefit.hz.under3_annual": "鏉窞 3 宀佷互涓嬪┐骞煎効鍏昏偛琛ュ姪鍙傝€?,[39m
+      at constructor (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:365:19)
+      at TypeScriptParserMixin.raise (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:6616:19)
+      at Object.unterminated (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:5681:20)
+      at readStringContents (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:5423:16)
+      at TypeScriptParserMixin.readString (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:6515:9)
+      at TypeScriptParserMixin.getTokenFromCode (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:6275:14)
+      at TypeScriptParserMixin.getTokenFromCode (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:4809:11)
+      at TypeScriptParserMixin.getTokenFromCode (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10004:11)
+      at TypeScriptParserMixin.nextToken (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:5799:10)
+      at TypeScriptParserMixin.next (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:5709:10)
+      at TypeScriptParserMixin.eat (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:5713:12)
+      at TypeScriptParserMixin.parseObjectProperty (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:11966:14)
+      at TypeScriptParserMixin.parseObjPropValue (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:11995:100)
+      at TypeScriptParserMixin.parseObjPropValue (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:9761:18)
+      at TypeScriptParserMixin.parsePropertyDefinition (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:11932:17)
+      at TypeScriptParserMixin.parseObjectLike (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:11849:21)
+      at TypeScriptParserMixin.parseExprAtom (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:11356:23)
+      at TypeScriptParserMixin.parseExprAtom (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:4776:20)
+      at TypeScriptParserMixin.parseExprSubscripts (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:11098:23)
+      at TypeScriptParserMixin.parseUpdate (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:11083:21)
+      at TypeScriptParserMixin.parseMaybeUnary (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:11063:23)
+      at TypeScriptParserMixin.parseMaybeUnary (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:9854:18)
+      at TypeScriptParserMixin.parseMaybeUnaryOrPrivate (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10916:61)
+      at TypeScriptParserMixin.parseExprOps (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10921:23)
+      at TypeScriptParserMixin.parseMaybeConditional (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10898:23)
+      at TypeScriptParserMixin.parseMaybeAssign (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10848:21)
+      at TypeScriptParserMixin.parseMaybeAssign (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:9803:20)
+      at Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10817:39
+      at TypeScriptParserMixin.allowInAnd (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:12438:16)
+      at TypeScriptParserMixin.parseMaybeAssignAllowIn (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10817:17)
+      at TypeScriptParserMixin.parseVar (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:13401:91)
+      at TypeScriptParserMixin.parseVarStatement (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:13247:10)
+      at TypeScriptParserMixin.parseVarStatement (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:9425:31)
+      at TypeScriptParserMixin.parseStatementContent (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:12868:23)
+      at TypeScriptParserMixin.parseStatementContent (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:9525:18)
+      at TypeScriptParserMixin.parseStatementLike (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:12784:17)
+      at TypeScriptParserMixin.parseModuleItem (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:12761:17)
+      at TypeScriptParserMixin.parseBlockOrModuleBlockBody (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:13333:36)
+      at TypeScriptParserMixin.parseBlockBody (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:13326:10)
+      at TypeScriptParserMixin.parseProgram (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:12639:10)
+      at TypeScriptParserMixin.parseTopLevel (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:12629:25)
+      at TypeScriptParserMixin.parse (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:14505:25)
+      at TypeScriptParserMixin.parse (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10143:18)
+      at parse (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:14539:38)
+      at parser (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\core\lib\parser\index.js:41:34)
+      at parser.next (<anonymous>)
+      at normalizeFile (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\core\lib\transformation\normalize-file.js:51:37)
+      at normalizeFile.next (<anonymous>)
+      at run (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\core\lib\transformation\index.js:22:50)
+      at run.next (<anonymous>)
+[2m17:30:36[22m [31m[1m[vite][22m[39m [31m[2m(client)[22m[39m Pre-transform error: Failed to load url /src/features/sharing/SharingScreen.tsx (resolved id: Z:/Users/BVZ/WorkSpace/101Doodle/VibeCoding/should-we-continue/src/features/sharing/SharingScreen.tsx) in Z:/Users/BVZ/WorkSpace/101Doodle/VibeCoding/should-we-continue/src/features/report/ReportShell.tsx. Does the file exist?
+[2m17:30:36[22m [31m[1m[vite][22m[39m [31m[2m(client)[22m[39m Pre-transform error: Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\src\features\report\AnalysisPage.tsx: Unterminated string constant. (31:26)
+
+[0m [90m 29 |[39m
+ [90m 30 |[39m [36mconst[39m [33mREGION_FIELD_LABELS[39m[33m:[39m [33mReadonly[39m[33m<[39m[33mRecord[39m[33m<[39m[33mstring[39m[33m,[39m string[33m>>[39m [33m=[39m {
+[31m[1m>[22m[39m[90m 31 |[39m   [32m"leave.zj.birth.first"[39m[33m:[39m [32m"娴欐睙涓€瀛╀骇鍋囧弬鑰冨ぉ鏁?,[39m
+ [90m    |[39m                           [31m[1m^[22m[39m
+ [90m 32 |[39m   [32m"leave.cn.miscarriage_under_4_months"[39m[33m:[39m [32m"娴佷骇鍋囧弬鑰冨ぉ鏁?,[39m
+ [90m 33 |[39m   [32m"benefit.hz.under3_annual"[39m[33m:[39m [32m"鏉窞 3 宀佷互涓嬪┐骞煎効鍏昏偛琛ュ姪鍙傝€?,[39m
+ [90m 34 |[39m }[33m;[39m[0m
+  Plugin: [35mvite:react-babel[39m
+  File: [36mZ:/Users/BVZ/WorkSpace/101Doodle/VibeCoding/should-we-continue/src/features/report/AnalysisPage.tsx[39m:31:26
+[33m  29 |  
+  30 |  const REGION_FIELD_LABELS: Readonly<Record<string, string>> = {
+  31 |    "leave.zj.birth.first": "娴欐睙涓€瀛╀骇鍋囧弬鑰冨ぉ鏁?,
+     |                            ^
+  32 |    "leave.cn.miscarriage_under_4_months": "娴佷骇鍋囧弬鑰冨ぉ鏁?,
+  33 |    "benefit.hz.under3_annual": "鏉窞 3 宀佷互涓嬪┐骞煎効鍏昏偛琛ュ姪鍙傝€?,[39m
+[2m17:30:36[22m [31m[1m[vite][22m[39m [31mInternal server error: Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\src\features\report\AnalysisPage.tsx: Unterminated string constant. (31:26)
+
+[0m [90m 29 |[31m
+ [90m 30 |[31m [36mconst[31m [33mREGION_FIELD_LABELS[31m[33m:[31m [33mReadonly[31m[33m<[31m[33mRecord[31m[33m<[31m[33mstring[31m[33m,[31m string[33m>>[31m [33m=[31m {
+[31m[1m>[22m[31m[90m 31 |[31m   [32m"leave.zj.birth.first"[31m[33m:[31m [32m"娴欐睙涓€瀛╀骇鍋囧弬鑰冨ぉ鏁?,[31m
+ [90m    |[31m                           [31m[1m^[22m[31m
+ [90m 32 |[31m   [32m"leave.cn.miscarriage_under_4_months"[31m[33m:[31m [32m"娴佷骇鍋囧弬鑰冨ぉ鏁?,[31m
+ [90m 33 |[31m   [32m"benefit.hz.under3_annual"[31m[33m:[31m [32m"鏉窞 3 宀佷互涓嬪┐骞煎効鍏昏偛琛ュ姪鍙傝€?,[31m
+ [90m 34 |[31m }[33m;[31m[0m[39m
+  Plugin: [35mvite:react-babel[39m
+  File: [36mZ:/Users/BVZ/WorkSpace/101Doodle/VibeCoding/should-we-continue/src/features/report/AnalysisPage.tsx[39m:31:26
+[33m  29 |  
+  30 |  const REGION_FIELD_LABELS: Readonly<Record<string, string>> = {
+  31 |    "leave.zj.birth.first": "娴欐睙涓€瀛╀骇鍋囧弬鑰冨ぉ鏁?,
+     |                            ^
+  32 |    "leave.cn.miscarriage_under_4_months": "娴佷骇鍋囧弬鑰冨ぉ鏁?,
+  33 |    "benefit.hz.under3_annual": "鏉窞 3 宀佷互涓嬪┐骞煎効鍏昏偛琛ュ姪鍙傝€?,[39m
+      at constructor (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:365:19)
+      at TypeScriptParserMixin.raise (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:6616:19)
+      at Object.unterminated (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:5681:20)
+      at readStringContents (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:5423:16)
+      at TypeScriptParserMixin.readString (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:6515:9)
+      at TypeScriptParserMixin.getTokenFromCode (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:6275:14)
+      at TypeScriptParserMixin.getTokenFromCode (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:4809:11)
+      at TypeScriptParserMixin.getTokenFromCode (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10004:11)
+      at TypeScriptParserMixin.nextToken (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:5799:10)
+      at TypeScriptParserMixin.next (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:5709:10)
+      at TypeScriptParserMixin.eat (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:5713:12)
+      at TypeScriptParserMixin.parseObjectProperty (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:11966:14)
+      at TypeScriptParserMixin.parseObjPropValue (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:11995:100)
+      at TypeScriptParserMixin.parseObjPropValue (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:9761:18)
+      at TypeScriptParserMixin.parsePropertyDefinition (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:11932:17)
+      at TypeScriptParserMixin.parseObjectLike (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:11849:21)
+      at TypeScriptParserMixin.parseExprAtom (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:11356:23)
+      at TypeScriptParserMixin.parseExprAtom (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:4776:20)
+      at TypeScriptParserMixin.parseExprSubscripts (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:11098:23)
+      at TypeScriptParserMixin.parseUpdate (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:11083:21)
+      at TypeScriptParserMixin.parseMaybeUnary (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:11063:23)
+      at TypeScriptParserMixin.parseMaybeUnary (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:9854:18)
+      at TypeScriptParserMixin.parseMaybeUnaryOrPrivate (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10916:61)
+      at TypeScriptParserMixin.parseExprOps (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10921:23)
+      at TypeScriptParserMixin.parseMaybeConditional (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10898:23)
+      at TypeScriptParserMixin.parseMaybeAssign (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10848:21)
+      at TypeScriptParserMixin.parseMaybeAssign (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:9803:20)
+      at Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10817:39
+      at TypeScriptParserMixin.allowInAnd (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:12438:16)
+      at TypeScriptParserMixin.parseMaybeAssignAllowIn (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10817:17)
+      at TypeScriptParserMixin.parseVar (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:13401:91)
+      at TypeScriptParserMixin.parseVarStatement (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:13247:10)
+      at TypeScriptParserMixin.parseVarStatement (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:9425:31)
+      at TypeScriptParserMixin.parseStatementContent (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:12868:23)
+      at TypeScriptParserMixin.parseStatementContent (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:9525:18)
+      at TypeScriptParserMixin.parseStatementLike (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:12784:17)
+      at TypeScriptParserMixin.parseModuleItem (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:12761:17)
+      at TypeScriptParserMixin.parseBlockOrModuleBlockBody (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:13333:36)
+      at TypeScriptParserMixin.parseBlockBody (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:13326:10)
+      at TypeScriptParserMixin.parseProgram (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:12639:10)
+      at TypeScriptParserMixin.parseTopLevel (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:12629:25)
+      at TypeScriptParserMixin.parse (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:14505:25)
+      at TypeScriptParserMixin.parse (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10143:18)
+      at parse (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:14539:38)
+      at parser (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\core\lib\parser\index.js:41:34)
+      at parser.next (<anonymous>)
+      at normalizeFile (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\core\lib\transformation\normalize-file.js:51:37)
+      at normalizeFile.next (<anonymous>)
+      at run (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\core\lib\transformation\index.js:22:50)
+      at run.next (<anonymous>)
+[2m17:31:04[22m [31m[1m[vite][22m[39m [31m[2m(client)[22m[39m Pre-transform error: Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\src\features\report\AnalysisPage.tsx: Unterminated string constant. (31:26)
+
+[0m [90m 29 |[39m
+ [90m 30 |[39m [36mconst[39m [33mREGION_FIELD_LABELS[39m[33m:[39m [33mReadonly[39m[33m<[39m[33mRecord[39m[33m<[39m[33mstring[39m[33m,[39m string[33m>>[39m [33m=[39m {
+[31m[1m>[22m[39m[90m 31 |[39m   [32m"leave.zj.birth.first"[39m[33m:[39m [32m"娴欐睙涓€瀛╀骇鍋囧弬鑰冨ぉ鏁?,[39m
+ [90m    |[39m                           [31m[1m^[22m[39m
+ [90m 32 |[39m   [32m"leave.cn.miscarriage_under_4_months"[39m[33m:[39m [32m"娴佷骇鍋囧弬鑰冨ぉ鏁?,[39m
+ [90m 33 |[39m   [32m"benefit.hz.under3_annual"[39m[33m:[39m [32m"鏉窞 3 宀佷互涓嬪┐骞煎効鍏昏偛琛ュ姪鍙傝€?,[39m
+ [90m 34 |[39m }[33m;[39m[0m
+  Plugin: [35mvite:react-babel[39m
+  File: [36mZ:/Users/BVZ/WorkSpace/101Doodle/VibeCoding/should-we-continue/src/features/report/AnalysisPage.tsx[39m:31:26
+[33m  29 |  
+  30 |  const REGION_FIELD_LABELS: Readonly<Record<string, string>> = {
+  31 |    "leave.zj.birth.first": "娴欐睙涓€瀛╀骇鍋囧弬鑰冨ぉ鏁?,
+     |                            ^
+  32 |    "leave.cn.miscarriage_under_4_months": "娴佷骇鍋囧弬鑰冨ぉ鏁?,
+  33 |    "benefit.hz.under3_annual": "鏉窞 3 宀佷互涓嬪┐骞煎効鍏昏偛琛ュ姪鍙傝€?,[39m
+[2m17:31:04[22m [31m[1m[vite][22m[39m [31mInternal server error: Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\src\features\report\AnalysisPage.tsx: Unterminated string constant. (31:26)
+
+[0m [90m 29 |[31m
+ [90m 30 |[31m [36mconst[31m [33mREGION_FIELD_LABELS[31m[33m:[31m [33mReadonly[31m[33m<[31m[33mRecord[31m[33m<[31m[33mstring[31m[33m,[31m string[33m>>[31m [33m=[31m {
+[31m[1m>[22m[31m[90m 31 |[31m   [32m"leave.zj.birth.first"[31m[33m:[31m [32m"娴欐睙涓€瀛╀骇鍋囧弬鑰冨ぉ鏁?,[31m
+ [90m    |[31m                           [31m[1m^[22m[31m
+ [90m 32 |[31m   [32m"leave.cn.miscarriage_under_4_months"[31m[33m:[31m [32m"娴佷骇鍋囧弬鑰冨ぉ鏁?,[31m
+ [90m 33 |[31m   [32m"benefit.hz.under3_annual"[31m[33m:[31m [32m"鏉窞 3 宀佷互涓嬪┐骞煎効鍏昏偛琛ュ姪鍙傝€?,[31m
+ [90m 34 |[31m }[33m;[31m[0m[39m
+  Plugin: [35mvite:react-babel[39m
+  File: [36mZ:/Users/BVZ/WorkSpace/101Doodle/VibeCoding/should-we-continue/src/features/report/AnalysisPage.tsx[39m:31:26
+[33m  29 |  
+  30 |  const REGION_FIELD_LABELS: Readonly<Record<string, string>> = {
+  31 |    "leave.zj.birth.first": "娴欐睙涓€瀛╀骇鍋囧弬鑰冨ぉ鏁?,
+     |                            ^
+  32 |    "leave.cn.miscarriage_under_4_months": "娴佷骇鍋囧弬鑰冨ぉ鏁?,
+  33 |    "benefit.hz.under3_annual": "鏉窞 3 宀佷互涓嬪┐骞煎効鍏昏偛琛ュ姪鍙傝€?,[39m
+      at constructor (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:365:19)
+      at TypeScriptParserMixin.raise (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:6616:19)
+      at Object.unterminated (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:5681:20)
+      at readStringContents (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:5423:16)
+      at TypeScriptParserMixin.readString (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:6515:9)
+      at TypeScriptParserMixin.getTokenFromCode (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:6275:14)
+      at TypeScriptParserMixin.getTokenFromCode (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:4809:11)
+      at TypeScriptParserMixin.getTokenFromCode (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10004:11)
+      at TypeScriptParserMixin.nextToken (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:5799:10)
+      at TypeScriptParserMixin.next (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:5709:10)
+      at TypeScriptParserMixin.eat (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:5713:12)
+      at TypeScriptParserMixin.parseObjectProperty (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:11966:14)
+      at TypeScriptParserMixin.parseObjPropValue (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:11995:100)
+      at TypeScriptParserMixin.parseObjPropValue (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:9761:18)
+      at TypeScriptParserMixin.parsePropertyDefinition (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:11932:17)
+      at TypeScriptParserMixin.parseObjectLike (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:11849:21)
+      at TypeScriptParserMixin.parseExprAtom (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:11356:23)
+      at TypeScriptParserMixin.parseExprAtom (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:4776:20)
+      at TypeScriptParserMixin.parseExprSubscripts (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:11098:23)
+      at TypeScriptParserMixin.parseUpdate (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:11083:21)
+      at TypeScriptParserMixin.parseMaybeUnary (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:11063:23)
+      at TypeScriptParserMixin.parseMaybeUnary (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:9854:18)
+      at TypeScriptParserMixin.parseMaybeUnaryOrPrivate (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10916:61)
+      at TypeScriptParserMixin.parseExprOps (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10921:23)
+      at TypeScriptParserMixin.parseMaybeConditional (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10898:23)
+      at TypeScriptParserMixin.parseMaybeAssign (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10848:21)
+      at TypeScriptParserMixin.parseMaybeAssign (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:9803:20)
+      at Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10817:39
+      at TypeScriptParserMixin.allowInAnd (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:12438:16)
+      at TypeScriptParserMixin.parseMaybeAssignAllowIn (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10817:17)
+      at TypeScriptParserMixin.parseVar (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:13401:91)
+      at TypeScriptParserMixin.parseVarStatement (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:13247:10)
+      at TypeScriptParserMixin.parseVarStatement (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:9425:31)
+      at TypeScriptParserMixin.parseStatementContent (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:12868:23)
+      at TypeScriptParserMixin.parseStatementContent (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:9525:18)
+      at TypeScriptParserMixin.parseStatementLike (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:12784:17)
+      at TypeScriptParserMixin.parseModuleItem (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:12761:17)
+      at TypeScriptParserMixin.parseBlockOrModuleBlockBody (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:13333:36)
+      at TypeScriptParserMixin.parseBlockBody (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:13326:10)
+      at TypeScriptParserMixin.parseProgram (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:12639:10)
+      at TypeScriptParserMixin.parseTopLevel (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:12629:25)
+      at TypeScriptParserMixin.parse (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:14505:25)
+      at TypeScriptParserMixin.parse (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:10143:18)
+      at parse (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\parser\lib\index.js:14539:38)
+      at parser (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\core\lib\parser\index.js:41:34)
+      at parser.next (<anonymous>)
+      at normalizeFile (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\core\lib\transformation\normalize-file.js:51:37)
+      at normalizeFile.next (<anonymous>)
+      at run (Z:\Users\BVZ\WorkSpace\101Doodle\VibeCoding\should-we-continue\node_modules\@babel\core\lib\transformation\index.js:22:50)
+      at run.next (<anonymous>)
+[2m17:31:09[22m [31m[1m[vite][22m[39m [31m[2m(client)[22m[39m Pre-transform error: Failed to load url /src/features/report/AnalysisPage.tsx (resolved id: Z:/Users/BVZ/WorkSpace/101Doodle/VibeCoding/should-we-continue/src/features/report/AnalysisPage.tsx) in Z:/Users/BVZ/WorkSpace/101Doodle/VibeCoding/should-we-continue/src/features/report/ReportShell.tsx. Does the file exist?

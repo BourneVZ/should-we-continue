@@ -53,12 +53,12 @@ export function createLocalWorkspaceRepository(
   const { storage, storageKey } = options;
 
   function load(): WorkspaceDocument | null {
-    const raw = storage.getItem(storageKey);
-    if (!raw) {
-      return null;
-    }
-
     try {
+      const raw = storage.getItem(storageKey);
+      if (!raw) {
+        return null;
+      }
+
       const parsed = parseWorkspaceDocument(JSON.parse(raw));
       if (parsed.schemaVersion !== WORKSPACE_SCHEMA_VERSION) {
         storage.removeItem(storageKey);
@@ -85,7 +85,11 @@ export function createLocalWorkspaceRepository(
 
   function clear(scope: ClearScope): void {
     if (scope === "all") {
-      storage.removeItem(storageKey);
+      try {
+        storage.removeItem(storageKey);
+      } catch {
+        return;
+      }
       return;
     }
 

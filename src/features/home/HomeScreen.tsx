@@ -21,7 +21,7 @@ export function HomeScreen({
       <div className="mx-auto flex min-h-screen max-w-7xl flex-col px-6 pb-12 pt-8 md:px-10 lg:px-12">
         <header className="flex items-center justify-between">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-sky-700">Should We Continue</p>
+            <p className="text-xs font-semibold tracking-[0.28em] text-sky-700">妊娠去留梳理工具</p>
             <h1 className="mt-3 max-w-3xl font-serif text-4xl font-semibold leading-tight text-slate-900 md:text-6xl">
               把混乱拆成一题一题，
               <br />

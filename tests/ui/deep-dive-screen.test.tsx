@@ -15,6 +15,7 @@ describe("DeepDiveScreen", () => {
         onSelectModule={() => undefined}
         onRequestSkipAll={() => undefined}
         onConfirmSkipAll={() => undefined}
+        onContinueToReport={() => undefined}
       />,
     );
 
@@ -25,5 +26,42 @@ describe("DeepDiveScreen", () => {
     expect(html).toContain("已完成");
     expect(html).toContain("未完成不参与报告");
     expect(html).toContain("确认跳过");
+  });
+
+  it("changes the final action copy when some or all optional modules are completed", () => {
+    const partialHtml = renderToStaticMarkup(
+      <DeepDiveScreen
+        recommendations={[
+          { moduleId: "medical-deep", title: "就医安排补充", estimatedQuestions: 4, purpose: "补齐就医安排", status: "completed" },
+          { moduleId: "mental-deep", title: "心理支持补充", estimatedQuestions: 3, purpose: "补齐支持安排", status: "not-started" },
+        ]}
+        personaExtra={{ moduleId: "persona-deep", title: "互动风格校准", estimatedQuestions: 12, purpose: "校准沟通偏好", status: "not-started" }}
+        skipConfirmationOpen={false}
+        onSelectModule={() => undefined}
+        onRequestSkipAll={() => undefined}
+        onConfirmSkipAll={() => undefined}
+        onContinueToReport={() => undefined}
+      />,
+    );
+
+    expect(partialHtml).toContain("跳过剩余");
+    expect(partialHtml).not.toContain("跳过全部");
+
+    const completeHtml = renderToStaticMarkup(
+      <DeepDiveScreen
+        recommendations={[
+          { moduleId: "medical-deep", title: "就医安排补充", estimatedQuestions: 4, purpose: "补齐就医安排", status: "completed" },
+        ]}
+        personaExtra={{ moduleId: "persona-deep", title: "互动风格校准", estimatedQuestions: 12, purpose: "校准沟通偏好", status: "completed" }}
+        skipConfirmationOpen={false}
+        onSelectModule={() => undefined}
+        onRequestSkipAll={() => undefined}
+        onConfirmSkipAll={() => undefined}
+        onContinueToReport={() => undefined}
+      />,
+    );
+
+    expect(completeHtml).toContain("进入下一环节");
+    expect(completeHtml).not.toContain("跳过全部");
   });
 });
