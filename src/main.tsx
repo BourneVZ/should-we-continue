@@ -1,11 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { createApiClient } from "@/app/api-client";
-import { RuntimeApp } from "@/app/RuntimeApp";
-import { createAppServices } from "@/app/services";
-import type { AppDiagnostics } from "@/app/services";
-import { createBrowserStorageAdapter } from "@/persistence/browser-storage";
-import { createLocalWorkspaceRepository } from "@/persistence/local-repository";
+import { App } from "@/App";
 import "./styles/index.css";
 
 const rootElement = document.getElementById("root");
@@ -53,58 +48,10 @@ class RootErrorBoundary extends React.Component<RootFallbackProps, RootFallbackS
   }
 }
 
-async function loadDiagnosticsPanel(diagnostics: AppDiagnostics) {
-  if (!import.meta.env.DEV) {
-    return null;
-  }
-
-  const { DiagnosticsPanel } = await import("./features/diagnostics/DiagnosticsPanel");
-  return (
-    <DiagnosticsPanel
-      isDev={diagnostics.isDev}
-      configAvailable={diagnostics.configAvailable}
-      templateFallbackActive={diagnostics.templateFallbackActive}
-      errorCategory={diagnostics.errorCategory}
-      schemaStatus={diagnostics.schemaStatus}
-    />
-  );
-}
-
-async function bootstrap() {
-  const diagnostics: AppDiagnostics = {
-    isDev: import.meta.env.DEV,
-    configAvailable: false,
-    templateFallbackActive: !import.meta.env.DEV,
-    errorCategory: null,
-    schemaStatus: "valid",
-  };
-
-  const services = createAppServices({
-    repository: createLocalWorkspaceRepository({
-      storage: createBrowserStorageAdapter(() => window.localStorage),
-      storageKey: "should-we-continue:workspace",
-    }),
-    clock: { now: () => Date.now() },
-    apiClient: createApiClient({
-      fetcher: (url, init) =>
-        fetch(url, init).then(async (response) => ({
-          ok: response.ok,
-          status: response.status,
-          json: async () => response.json(),
-        })),
-    }),
-    diagnostics,
-  });
-
-  const diagnosticsPanel = await loadDiagnosticsPanel(diagnostics);
-
-  ReactDOM.createRoot(appRoot).render(
-    <React.StrictMode>
-      <RootErrorBoundary>
-        <RuntimeApp diagnosticsPanel={diagnosticsPanel} services={services} />
-      </RootErrorBoundary>
-    </React.StrictMode>,
-  );
-}
-
-void bootstrap();
+ReactDOM.createRoot(appRoot).render(
+  <React.StrictMode>
+    <RootErrorBoundary>
+      <App />
+    </RootErrorBoundary>
+  </React.StrictMode>,
+);

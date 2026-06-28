@@ -1,1 +1,1 @@
-export { App } from "@/app/App";
+export { CoreSpecRebuildApp as App } from "@/core-spec-rebuild/CoreSpecRebuildApp";
