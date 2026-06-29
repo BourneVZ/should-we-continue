@@ -18,6 +18,8 @@ export interface MatchEntry {
   code: string;
   name: string;
   distance: number;
+  similarityPercent: number;
+  exactMatchCount: number;
   archetype: ArchetypeDefinition;
 }
 
@@ -25,6 +27,7 @@ export interface MatchResult {
   primary: ArchetypeDefinition;
   family: FamilyDefinition;
   similar: readonly MatchEntry[];
+  ranked: readonly MatchEntry[];
   isFallback: boolean;
   contradictionCount: number;
   distance: number;
@@ -95,14 +98,29 @@ function countContradictions(vector: ScoreVector): number {
   return CONTRADICTION_PAIRS.filter(([left, right]) => vector[left] >= 4.3 && vector[right] >= 4.3).length;
 }
 
+export function getSimilarityPercent(distance: number): number {
+  return Math.max(0, Math.min(100, Math.round((1 - distance / 4) * 100)));
+}
+
+export function countLevelMatches(left: ScoreVector, right: ScoreVector): number {
+  return DIMENSION_IDS.filter((dimensionId) => getFingerprintLevel(left[dimensionId]) === getFingerprintLevel(right[dimensionId]))
+    .length;
+}
+
 function buildMatchTable(vector: ScoreVector): readonly MatchEntry[] {
   return [...ARCHETYPES]
-    .map((archetype) => ({
-      code: archetype.code,
-      name: archetype.name,
-      distance: calculateDistance(vector, archetype.prototype),
-      archetype,
-    }))
+    .map((archetype) => {
+      const distance = calculateDistance(vector, archetype.prototype);
+
+      return {
+        code: archetype.code,
+        name: archetype.name,
+        distance,
+        similarityPercent: getSimilarityPercent(distance),
+        exactMatchCount: countLevelMatches(vector, archetype.prototype),
+        archetype,
+      };
+    })
     .sort((left, right) => left.distance - right.distance);
 }
 
@@ -118,6 +136,7 @@ export function matchArchetype(vector: ScoreVector): MatchResult {
       primary: FALLBACK_ARCHETYPE,
       family: getFamily("fallback"),
       similar: matchTable.slice(0, 3),
+      ranked: matchTable.slice(0, 5),
       isFallback: true,
       contradictionCount,
       distance: bestMatch.distance,
@@ -128,6 +147,7 @@ export function matchArchetype(vector: ScoreVector): MatchResult {
     primary: bestMatch.archetype,
     family: getFamily(bestMatch.archetype.familyId),
     similar: matchTable.slice(1, 4),
+    ranked: matchTable.slice(0, 5),
     isFallback: false,
     contradictionCount,
     distance: bestMatch.distance,

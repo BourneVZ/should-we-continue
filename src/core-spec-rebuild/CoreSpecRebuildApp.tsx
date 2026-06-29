@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, type ReactNode } from "react";
 import {
   ALL_ARCHETYPES,
   DIMENSIONS,
@@ -23,6 +23,7 @@ import {
   getWhyTags,
   isQuizComplete,
   matchArchetype,
+  type MatchEntry,
 } from "./scoring";
 import { clearPersistedQuizState, loadPersistedQuizState, savePersistedQuizState } from "./storage";
 
@@ -99,10 +100,21 @@ function buildHashRoute(view: View, detailCode: string): string {
   }
 }
 
+export function getResumeQuestionIndex(answerMap: Record<string, number | null>, currentQuestionIndex: number): number {
+  const hasAnyAnswer = Object.values(answerMap).some((value) => value !== null);
+
+  if (!hasAnyAnswer) {
+    return Math.max(0, Math.min(currentQuestionIndex, QUESTIONS.length - 1));
+  }
+
+  return getFirstUnansweredIndex(answerMap as Record<QuestionId, number | null>);
+}
+
 function ArchetypeThumbnail(props: {
   archetype: ArchetypeDefinition;
   size?: "sm" | "md";
   className?: string;
+  srcOverride?: string;
 }) {
   const family = getFamily(props.archetype.familyId);
   const sizeClass = props.size === "sm" ? "h-14 w-14 rounded-[16px]" : "h-24 w-24 rounded-[22px]";
@@ -110,7 +122,11 @@ function ArchetypeThumbnail(props: {
   if (props.archetype.artwork?.status === "final") {
     return (
       <div className={`shrink-0 overflow-hidden border border-black/5 bg-[#fbf7f0] p-1 ${sizeClass} ${props.className ?? ""}`}>
-        <img src={props.archetype.artwork.posterPath} alt={props.archetype.artwork.alt} className="h-full w-full object-contain" />
+        <img
+          src={props.srcOverride ?? props.archetype.artwork.posterPath}
+          alt={props.archetype.artwork.alt}
+          className="h-full w-full object-contain"
+        />
       </div>
     );
   }
@@ -137,7 +153,7 @@ function HomePreviewChip(props: { archetype: ArchetypeDefinition; onClick: () =>
       onClick={props.onClick}
       className="flex w-full items-center gap-3 rounded-[24px] border border-[#ded8ce] bg-white px-3 py-3 text-left shadow-sm transition hover:-translate-y-0.5 hover:border-[#cdbbaa] hover:bg-[#fffdfa]"
     >
-      <ArchetypeThumbnail archetype={props.archetype} size="sm" />
+      <ArchetypeThumbnail archetype={props.archetype} size="sm" srcOverride={`/archetypes/thumbs/${props.archetype.code}.png`} />
       <div className="min-w-0">
         <p className="text-sm font-semibold tracking-[0.12em] text-[#3d5f5a]">{props.archetype.code}</p>
         <p className="truncate text-base font-semibold text-[#4f443d]">{props.archetype.name}</p>
@@ -303,13 +319,13 @@ function HomeView(props: {
   );
 }
 
-function QuizView(props: {
+export function QuizView(props: {
   index: number;
+  answeredCount: number;
   selectedValue: number | null;
   validationMessage: string | null;
-  saveMessage: string | null;
-  onBack: () => void;
-  onNext: () => void;
+  onExit: () => void;
+  onPrevious: () => void;
   onChange: (value: number) => void;
 }) {
   const question = QUESTIONS[props.index];
@@ -317,28 +333,20 @@ function QuizView(props: {
 
   return (
     <main className="mx-auto min-h-screen max-w-5xl px-5 py-6 md:px-8">
-      <header className="flex flex-wrap items-center justify-between gap-3">
+      <header className="flex items-center justify-start">
         <button
           type="button"
-          onClick={props.onBack}
+          onClick={props.onExit}
           className="rounded-full border border-black/5 bg-white/80 px-4 py-2.5 text-sm font-semibold text-[#51443d] shadow-sm transition hover:bg-white"
         >
-          返回
+          {"\u8fd4\u56de\u4e3b\u9875"}
         </button>
-        <div className="rounded-full border border-black/5 bg-white/80 px-4 py-2 text-sm text-[#65584f] shadow-sm">
-          {props.saveMessage ?? "草稿默认保存在本机浏览器"}
-        </div>
       </header>
 
       <section className="mt-5 overflow-hidden rounded-[36px] border border-black/5 bg-white p-6 shadow-[0_24px_80px_rgba(43,37,31,0.08)] md:p-8">
         <div className="flex flex-wrap items-center justify-between gap-4">
-          <div>
-            <div className="inline-flex rounded-full bg-[#f1e4d7] px-3.5 py-1.5 text-sm font-semibold text-[#85543e]">
-              第 {props.index + 1} / {QUESTIONS.length} 题
-            </div>
-            <p className="mt-4 text-sm font-medium text-[#8b7468]">
-              {question.format === "scenario" ? "场景题" : "陈述句"} · {DIMENSIONS.find((item) => item.id === question.dimensionId)?.label}
-            </p>
+          <div className="inline-flex rounded-full bg-[#f1e4d7] px-3.5 py-1.5 text-sm font-semibold text-[#85543e]">
+            {"\u7b2c "}{props.index + 1}{" \u9898"}
           </div>
           <div className="w-full max-w-xs">
             <div className="h-2 overflow-hidden rounded-full bg-[#efe7de]">
@@ -351,7 +359,6 @@ function QuizView(props: {
         </div>
 
         <h1 className="mt-8 max-w-3xl text-3xl font-semibold leading-tight text-[#2f2118] md:text-4xl">{question.prompt}</h1>
-        <p className="mt-4 text-sm leading-7 text-[#77685c]">按“像不像你当前会进入这种模式”来选，不用追求政治正确。</p>
 
         <div className="mt-8 space-y-3">
           {QUESTION_SCALE_OPTIONS.map((option) => {
@@ -362,14 +369,13 @@ function QuizView(props: {
                 key={option.value}
                 type="button"
                 onClick={() => props.onChange(option.value)}
-                className={`flex w-full items-center justify-between rounded-[24px] border px-5 py-4 text-left transition ${
+                className={`flex w-full items-center rounded-[24px] border px-5 py-4 text-left transition ${
                   active
                     ? "border-[#b4553e] bg-[#fff4ee] text-[#5f3729] shadow-[0_10px_24px_rgba(180,85,62,0.12)]"
                     : "border-black/5 bg-[#fbf9f6] text-[#4e433c] hover:border-[#c7b7a8] hover:bg-white"
                 }`}
               >
                 <span className="text-base font-semibold">{option.label}</span>
-                <span className="rounded-full bg-black/5 px-3 py-1 text-xs font-semibold text-[#7a6a5d]">{option.value}</span>
               </button>
             );
           })}
@@ -382,14 +388,15 @@ function QuizView(props: {
         ) : null}
 
         <footer className="mt-8 flex flex-wrap items-center justify-between gap-4">
-          <p className="text-sm leading-7 text-[#77685c]">没有标准答案。你只需要选最像你会出现的反应。</p>
           <button
             type="button"
-            onClick={props.onNext}
-            className="rounded-full bg-[#2f2118] px-6 py-3 font-semibold text-white shadow-[0_18px_36px_rgba(47,33,24,0.22)] transition hover:-translate-y-0.5 hover:bg-[#472f22]"
+            onClick={props.onPrevious}
+            disabled={props.index === 0}
+            className="rounded-full border border-[#d9d2c8] bg-white px-5 py-3 font-semibold text-[#5d5048] shadow-sm transition hover:bg-[#fffdfa] disabled:cursor-not-allowed disabled:opacity-45"
           >
-            {props.index === QUESTIONS.length - 1 ? "看结果" : "下一题"}
+            {"\u2190 \u4e0a\u4e00\u9898"}
           </button>
+          <p className="text-sm font-medium text-[#6d6057]">{props.answeredCount}/{QUESTIONS.length} {"\u5df2\u5b8c\u6210"}</p>
         </footer>
       </section>
     </main>
@@ -433,7 +440,164 @@ function FingerprintGrid(props: { vector: ScoreVector }) {
   );
 }
 
-function DetailedFingerprintPanel(props: { vector: ScoreVector }) {
+const RADAR_SIZE = 560;
+const RADAR_CENTER = RADAR_SIZE / 2;
+const RADAR_RADIUS = 164;
+const RADAR_LABEL_RADIUS = 226;
+const HML_LEVELS: readonly FingerprintLevel[] = ["high", "medium", "low"];
+
+function getDimensionBarWidth(score: number): string {
+  const percent = ((score - 1) / 4) * 100;
+  return `${Math.max(0, Math.min(100, Math.round(percent)))}%`;
+}
+
+function getDimensionOrderLabel(dimensionId: string): string {
+  const index = DIMENSIONS.findIndex((dimension) => dimension.id === dimensionId);
+  return String(index + 1).padStart(2, "0");
+}
+
+function getRadarTextAnchor(x: number): "start" | "middle" | "end" {
+  if (Math.abs(x - RADAR_CENTER) < 20) {
+    return "middle";
+  }
+
+  return x < RADAR_CENTER ? "end" : "start";
+}
+
+function ResultBreadcrumb(props: { onGoHome: () => void; currentLabel: string }) {
+  return (
+    <div className="flex flex-wrap items-center gap-2 text-sm text-[#7b6c61]">
+      <button
+        type="button"
+        onClick={props.onGoHome}
+        className="rounded-full border border-[#e1d8cd] bg-white px-4 py-2 font-semibold text-[#4f433b] shadow-sm transition hover:-translate-y-0.5 hover:bg-[#fffdfa]"
+      >
+        返回首页
+      </button>
+      <span aria-hidden="true">/</span>
+      <span className="font-medium text-[#6a5c52]">{props.currentLabel}</span>
+    </div>
+  );
+}
+
+function ResultHeroSection(props: {
+  archetype: ArchetypeDefinition;
+  match: MatchEntry;
+  whyTags: readonly string[];
+}) {
+  const family = getFamily(props.archetype.familyId);
+
+  return (
+    <section className="rounded-[36px] border border-black/5 bg-white p-6 shadow-[0_24px_80px_rgba(43,37,31,0.08)] md:p-8">
+      <div className="grid gap-8 lg:grid-cols-[0.92fr_1.08fr] lg:items-center">
+        <div className="mx-auto w-full max-w-[520px]">
+          <ArchetypePoster archetype={props.archetype} compact />
+        </div>
+        <div>
+          <p className="text-sm font-semibold tracking-[0.16em] text-[#6e8573]">测试结果已生成 · {family.name}</p>
+          <h1 className="mt-4 font-serif text-4xl font-semibold leading-tight text-[#1f2b27] md:text-6xl">
+            {props.archetype.code}
+            <span className="mt-3 block text-3xl text-[#314740] md:text-4xl">{props.archetype.name}</span>
+          </h1>
+          <div className="mt-5 inline-flex rounded-full border border-[#d6e3d8] bg-[#f4faf6] px-4 py-2 text-sm font-semibold text-[#466b5f]">
+            匹配度 {props.match.similarityPercent}% · 精准命中 {props.match.exactMatchCount}/{DIMENSIONS.length} 维
+          </div>
+          <p className="mt-6 text-xl font-semibold leading-8 text-[#33453f]">{props.archetype.punchline}</p>
+          <p className="mt-4 max-w-2xl text-[15px] leading-8 text-[#5b4e45]">{props.archetype.intro}</p>
+          <div className="mt-5 flex flex-wrap gap-2.5">
+            {props.whyTags.map((tag) => (
+              <span key={tag} className="rounded-full bg-[#f3e5da] px-4 py-2 text-sm font-semibold text-[#8c513d]">
+                {tag}
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function RadarChart(props: { vector: ScoreVector }) {
+  const angleStep = (Math.PI * 2) / DIMENSIONS.length;
+  const gridScales = [0.25, 0.5, 0.75, 1];
+
+  const labelPoints = DIMENSIONS.map((dimension, index) => {
+    const angle = -Math.PI / 2 + angleStep * index;
+    const x = RADAR_CENTER + Math.cos(angle) * RADAR_LABEL_RADIUS;
+    const y = RADAR_CENTER + Math.sin(angle) * RADAR_LABEL_RADIUS;
+
+    return {
+      dimension,
+      x,
+      y,
+      anchor: getRadarTextAnchor(x),
+    };
+  });
+
+  const polygonPoints = DIMENSIONS.map((dimension, index) => {
+    const angle = -Math.PI / 2 + angleStep * index;
+    const normalized = (props.vector[dimension.id] - 1) / 4;
+    const radius = RADAR_RADIUS * normalized;
+
+    return {
+      x: RADAR_CENTER + Math.cos(angle) * radius,
+      y: RADAR_CENTER + Math.sin(angle) * radius,
+    };
+  });
+
+  return (
+    <div className="overflow-hidden rounded-[28px] border border-[#efe8dd] bg-[#fbfaf7] p-4">
+      <svg viewBox={`0 0 ${RADAR_SIZE} ${RADAR_SIZE}`} className="mx-auto block w-full max-w-[560px]" role="img" aria-label="15个维度的雷达图">
+        {gridScales.map((scale) => (
+          <polygon
+            key={scale}
+            points={DIMENSIONS.map((_, index) => {
+              const angle = -Math.PI / 2 + angleStep * index;
+              const x = RADAR_CENTER + Math.cos(angle) * RADAR_RADIUS * scale;
+              const y = RADAR_CENTER + Math.sin(angle) * RADAR_RADIUS * scale;
+
+              return `${x},${y}`;
+            }).join(" ")}
+            fill="none"
+            stroke="#d9ddd4"
+            strokeWidth="1"
+          />
+        ))}
+        {DIMENSIONS.map((_, index) => {
+          const angle = -Math.PI / 2 + angleStep * index;
+          const x = RADAR_CENTER + Math.cos(angle) * RADAR_RADIUS;
+          const y = RADAR_CENTER + Math.sin(angle) * RADAR_RADIUS;
+
+          return <line key={index} x1={RADAR_CENTER} y1={RADAR_CENTER} x2={x} y2={y} stroke="#e8ece5" strokeWidth="1" />;
+        })}
+        <polygon
+          points={polygonPoints.map((point) => `${point.x},${point.y}`).join(" ")}
+          fill="rgba(95, 117, 91, 0.18)"
+          stroke="#5f755b"
+          strokeWidth="3"
+          strokeLinejoin="round"
+        />
+        {polygonPoints.map((point, index) => (
+          <circle key={DIMENSIONS[index].id} cx={point.x} cy={point.y} r="4.5" fill="#5f755b" />
+        ))}
+        {labelPoints.map((point) => (
+          <text
+            key={point.dimension.id}
+            x={point.x}
+            y={point.y}
+            textAnchor={point.anchor}
+            dominantBaseline="middle"
+            className="fill-[#6a6f68] text-[11px] font-medium"
+          >
+            {point.dimension.label}
+          </text>
+        ))}
+      </svg>
+    </div>
+  );
+}
+
+function LegacyDetailedFingerprintPanel(props: { vector: ScoreVector }) {
   return (
     <section className="rounded-[32px] border border-black/5 bg-white p-7 shadow-[0_18px_60px_rgba(43,37,31,0.08)]">
       <h2 className="text-2xl font-semibold text-[#2f2118]">15 维度画像</h2>
@@ -472,6 +636,164 @@ function DetailedFingerprintPanel(props: { vector: ScoreVector }) {
   );
 }
 
+function DetailedFingerprintPanel(props: { vector: ScoreVector }) {
+  return (
+    <section className="rounded-[32px] border border-black/5 bg-white p-7 shadow-[0_18px_60px_rgba(43,37,31,0.08)]">
+      <div className="grid gap-8 xl:grid-cols-[0.9fr_1.1fr]">
+        <div>
+          <h2 className="text-2xl font-semibold text-[#2f2118]">维度雷达</h2>
+          <p className="mt-3 text-sm leading-7 text-[#66594f]">15 个维度一起看，只展示高低趋势，不公开原始分数。</p>
+          <div className="mt-6">
+            <RadarChart vector={props.vector} />
+          </div>
+        </div>
+
+        <div>
+          <h2 className="text-2xl font-semibold text-[#2f2118]">15 维度画像</h2>
+          <p className="mt-3 text-sm leading-7 text-[#66594f]">每一维都给出当前落点、简短说明和 H / M / L 标记，方便从上到下快速扫读。</p>
+          <div className="mt-6 space-y-8">
+            {MODELS.map((model) => (
+              <div key={model.id}>
+                <div className="border-b border-[#ece4da] pb-3">
+                  <h3 className="text-xl font-semibold text-[#3f544f]">{model.label}</h3>
+                </div>
+                <div className="mt-4 space-y-5">
+                  {model.dimensionIds.map((dimensionId) => {
+                    const dimension = DIMENSIONS.find((item) => item.id === dimensionId);
+
+                    if (!dimension) {
+                      return null;
+                    }
+
+                    const level = getFingerprintLevel(props.vector[dimensionId]);
+                    const meta = LEVEL_BADGE_META[level];
+
+                    return (
+                      <article key={dimensionId} className="rounded-[24px] bg-[#fcfaf6] px-4 py-4">
+                        <div className="flex flex-wrap items-start justify-between gap-4">
+                          <div>
+                            <p className="text-xs font-semibold tracking-[0.18em] text-[#77887d]">
+                              {getDimensionOrderLabel(dimensionId)} · {model.label}
+                            </p>
+                            <h4 className="mt-2 text-[22px] font-semibold leading-none text-[#2f2118]">{dimension.label}</h4>
+                            <p className="mt-3 text-sm leading-7 text-[#5e5249]">{dimension.notes[level]}</p>
+                          </div>
+                          <span className={`rounded-full px-2.5 py-1 text-xs font-semibold ${meta.className}`}>{meta.text}</span>
+                        </div>
+                        <div className="mt-4 flex items-center gap-4">
+                          <div className="h-2 flex-1 overflow-hidden rounded-full bg-[#e9eee8]">
+                            <div
+                              className="h-full rounded-full bg-[linear-gradient(90deg,#7e9480,#5f755b)]"
+                              style={{ width: getDimensionBarWidth(props.vector[dimensionId]) }}
+                            />
+                          </div>
+                          <div className="flex shrink-0 items-center gap-1.5">
+                            {HML_LEVELS.map((status) => {
+                              const active = status === level;
+                              const label = LEVEL_BADGE_META[status].text;
+
+                              return (
+                                <span
+                                  key={status}
+                                  className={`inline-flex h-7 w-7 items-center justify-center rounded-full text-xs font-semibold ${
+                                    active ? LEVEL_BADGE_META[status].className : "bg-[#f1ede6] text-[#9a8f86]"
+                                  }`}
+                                >
+                                  {label}
+                                </span>
+                              );
+                            })}
+                          </div>
+                        </div>
+                      </article>
+                    );
+                  })}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function PersonalityTraitCard(props: { index: number; title: string; body: string }) {
+  return (
+    <article className="rounded-[30px] border border-[#f0b29c] bg-white px-6 py-6 shadow-[0_14px_40px_rgba(43,37,31,0.06)]">
+      <div className="flex items-center gap-3">
+        <span className="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-[#f2774b] text-sm font-semibold text-white">
+          {String(props.index).padStart(2, "0")}
+        </span>
+        <h3 className="text-2xl font-semibold text-[#26312d]">{props.title}</h3>
+      </div>
+      <p className="mt-4 text-[15px] leading-8 text-[#5d5248]">{props.body}</p>
+    </article>
+  );
+}
+
+function PersonalityTraitsSection(props: { archetype: ArchetypeDefinition }) {
+  const traits = [
+    { title: "典型反应", body: props.archetype.reaction },
+    { title: "最容易翻车的地方", body: props.archetype.failureMode },
+    { title: "别人怎么配合你更有用", body: props.archetype.needFromOthers },
+  ];
+
+  return (
+    <section className="rounded-[32px] border border-black/5 bg-white p-7 shadow-[0_18px_60px_rgba(43,37,31,0.08)]">
+      <h2 className="text-2xl font-semibold text-[#2f2118]">扩写性格特点</h2>
+      <p className="mt-3 text-sm leading-7 text-[#66594f]">这里保留三块最稳定、最可回溯的特征，不额外发明脱离题库的新标签。</p>
+      <div className="mt-6 space-y-4">
+        {traits.map((trait, index) => (
+          <PersonalityTraitCard key={trait.title} index={index + 1} title={trait.title} body={trait.body} />
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function SimilarTypeRankingSection(props: {
+  title: string;
+  description: string;
+  matches: readonly MatchEntry[];
+  onOpenDetail: (code: string) => void;
+  actions?: ReactNode;
+}) {
+  return (
+    <section className="rounded-[32px] border border-black/5 bg-white p-7 shadow-[0_18px_60px_rgba(43,37,31,0.08)]">
+      <div className="flex flex-wrap items-start justify-between gap-4">
+        <div>
+          <h2 className="text-2xl font-semibold text-[#2f2118]">{props.title}</h2>
+          <p className="mt-3 text-sm leading-7 text-[#66594f]">{props.description}</p>
+        </div>
+        {props.actions}
+      </div>
+      <div className="mt-6 divide-y divide-[#ece4da] rounded-[28px] border border-[#eee5da] bg-[#fcfaf6]">
+        {props.matches.map((entry, index) => (
+          <button
+            key={entry.code}
+            type="button"
+            onClick={() => props.onOpenDetail(entry.code)}
+            className="flex w-full flex-col gap-3 px-5 py-5 text-left transition hover:bg-white md:flex-row md:items-center md:justify-between"
+          >
+            <div className="flex items-center gap-4">
+              <span className="w-14 text-2xl font-semibold text-[#6d7f73]">#{index + 1}</span>
+              <div>
+                <p className="text-[30px] font-semibold leading-none text-[#43594f]">{entry.code}</p>
+                <p className="mt-2 text-lg text-[#584c45]">{entry.archetype.name}</p>
+              </div>
+            </div>
+            <div className="text-left md:text-right">
+              <p className="text-3xl font-semibold text-[#6d7f73]">{entry.similarityPercent}%</p>
+              <p className="mt-1 text-xs font-semibold tracking-[0.16em] text-[#8b7f75]">相似度</p>
+            </div>
+          </button>
+        ))}
+      </div>
+    </section>
+  );
+}
+
 function TypeCard(props: {
   archetype: ArchetypeDefinition;
   onClick?: () => void;
@@ -498,7 +820,7 @@ function TypeCard(props: {
   );
 }
 
-function ResultView(props: {
+function LegacyResultView(props: {
   matched: ArchetypeDefinition;
   resultVector: ScoreVector;
   similar: readonly { code: string; archetype: ArchetypeDefinition }[];
@@ -624,6 +946,94 @@ function ResultView(props: {
   );
 }
 
+function DetailDescriptionSection(props: { archetype: ArchetypeDefinition }) {
+  const family = getFamily(props.archetype.familyId);
+
+  return (
+    <section className="rounded-[32px] border border-black/5 bg-white p-7 shadow-[0_18px_60px_rgba(43,37,31,0.08)]">
+      <div className="grid gap-6 lg:grid-cols-[0.8fr_1.2fr]">
+        <div className="rounded-[28px] bg-[#fbf7f0] p-5">
+          <p className="text-xs font-semibold tracking-[0.18em] text-[#8a6f61]">所属家族</p>
+          <h2 className="mt-3 text-2xl font-semibold text-[#2f2118]">{family.name}</h2>
+          <p className="mt-3 text-sm leading-7 text-[#5c5047]">{family.summary}</p>
+        </div>
+        <div>
+          <h2 className="text-2xl font-semibold text-[#2f2118]">类型说明</h2>
+          <p className="mt-4 text-[15px] leading-8 text-[#5c5047]">{getArchetypeDescription(props.archetype)}</p>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+export function ResultView(props: {
+  matched: ArchetypeDefinition;
+  resultVector: ScoreVector;
+  rankedMatches: readonly MatchEntry[];
+  onGoHome: () => void;
+  onOpenDetail: (code: string) => void;
+  onRetake: () => void;
+  onBrowseAll: () => void;
+}) {
+  const whyTags = getWhyTags(props.resultVector, 4);
+  const headlineMatch = props.rankedMatches[0];
+  const rankingTitle = props.matched.code === "NOIS" ? "最接近的标准类型 TOP 5" : "相近类型 TOP 5";
+  const rankingDescription =
+    props.matched.code === "NOIS"
+      ? "当前结果说明你同时踩中了多股模式，所以这里优先给你最接近的标准类型作对照。"
+      : "你的结果不是孤立存在的，下面是最贴近你的前 5 个类型和相似百分比。";
+
+  return (
+    <main className="mx-auto flex min-h-screen max-w-7xl flex-col gap-6 px-5 py-8 md:px-8">
+      <ResultBreadcrumb onGoHome={props.onGoHome} currentLabel="测试结果" />
+      <ResultHeroSection archetype={props.matched} match={headlineMatch} whyTags={whyTags} />
+      <DetailedFingerprintPanel vector={props.resultVector} />
+      <PersonalityTraitsSection archetype={props.matched} />
+      <SimilarTypeRankingSection
+        title={rankingTitle}
+        description={rankingDescription}
+        matches={props.rankedMatches}
+        onOpenDetail={props.onOpenDetail}
+        actions={
+          <div className="flex flex-wrap gap-3">
+            <button
+              type="button"
+              onClick={props.onRetake}
+              className="rounded-full border border-black/5 bg-[#f7f2ec] px-5 py-3 font-semibold text-[#574a42] transition hover:bg-white"
+            >
+              重新测试
+            </button>
+            <button
+              type="button"
+              onClick={props.onBrowseAll}
+              className="rounded-full bg-[#2f2118] px-5 py-3 font-semibold text-white transition hover:bg-[#472f22]"
+            >
+              浏览全部类型
+            </button>
+            <button
+              type="button"
+              onClick={() => props.onOpenDetail(props.matched.code)}
+              className="rounded-full border border-black/5 bg-white px-5 py-3 font-semibold text-[#574a42] transition hover:bg-[#fffdfa]"
+            >
+              查看当前类型详情
+            </button>
+          </div>
+        }
+      />
+
+      {props.matched.code === "NOIS" ? (
+        <p className="rounded-[24px] border border-[#8a8a8a]/20 bg-[#f5f5f5] px-5 py-4 text-sm leading-7 text-[#545454]">
+          标准提示：你不是“没有结果”，而是多股模式一起抢方向盘。先看最接近的标准类型，再回头看哪些维度在同时拉扯你。
+        </p>
+      ) : null}
+
+      <p className="pb-8 text-center text-sm leading-7 text-[#73675e]">
+        鏈骇鍝佹槸绫诲瀷娴嬭瘯锛屼笉鎻愪緵鍖荤枟銆佹硶寰嬫垨蹇冪悊寤鸿锛屼篃涓嶆浛浣犲喅瀹氭槸鍚︾户缁濞犮€?
+      </p>
+    </main>
+  );
+}
+
 function CatalogView(props: {
   onOpenDetail: (code: string) => void;
   onBack: () => void;
@@ -656,7 +1066,7 @@ function CatalogView(props: {
   );
 }
 
-function DetailView(props: {
+function LegacyDetailView(props: {
   archetypeCode: string;
   onBack: () => void;
   onOpenCatalog: () => void;
@@ -668,10 +1078,7 @@ function DetailView(props: {
     <main className="mx-auto min-h-screen max-w-7xl px-5 py-8 md:px-8">
       <div className="flex flex-wrap items-center justify-between gap-4">
         <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[#8b4e37]">孕妈类型详情</p>
-          <h1 className="mt-3 font-serif text-3xl font-semibold text-[#2f2118] md:text-4xl">
-            {archetype.code} {"\u2014"} {archetype.name}
-          </h1>
+          <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[#8b4e37]">{"\u7c7b\u578b\u8be6\u60c5"}</p>
         </div>
         <div className="flex flex-wrap gap-3">
           <button
@@ -679,46 +1086,93 @@ function DetailView(props: {
             onClick={props.onBack}
             className="rounded-full border border-black/5 bg-white px-5 py-3 font-semibold text-[#594d45] shadow-sm transition hover:bg-[#fffdfa]"
           >
-            返回
+            {"\u8fd4\u56de"}
           </button>
           <button
             type="button"
             onClick={props.onOpenCatalog}
             className="rounded-full bg-[#2f2118] px-5 py-3 font-semibold text-white transition hover:bg-[#472f22]"
           >
-            浏览全部类型
+            {"\u6d4f\u89c8\u5168\u90e8\u7c7b\u578b"}
           </button>
         </div>
       </div>
 
       <section
-        className="mt-6 rounded-[34px] border border-black/5 bg-white p-6 shadow-[0_20px_70px_rgba(43,37,31,0.1)] md:p-7"
+        className="mt-6 rounded-[34px] border border-black/5 bg-white p-6 shadow-[0_20px_70px_rgba(43,37,31,0.1)] md:p-8"
         style={{ backgroundImage: `radial-gradient(circle at top, ${family.accentTo}18 0%, rgba(255,255,255,0) 50%)` }}
       >
-        <div className="grid items-center gap-5 lg:grid-cols-[220px_1fr]">
-          <div className="mx-auto w-full max-w-[220px]">
-            <ArchetypePoster archetype={archetype} compact />
+        <div className="flex flex-col items-center gap-6">
+          <div className="mx-auto w-full max-w-[520px]">
+            <ArchetypePoster archetype={archetype} />
           </div>
-          <div className="text-center lg:text-left">
-            <p className="text-xs font-semibold tracking-[0.18em] text-[#8b6b5d]">{family.name}</p>
-            <h2 className="mt-3 text-[40px] font-semibold leading-none text-[#1f2f33] md:text-[44px]">{archetype.code}</h2>
-            <p className="mt-3 text-2xl font-semibold text-[#3f5b58]">{archetype.name}</p>
-            <p className="mt-4 text-lg leading-8 text-[#5c5047]">{archetype.punchline}</p>
+          <p className="text-center text-lg leading-8 text-[#5c5047]">{archetype.punchline}</p>
+        </div>
+      </section>
+    </main>
+  );
+}
+export function DetailView(props: {
+  archetypeCode: string;
+  onBack: () => void;
+  onOpenCatalog: () => void;
+  onOpenDetail: (code: string) => void;
+}) {
+  const archetype = getArchetype(props.archetypeCode);
+  const family = getFamily(archetype.familyId);
+  const detailMatch = matchArchetype(archetype.prototype);
+
+  return (
+    <main className="mx-auto min-h-screen max-w-7xl px-5 py-8 md:px-8">
+      <div className="flex flex-wrap items-center justify-between gap-4">
+        <div>
+          <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[#8b4e37]">{"\u7c7b\u578b\u8be6\u60c5"}</p>
+        </div>
+        <div className="flex flex-wrap gap-3">
+          <button
+            type="button"
+            onClick={props.onBack}
+            className="rounded-full border border-black/5 bg-white px-5 py-3 font-semibold text-[#594d45] shadow-sm transition hover:bg-[#fffdfa]"
+          >
+            {"\u8fd4\u56de"}
+          </button>
+          <button
+            type="button"
+            onClick={props.onOpenCatalog}
+            className="rounded-full bg-[#2f2118] px-5 py-3 font-semibold text-white transition hover:bg-[#472f22]"
+          >
+            {"\u6d4f\u89c8\u5168\u90e8\u7c7b\u578b"}
+          </button>
+        </div>
+      </div>
+
+      <section
+        className="mt-6 rounded-[34px] border border-black/5 bg-white p-6 shadow-[0_20px_70px_rgba(43,37,31,0.1)] md:p-8"
+        style={{ backgroundImage: `radial-gradient(circle at top, ${family.accentTo}18 0%, rgba(255,255,255,0) 50%)` }}
+      >
+        <div className="flex flex-col items-center gap-6">
+          <div className="mx-auto w-full max-w-[520px]">
+            <ArchetypePoster archetype={archetype} />
           </div>
+          <p className="text-center text-lg leading-8 text-[#5c5047]">{archetype.punchline}</p>
         </div>
       </section>
 
-      <section className="mt-6 rounded-[32px] border border-black/5 bg-white p-7 shadow-[0_18px_60px_rgba(43,37,31,0.08)]">
-        <h2 className="text-2xl font-semibold text-[#2f2118]">类型说明</h2>
-        <p className="mt-4 text-[15px] leading-8 text-[#564a42]">{getArchetypeDescription(archetype)}</p>
-      </section>
-
-      <div className="mt-6">
+      <div className="mt-6 space-y-6">
+        <DetailDescriptionSection archetype={archetype} />
         <DetailedFingerprintPanel vector={archetype.prototype} />
+        <PersonalityTraitsSection archetype={archetype} />
+        <SimilarTypeRankingSection
+          title="相近类型 TOP 5"
+          description="这里按类型原型做相似度排序，方便横向对照当前类型和邻近类型。"
+          matches={detailMatch.ranked}
+          onOpenDetail={props.onOpenDetail}
+        />
       </div>
     </main>
   );
 }
+
 
 export function CoreSpecRebuildApp() {
   const initial = useMemo(() => loadPersistedQuizState(), []);
@@ -820,7 +1274,7 @@ export function CoreSpecRebuildApp() {
   }, [selectedDetailCode, view]);
 
   function handleStart() {
-    setCurrentQuestionIndex(getFirstUnansweredIndex(answers));
+    setCurrentQuestionIndex(getResumeQuestionIndex(answers, currentQuestionIndex));
     setValidationMessage(null);
     navigate("quiz");
   }
@@ -833,41 +1287,41 @@ export function CoreSpecRebuildApp() {
 
     setAnswers(nextAnswers);
     setValidationMessage(null);
-    persist(nextAnswers, currentQuestionIndex);
-  }
-
-  function handleNext() {
-    const question = QUESTIONS[currentQuestionIndex];
-
-    if (answers[question.id] === null) {
-      setValidationMessage("这题先选一个，不用优雅，先选最像你的那个。");
-      return;
-    }
 
     if (currentQuestionIndex === QUESTIONS.length - 1) {
+      persist(nextAnswers, currentQuestionIndex);
       navigate("result");
-      persist(answers, currentQuestionIndex);
       return;
     }
 
     const nextIndex = currentQuestionIndex + 1;
     setCurrentQuestionIndex(nextIndex);
-    persist(answers, nextIndex);
+    persist(nextAnswers, nextIndex);
   }
 
-  function handleBack() {
-    if (view === "quiz" && currentQuestionIndex > 0) {
-      const previousIndex = currentQuestionIndex - 1;
-      setCurrentQuestionIndex(previousIndex);
-      setValidationMessage(null);
-      persist(answers, previousIndex);
+  function handlePreviousQuestion() {
+    if (currentQuestionIndex === 0) {
       return;
     }
 
+    const previousIndex = currentQuestionIndex - 1;
+    setCurrentQuestionIndex(previousIndex);
+    setValidationMessage(null);
+    persist(answers, previousIndex);
+  }
+
+  function handleExitQuiz() {
+    setValidationMessage(null);
+    persist(answers, currentQuestionIndex);
+    navigate("home");
+  }
+
+  function handleBack() {
     goHistoryBack("home");
   }
 
   function handleReset() {
+
     if (typeof window !== "undefined" && !window.confirm("清空本机草稿并重新开始？")) {
       return;
     }
@@ -888,11 +1342,11 @@ export function CoreSpecRebuildApp() {
     return (
       <QuizView
         index={currentQuestionIndex}
+        answeredCount={answeredCount}
         selectedValue={answers[question.id]}
         validationMessage={validationMessage}
-        saveMessage={saveMessage}
-        onBack={handleBack}
-        onNext={handleNext}
+        onExit={handleExitQuiz}
+        onPrevious={handlePreviousQuestion}
         onChange={(value) => handleAnswerChange(question.id, value)}
       />
     );
@@ -903,7 +1357,8 @@ export function CoreSpecRebuildApp() {
       <ResultView
         matched={result.primary}
         resultVector={resultVector}
-        similar={result.similar.map((entry) => ({ code: entry.code, archetype: entry.archetype }))}
+        rankedMatches={result.ranked}
+        onGoHome={() => navigate("home")}
         onOpenDetail={(code) => openDetail(code, "result")}
         onRetake={handleReset}
         onBrowseAll={() => navigate("catalog")}
@@ -926,6 +1381,7 @@ export function CoreSpecRebuildApp() {
         archetypeCode={selectedDetailCode}
         onBack={() => goHistoryBack(detailReturnView, { detailCode: selectedDetailCode })}
         onOpenCatalog={() => navigate("catalog")}
+        onOpenDetail={(code) => openDetail(code, detailReturnView)}
       />
     );
   }
