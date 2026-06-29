@@ -1,3 +1,5 @@
+import { STATIC_ARCHETYPE_SECTIONS } from "./archetypeSections";
+
 export interface DimensionDefinition {
   id: DimensionId;
   label: string;
@@ -592,6 +594,249 @@ const INTRO_OPENERS: Record<string, string> = {
   NOIS: "NOIS 像所有频道同时开麦，谁都不肯当背景音。",
 };
 
+const INTRO_SCENE_LINES: Record<string, string> = {
+  CTRL: "验孕棒刚出线，你先想把信息补齐；话题一拐到分工，脑内白板就已经展开。",
+  SCAN: "别人还在消化消息时，你多半已经先去扫身体信号、风险点和可能翻车的环节。",
+  GRID: "有些人先感受，你通常先在脑内排谁接哪段、谁补哪班、谁来维持日常运转。",
+  DRAG: "消息一落下，你最先做的常常不是表态，而是给自己抢一点别被立刻逼答的缓冲。",
+  FOGG: "你会先把结论压住，不急着说死，因为太早定调会让很多退路当场关门。",
+  HUSH: "话题一变重，你常会先把外界音量调低，免得系统被推到只能硬撑的程度。",
+  QCER: "一说到怀孕和以后怎么带，你先看的不是态度，是谁说了会做、谁只是会说。",
+  LIST: "你很容易一边听，一边把事项、节奏和责任人自动整理成待办清单。",
+  TICK: "别人想到的是大方向，你先想到的是夜里谁起、杂务谁补、收尾谁认领。",
+  WALL: "你最先响起的常常不是母爱滤镜，而是身体、时间和决定权会不会被越线。",
+  SOLO: "你会先确认那个原来的自己还在不在，而不是先急着把新角色往身上套。",
+  EXIT: "你第一时间更在意门有没有留着，能不能暂停、能不能回头、能不能重新谈。",
+  HOLD: "很多人还在讨论愿不愿意，你已经先把最重的那一段默默放到自己肩上试重量。",
+  GIVE: "你常常会先想别人能不能顺下来，晚一点才轮到自己到底愿不愿意让这么多。",
+  SPNG: "房间里只要有人慌、有人愧疚、有人先乱，你的雷达就会比自己的感受更早上线。",
+  GLOW: "你很容易先被那张温柔的未来海报点亮，再回头看现实有没有跟上。",
+  FILM: "这件事一来，你脑内常会先响起旁白，像人生突然被切进了一个新章节。",
+  NEST: "你最先浮出来的通常不是流程，而是那个家到时候像不像一个真的能住人的地方。",
+  BASE: "你会先摸地基，再决定要不要往上搭，因为没有承重，浪漫只会更快塌。",
+  LOAD: "身体和恢复那笔重账，在你这边往往比氛围更早出现，而且账目还很具体。",
+  PLAN: "你很难只聊愿望，因为一聊到未来，执行表、维护表和接班表就会一起弹出。",
+  SHAK: "这类话题一来，你不是没逻辑，是太多频道一起抢前排，谁都在催你先听它。",
+  CLAS: "你刚想把事情排顺，新的变量又会插队进来，像整理桌面时桌子还在继续长东西。",
+  FRAY: "你第一时间就能感觉到这不是一道题，而是身体、关系、自由和现实在同时拉扯。",
+  NOIS: "别人的反应像单声道，你这里更像多轨并发，谁都不肯安静排队发言。",
+};
+
+const FIRST_REACTION_SCENE_LINES: Record<string, string> = {
+  CTRL: "验孕结果一出来，你常先补信息和边界，再决定谁能进你的工作区。",
+  SCAN: "你多半会先检查哪里可能出意外，而不是先急着把气氛维持得很好看。",
+  GRID: "你会先把人手、班次和交接点过一遍，像系统上线前先看排班表。",
+  DRAG: "你第一下更像是往后退半步，先护住自己那点还没被催成答案的空间。",
+  FOGG: "你常先把话停在模糊区，免得一句说实以后，整个局面立刻变窄。",
+  HUSH: "你的系统会先降噪，不让问题、情绪和别人的意见一起灌进来。",
+  QCER: "你通常先看谁是真接招、谁只是姿态漂亮，承诺对你来说得先过验收。",
+  LIST: "你很容易先把问题拆成几项、谁负责什么、什么时候回看，而不是先顺着情绪走。",
+  TICK: "你第一眼常落在细活和收尾，因为真正累人的通常不是开场，而是长期补位。",
+  WALL: "你会先感受身体和自主权有没有被动到，再决定这场对话还能不能继续。",
+  SOLO: "你往往先确认自己会不会被整套角色吞掉，而不是先配合大家进入期待模式。",
+  EXIT: "你会先找暂停键和回头路，确认这不是一扇只能往前推开的门。",
+  HOLD: "你很容易先替未来那段最重的照护和恢复试重量，肩膀比脑子更早进入值班。",
+  GIVE: "你经常先盘算怎么让所有人都舒服一点，自己的那份勉强会被往后放。",
+  SPNG: "谁先慌、谁先崩、谁先内疚，你会比自己的立场更早接到这些信号。",
+  GLOW: "你常常先被那种连接感和新生活的光亮吸住，现实问题会稍后才补进来。",
+  FILM: "你会先把这件事接进自己的人生叙事里，像在看它会不会改写整章故事。",
+  NEST: "你第一反应通常是去想那个家能不能把人安稳放进去，而不是先做冷计算。",
+  BASE: "你常先看承重、资源和长期供给，确认这不是只靠热情撑着的项目。",
+  LOAD: "你的注意力经常先落到恢复、疲惫和持续照护这笔身体账上。",
+  PLAN: "你会先把愿望和执行并排摆开，看看这套系统到底有没有维护方案。",
+  SHAK: "你第一下往往是被多路信号同时拽住，很难只盯一个点先反应。",
+  CLAS: "你刚想先分个类，新的变量又冒出来，于是反应本身也被打成乱序。",
+  FRAY: "你第一时间就能看见几条线同时打结，所以很难像别人那样只回答一个问题。",
+  NOIS: "你会先听见一堆彼此打架的声音一起冲上来，很难马上挑出唯一主线。",
+};
+
+const SECTION_SCENE_LINES: Record<
+  string,
+  {
+    mentalPreview: string;
+    coreConcern: string;
+    selfPressure: string;
+    distortionTrigger: string;
+    effectiveSupport: string;
+  }
+> = {
+  CTRL: {
+    mentalPreview: "你脑内先开的通常不是抒情频道，而是哪个节点会失手、谁会掉线、最后谁来总控。",
+    coreConcern: "你表面像在卡一个决定，底下其实在防止整套系统又滚成无人负责的烂局。",
+    selfPressure: "最要命的是别人一露出“你比较会搞定”的眼神，你就容易把总控权限默默接回来。",
+    distortionTrigger: "你不是逮谁都想控场，而是最怕信息断线、角色浮空、最后全靠临场救火。",
+    effectiveSupport: "你吃得下的支持从来不是口号，而是有人把节点、责任和交付一起摆明。",
+  },
+  SCAN: {
+    mentalPreview: "你会一路预演到症状失控、计划变形、补救太晚，像提前把演习手册翻到最后一页。",
+    coreConcern: "表面上你像想太多，底下真正卡住的是别在最脆的时候被现实从背后偷袭。",
+    selfPressure: "一旦现场有人只会说“别怕”，你反而更容易把所有排雷工作都揽进自己脑子里。",
+    distortionTrigger: "真正把你推歪的不是坏消息本身，而是模糊、侥幸和没人肯核实的气氛。",
+    effectiveSupport: "最能让你放松的，不是大家一起正能量，而是有人陪你把雷点拆成可核实项。",
+  },
+  GRID: {
+    mentalPreview: "你常会直接想到班表断档、照护脱节、资源没补上，像系统还没上线就先看到缺口。",
+    coreConcern: "你嘴上像在追问细节，其实是在确认这不是一栋靠热情硬顶的空心房子。",
+    selfPressure: "只要别人开始讲感受不讲执行，你就很容易把施工图、备份表和补位表一起接手。",
+    distortionTrigger: "最让你失真的不是压力大，而是责任漂浮、流程悬空、每个人都只讲愿景。",
+    effectiveSupport: "真正对你有效的，是有人愿意把分工图一起画完，不让你独自当总包。",
+  },
+  DRAG: {
+    mentalPreview: "你会先演到一旦点头就回不了头，连后面每次被追问的窒息感都能提前感到。",
+    coreConcern: "你看着像拖，其实是在守最后那点还能慢一点、想清楚一点的回旋空间。",
+    selfPressure: "越怕被立刻逼答，你越可能把每个问题都往后挪，最后连自己都被堆积压住。",
+    distortionTrigger: "真正让你变形的，是时间表和他人态度一起往前顶，像把缓冲区整块抽掉。",
+    effectiveSupport: "对你最有帮助的不是催成熟，而是先给缓冲，再一起约定下一次落地节点。",
+  },
+  FOGG: {
+    mentalPreview: "你会一路想到哪句话一旦说死、哪条路就会立刻关门，所以脑内总先保留雾面版本。",
+    coreConcern: "外人以为你含糊，实际上你是在抵抗过早定性把复杂心情一次压扁。",
+    selfPressure: "最累的是你一边想保留弹性，一边又得处理别人逼你给清晰答复的拉扯。",
+    distortionTrigger: "你最容易失真时，往往正是别人非要把灰区掰成黑白、还要求你马上站队的时候。",
+    effectiveSupport: "真正帮到你的，是有人承认现在可以先不定论，再慢慢把雾拆成几种状态。",
+  },
+  HUSH: {
+    mentalPreview: "你的脑内会先演到再多一点输入就死机，所以预演本身常带着明显的降噪需求。",
+    coreConcern: "表面像沉默，底下更像是在守住一个还没有被外界吵碎的思考空间。",
+    selfPressure: "越怕失控，你越容易把感受压成静音，结果连求助也一起压薄了。",
+    distortionTrigger: "真正让你切到自保模式的，通常是信息过密、情绪过吵、每个人都来抢话筒。",
+    effectiveSupport: "对你有效的配合是轻声、短句、留暂停口，而不是一群人围上来帮忙分析。",
+  },
+  QCER: {
+    mentalPreview: "你脑里会直接跳到谁口头答应、谁中途掉线、谁会把承诺拖成售后纠纷。",
+    coreConcern: "你像在挑刺，其实是在核对这段关系到底有没有真实可兑现的承重能力。",
+    selfPressure: "只要感觉交付要掉线，你就会把亲密关系开成质检现场，连自己也不放过。",
+    distortionTrigger: "最容易把你逼到尖锐模式的，是漂亮话很多、责任却始终没有人签收。",
+    effectiveSupport: "最有用的方式不是感动你，而是把能做、不能做、何时做一次讲明白。",
+  },
+  LIST: {
+    mentalPreview: "你会先想到事情会不会越滚越散、待办会不会失控、最后谁来负责长期维护。",
+    coreConcern: "别人觉得你太任务导向，你自己知道没清单的关系最容易在现实里漏风。",
+    selfPressure: "一旦现场变散，你就会自动想把每个人、每件事、每个时间点都重新排进表里。",
+    distortionTrigger: "真正让你炸毛的，不是工作量，而是讨论飘着、分工虚着、待办永远没人认领。",
+    effectiveSupport: "别人越能陪你把事项摊平、时间线对齐，你越不用一个人拿清单救火。",
+  },
+  TICK: {
+    mentalPreview: "你会直接演到夜里谁起、白天谁接、杂务谁补，像把长期收尾镜头先全部看完。",
+    coreConcern: "你不像在泼冷水，更像在提醒大家最累的从来不是决定本身，而是长期补位。",
+    selfPressure: "一旦没人主动认领收尾，你就会先按最累版本验收，顺手把压力提前背上。",
+    distortionTrigger: "最让你过载的是那种“到时候再说”的轻飘口气，因为你知道最后会有人长期接盘。",
+    effectiveSupport: "对你有用的不是宏大愿景，而是有人把那些最碎最累的日常细活先摊开来谈。",
+  },
+  WALL: {
+    mentalPreview: "你脑里常先响起的是边界后退版剧情，像别人一步一步把你的决定权挤出门外。",
+    coreConcern: "你看似冷下来，实际是在确认身体、时间和同意权会不会被亲密关系顺手接管。",
+    selfPressure: "你为了不被越线，常会把门一下关得很死，连本来能谈的空间也一起锁住。",
+    distortionTrigger: "真正逼你变硬的，通常不是分歧本身，而是擅自安排和价值绑架混着来。",
+    effectiveSupport: "最能让你松一点的，是别人先问边界再提期待，而不是先替你决定什么算为你好。",
+  },
+  SOLO: {
+    mentalPreview: "你脑内常会先演到角色越套越紧，最后那个原来的自己被挤成背景板。",
+    coreConcern: "你表面像在躲亲密，其实更在意的是别把自我连续性赔给一整套默认剧本。",
+    selfPressure: "最隐蔽的压力是你总想证明自己不用麻烦别人，结果什么都练成单兵作战。",
+    distortionTrigger: "最容易让你退开的，是那种默认你该牺牲私人空间、顺势长成某种标准模板的气氛。",
+    effectiveSupport: "对你真正有用的配合，是保留独处、节奏和表达权，不把靠近写成吞并。",
+  },
+  EXIT: {
+    mentalPreview: "你的脑子会先把所有出口扫一遍，确认每一扇门是不是都还能推得开。",
+    coreConcern: "别人以为你想跑，实际你是在检查选择权有没有还在桌上，而不是只剩单行道。",
+    selfPressure: "越怕被困住，你越会把每场对话都过成撤离演练，连放松都像预备撤退。",
+    distortionTrigger: "最让你失真的，是没有暂停权、没有缓冲、也没有重新谈判余地的推进方式。",
+    effectiveSupport: "对你最关键的支持，是把暂停键和重谈的门保留下来，而不是一路把你往前推。",
+  },
+  HOLD: {
+    mentalPreview: "你脑里会直接演到身体、恢复、喂养和情绪全压到自己这边，像提前值完整个长班。",
+    coreConcern: "你看起来像太会扛，实际上是在防那个没人接手时只能自己顶上的老剧本。",
+    selfPressure: "只要现场出现空位，你就会本能往前补，连还没发生的重活也先替它占坑。",
+    distortionTrigger: "最容易让你垮的，是大家都夸你懂事，却没人真的把重量从你肩上搬走。",
+    effectiveSupport: "对你有用的不是称赞可靠，而是别人真的把具体照护和恢复期负担分走一块。",
+  },
+  GIVE: {
+    mentalPreview: "你会先演到如果自己再让一点、再懂事一点，也许全场就不会这么难看。",
+    coreConcern: "外人会说你没主见，实际上你卡的是怎么顾全别人又别把自己整块让没。",
+    selfPressure: "最难的是你总能先理解别人，结果很多本该替自己争的东西都被你主动吞回去。",
+    distortionTrigger: "你最容易失真时，往往正遇上愧疚施压、家庭期待和伴侣先崩同时来敲门。",
+    effectiveSupport: "真正帮到你的，是有人先问你最不想让掉什么，而不是默认你最会体谅。",
+  },
+  SPNG: {
+    mentalPreview: "你常先演到如果自己不稳住，房间里别人的慌乱就会一层一层往外炸开。",
+    coreConcern: "你不是没立场，而是太容易先接收到别人的波动，自己的声音反而被冲淡。",
+    selfPressure: "只要现场有人先崩，你就会把自己的版本泡软，腾地方去接别人的情绪洪水。",
+    distortionTrigger: "最让你过载的不是决定难，而是所有人的慌、愧疚和失望一起朝你涌过来。",
+    effectiveSupport: "对你有效的配合，是别人把自己的情绪先收一收，不把你当默认缓冲垫。",
+  },
+  GLOW: {
+    mentalPreview: "你会先演到那个更完整、更温柔的新生活版本，像未来感先把现实灯光打亮。",
+    coreConcern: "你看着像被浪漫带跑，其实你卡的是怎么保住那份光，又不让它骗过现实。",
+    selfPressure: "越被意义感点亮，你越可能默认这份心动已经足够替现实兜底。",
+    distortionTrigger: "最容易让你翻车的，是温暖叙事一直加码，现实账本却始终没被摊开。",
+    effectiveSupport: "对你最有用的不是泼冷水，而是有人陪你把浪漫和成本放在同一张桌上。",
+  },
+  FILM: {
+    mentalPreview: "你会先演到命运转场、关系升级、人生章节改写，像预告片比执行表更早开播。",
+    coreConcern: "别人觉得你戏多，你自己知道你真正卡的是别让故事感盖过日子本身。",
+    selfPressure: "一旦剧情张力太好看，你就容易先爱上意义，再把执行成本往后挪。",
+    distortionTrigger: "最容易把你带偏的，是象征意味很满、现实细节却一直不上镜的局面。",
+    effectiveSupport: "真正帮到你的，是有人陪你谈意义，也有耐心把故事拆回一餐一饭的日子。",
+  },
+  NEST: {
+    mentalPreview: "你会先演到那个家的气味、空间和关系感能不能把人安顿住，而不只是勉强运转。",
+    coreConcern: "你不像在纠结形式，实际更在意的是这是不是一段真的可居住的日常。",
+    selfPressure: "你很容易先忙着把氛围搭好，结果把承重结构和现实支撑拖到后面才看。",
+    distortionTrigger: "最让你失真的，是画面很暖、关系很软，却没人回答这个家到底怎么撑。",
+    effectiveSupport: "对你有效的支持，是有人能把家的感觉翻译成作息、分工和长期维护。",
+  },
+  BASE: {
+    mentalPreview: "你常会直接演到承重、供给和长期稳定那一层，像先把地基图翻出来核算一遍。",
+    coreConcern: "你不是故意扫兴，只是更早看见系统能不能活，远比场面好不好看重要。",
+    selfPressure: "只要资源有点悬，你就会自动把标准拉到最稳版本，连弹性都一起收紧。",
+    distortionTrigger: "真正让你紧起来的，是收入不稳、支援缺位、却还要求你只谈希望和爱。",
+    effectiveSupport: "最能帮你放下防御的，是有人认真跟你算长期承重，而不是嫌你现实。",
+  },
+  LOAD: {
+    mentalPreview: "你会先演到睡不够、接不上班、身体一直亏着的版本，像劳损明细先跳出来。",
+    coreConcern: "你表面像总往重处想，实际上是在替那副身体提前争一口别被透支的气。",
+    selfPressure: "一旦没人认真看待恢复和照护重量，你就会先把最坏版本在脑里全部扛一遍。",
+    distortionTrigger: "最让你失真的，不是辛苦本身，而是身体已经很重了，周围人还在装轻松。",
+    effectiveSupport: "对你有效的不是抽象心疼，而是把恢复期、接手人和轮班安排先落下来。",
+  },
+  PLAN: {
+    mentalPreview: "你会先演到谁维护、谁补洞、谁接班，像还没开工就已经看到后期运维表。",
+    coreConcern: "你表面像控制欲上线，实际上只是太清楚没有施工图的理想很容易烂尾。",
+    selfPressure: "一旦大家只想聊愿景，你就会把整套执行和维护都提前打包进自己脑子里。",
+    distortionTrigger: "真正让你失真的是理想很满、变量持续加码、却没人肯谈怎么长期维护。",
+    effectiveSupport: "最能帮到你的，是有人愿意一起分包，而不是把靠谱两个字当外包申请单。",
+  },
+  SHAK: {
+    mentalPreview: "你会一路演到每条分支都可能失控，像脑内同时开着好几版互相打架的未来。",
+    coreConcern: "别人看到的是你难定，只有你自己知道是太多拉扯同时在抢主导权。",
+    selfPressure: "最折磨人的不是没有答案，而是每个自己都像有道理，于是轮番上来辩论。",
+    distortionTrigger: "你最容易被推歪的时候，通常正是新变量一层层叠上来、范围还越谈越大。",
+    effectiveSupport: "对你最有用的是帮你一次只收窄一层，不要一口气把整锅问题全端上来。",
+  },
+  CLAS: {
+    mentalPreview: "你会先演到优先级刚排好又被新警报打断，像脑内一直有人在不断刷新待处理列表。",
+    coreConcern: "表面像你整理得不够快，实情更像秩序刚搭出来就又被新变量冲散。",
+    selfPressure: "你越想尽快理清，就越容易把所有事一起拖进紧急轨，结果每件事都像火警。",
+    distortionTrigger: "最容易让你明显失真的是输入不断、问题并发、每件事都说自己最急。",
+    effectiveSupport: "对你有帮助的是先停新增噪音，再陪你把顺序排出来，而不是继续加题。",
+  },
+  FRAY: {
+    mentalPreview: "你会先演到身体、关系、自由和现实彼此绊脚，像每根线都在扯另外几根线。",
+    coreConcern: "别人嫌你钻，实际上你卡的是多种真相同时成立，没法粗暴归成一个答案。",
+    selfPressure: "你很容易为了讲清每一根线，把自己解释到脱力，还怕别人嫌你复杂。",
+    distortionTrigger: "最让你变形的是一句话硬盖全局，逼你把一团结拆成单选题来回答。",
+    effectiveSupport: "真正对你有用的，是有人肯陪你一根一根拆，而不是大而化之地下定义。",
+  },
+  NOIS: {
+    mentalPreview: "你会先演到每个版本都像有理，却又互相打架，像所有频道都想抢主旋律。",
+    coreConcern: "别人觉得你没主线，实际上你是在噪声里努力找那条不被淹掉的真感受。",
+    selfPressure: "最累的是你把每个信号都当真，结果脑内像一直开着一场没有主席的会议。",
+    distortionTrigger: "最容易把你推过载的，不是单一坏消息，而是低匹配和高拉扯一起扩音。",
+    effectiveSupport: "对你最有用的，是有人先帮你降噪，再陪你拉出最重要的那一条线。",
+  },
+};
+
 export const EXTENDED_SECTION_TITLES = [
   "你第一反应通常先去哪",
   "你脑内最常开的预演剧情",
@@ -816,40 +1061,54 @@ function buildArchetypeIntro(
   spec: Pick<ArchetypeDefinition, "code" | "intro" | "reaction" | "failureMode" | "needFromOthers">,
   prototype: ScoreVector,
 ): string {
+  const seed = ARCHETYPE_CONTENT_SEEDS[spec.code];
   const salientDimensions = spec.code === "NOIS" ? "多条维度" : getTopDimensionLabels(prototype, 3);
   const opener = INTRO_OPENERS[spec.code] ?? `${spec.code} 这型人的系统有自己很固执的优先级。`;
+  const sceneLine = INTRO_SCENE_LINES[spec.code] ?? "这类消息一来，你的系统会先走自己那条老路。";
 
-  return `${opener}${spec.intro} 一遇到怀孕、和老公谈分工、带宝宝或顾及已有孩子节奏时，这套模式就会上线。碰上${salientDimensions}这些维度一起抬头，${spec.reaction} 这让你常常更早看见关键，也更容易把自己推到过载边缘，因为${spec.failureMode} 真正有帮助的，不是被催着想开，而是${spec.needFromOthers}`;
+  return `${opener}${spec.intro} ${sceneLine}${spec.reaction} ${salientDimensions}这些维度一抬头，就会把“${seed.firstReaction}”这套动作直接推到前台。你确实很会提前看见关键，但也容易在${seed.distortionTrigger}这类局面里被拖向${seed.selfPressure}，所以有效的配合通常是${spec.needFromOthers}`;
 }
 
-function buildExtendedSections(prototype: ScoreVector, seed: ArchetypeContentSeed): readonly ArchetypeSection[] {
+function buildExtendedSections(
+  spec: Pick<ArchetypeDefinition, "code" | "reaction" | "failureMode" | "needFromOthers">,
+  prototype: ScoreVector,
+  seed: ArchetypeContentSeed,
+): readonly ArchetypeSection[] {
   const focusDimensions = getTopDimensionLabels(prototype, 2);
   const pressureDimensions = getTopDimensionLabels(prototype, 3);
+  const firstReactionScene = FIRST_REACTION_SCENE_LINES[spec.code] ?? "这类消息一落地，你通常会先进入自己最熟的反应轨道。";
+  const sectionScene = SECTION_SCENE_LINES[spec.code] ?? {
+    mentalPreview: "你的脑内会先沿着自己最熟的那条风险或意义链往下演。",
+    coreConcern: "你表面上的纠结，底下通常还有一层更难说出口的真实卡点。",
+    selfPressure: "一旦局面有点乱，你就很容易把原本该共担的东西先揽到自己身上。",
+    distortionTrigger: "真正把你推歪的，往往不是单一事件，而是几种压力同时叠上来。",
+    effectiveSupport: "真正能帮到你的，不是空话，而是别人真的按你吃得下的方式来配合。",
+  };
 
   return [
     {
       title: EXTENDED_SECTION_TITLES[0],
-      body: `${seed.firstReaction}。消息一落地，或话题转到孕周、和老公怎么谈、宝宝出生后谁扛、已有孩子会不会受影响时，你通常先盯这里。它和你在${focusDimensions}这些维度上的高敏感有关，所以外人看像反应快，其实是大脑先找安全位。`,
+      body: `${seed.firstReaction}。${firstReactionScene}“${seed.coreConcern}”这道门，通常会被你拿${focusDimensions}先顶住；对你来说，这不叫反应快，更像“${seed.firstReaction}”先一步出手，去挡“${seed.coreConcern}”这口风。`,
     },
     {
       title: EXTENDED_SECTION_TITLES[1],
-      body: `${seed.mentalPreview}。你脑内先预演的，往往不只是一种最坏结果，还包括关系会不会失衡、照护会不会失手、生活节奏会不会被整锅端。${pressureDimensions}这些维度一抬高，你就更容易先把后果片看完，再决定要不要放心。`,
+      body: `${seed.mentalPreview}。${sectionScene.mentalPreview}“${seed.selfPressure}”那一幕之所以老在后面等着你，不是因为你爱脑补，而是${pressureDimensions}这组高敏开关知道，后面排队的常常就是“${seed.mentalPreview}”这版结局。`,
     },
     {
       title: EXTENDED_SECTION_TITLES[2],
-      body: `${seed.coreConcern}。表面上你像在纠结要不要、生不生、说不说，底层更像在确认自己会不会被困住、被失望，或被默认接盘。怀孕和养育在你这里从来不是单题，而是${focusDimensions}一起把那个真正卡点顶出来。`,
+      body: `${seed.coreConcern}。${sectionScene.coreConcern}“${seed.distortionTrigger}”一来，你真正先护住的往往不是场面，而是“${seed.coreConcern}”这块地方；你怕的不是那道题本身，而是它又把你拖回“${seed.distortionTrigger}”这条老路。`,
     },
     {
       title: EXTENDED_SECTION_TITLES[3],
-      body: `${seed.selfPressure}。你最容易不是被别人一句话压垮，而是自己先把责任、体面、效率和关系稳定统统打包背走。特别在和老公谈分工、安排产检、预想带宝宝或顾及已有孩子节奏时，你会比别人更早把“那就我来”内化成默认动作。`,
+      body: `${seed.selfPressure}。${sectionScene.selfPressure}“${seed.selfPressure}”这件事对你来说，常常不是选择题，而像一种会自动续费的老动作，绕一圈最后又回到“${seed.selfPressure}”这条轨道上。`,
     },
     {
       title: EXTENDED_SECTION_TITLES[4],
-      body: `${seed.distortionTrigger}。一旦局面同时满足这些条件，你就更容易失真：信息含糊、时间逼近、承诺落空，或者所有人都把情绪和任务往你面前一倒。那不是你故意难搞，而是${pressureDimensions}这些高敏维度一起超载，系统只能靠退避、控场或僵住自保。`,
+      body: `${seed.distortionTrigger}。${sectionScene.distortionTrigger}“${seed.selfPressure}”那种状态之所以会逼近，往往不是你故意难搞，而是${pressureDimensions}这组开关已经一起冲红，系统只好先开出“${seed.distortionTrigger}”这档自保程序。`,
     },
     {
       title: EXTENDED_SECTION_TITLES[5],
-      body: `${seed.effectiveSupport}。真正有用的配合不是鸡汤，也不是替你拍板，而是按你能消化的节奏把事实、选择、分工和情绪容纳都放到位。尤其在怀孕、带宝宝、和老公磨合或照顾已有孩子的现实场景里，这样的支持最能帮你把防御慢慢放下。`,
+      body: `${seed.effectiveSupport}。${sectionScene.effectiveSupport}只要“${seed.effectiveSupport}”这件事真的落地，你通常就更愿意把防御撤下一格，也更容易把那句关于“${seed.coreConcern}”的真心话说出来。`,
     },
   ];
 }
@@ -1130,7 +1389,7 @@ export const ARCHETYPES: readonly ArchetypeDefinition[] = ARCHETYPE_SPECS.map((s
     name: spec.name,
     punchline: spec.punchline,
     intro: buildArchetypeIntro(spec, prototype),
-    sections: buildExtendedSections(prototype, ARCHETYPE_CONTENT_SEEDS[spec.code]),
+    sections: STATIC_ARCHETYPE_SECTIONS[spec.code],
     reaction: spec.reaction,
     failureMode: spec.failureMode,
     needFromOthers: spec.needFromOthers,
@@ -1180,7 +1439,7 @@ export const FALLBACK_ARCHETYPE: ArchetypeDefinition = {
     },
     FALLBACK_PROTOTYPE,
   ),
-  sections: buildExtendedSections(FALLBACK_PROTOTYPE, ARCHETYPE_CONTENT_SEEDS.NOIS),
+  sections: STATIC_ARCHETYPE_SECTIONS.NOIS,
   reaction: "你不是没有模式，而是好几种模式同时抢前排。怀孕和养育想象在你这里像多路输入并发播放，谁都不像背景音。",
   failureMode: "最容易翻车的地方，是你把每一种声音都当成最终结论，最后整个人卡在过载状态里。",
   needFromOthers: "最需要的不是替你定性，而是帮你缩小范围、降低噪声、把最重要的一条线先拉出来。",
