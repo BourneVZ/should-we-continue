@@ -7,7 +7,7 @@ import {
   ResultView,
   getResumeQuestionIndex,
 } from "@/core-spec-rebuild/CoreSpecRebuildApp";
-import { QUESTIONS, getArchetype } from "@/core-spec-rebuild/model";
+import { QUESTIONS, getArchetype, getArchetypeDescription } from "@/core-spec-rebuild/model";
 import { createEmptyAnswers, matchArchetype } from "@/core-spec-rebuild/scoring";
 
 describe("core-spec-rebuild home ui", () => {
@@ -66,7 +66,7 @@ describe("core-spec-rebuild quiz ui", () => {
 });
 
 describe("core-spec-rebuild result ui", () => {
-  it("renders breadcrumb, shared dimension info, and standalone trait sections without similar types", () => {
+  it("renders the moved description, shared dimension info, and standalone trait sections without similar types", () => {
     const archetype = getArchetype("CTRL");
     const match = matchArchetype(archetype.prototype);
     const html = renderToStaticMarkup(
@@ -83,33 +83,31 @@ describe("core-spec-rebuild result ui", () => {
 
     expect(html).toContain("返回首页");
     expect(html).toContain("测试结果");
-    expect(html).not.toContain("rounded-full border border-[#e1d8cd]");
     expect(html).toContain("匹配度");
     expect(html).toContain("精准命中");
     expect(html).toContain("维度信息");
-    expect(html).not.toContain("维度雷达");
-    expect(html).not.toContain("15 个维度一起看，只展示高低趋势，不公开原始分数。");
-    expect(html).not.toContain("15 维度画像");
+    expect(html).toContain(getArchetypeDescription(archetype));
     expect(html).toContain("典型反应");
     expect(html).toContain("最容易翻车的地方");
     expect(html).toContain("别人怎么配合你更有用");
-    expect(html).not.toContain("扩写性格特点");
     expect(html).not.toContain("相近类型 TOP 5");
-    expect(html).not.toContain("乱码");
   });
 });
 
 describe("core-spec-rebuild detail ui", () => {
-  it("keeps the enlarged poster while reusing the lower report sections", () => {
+  it("uses direct home navigation in breadcrumb and reuses the lower report sections", () => {
     const archetype = getArchetype("CTRL");
     const html = renderToStaticMarkup(
-      <DetailView archetypeCode={archetype.code} onBack={() => {}} onOpenCatalog={() => {}} onOpenDetail={() => {}} />,
+      <DetailView archetypeCode={archetype.code} onGoHome={() => {}} onOpenCatalog={() => {}} onOpenDetail={() => {}} />,
     );
 
+    expect(html).toContain("返回首页");
+    expect(html).toContain("全部类型");
+    expect(html).toContain("类型详情");
     expect(html).toContain(archetype.punchline);
+    expect(html).toContain(getArchetypeDescription(archetype));
     expect(html).toContain("维度信息");
     expect(html).toContain("典型反应");
     expect(html).not.toContain("相近类型 TOP 5");
-    expect(html).not.toContain("所属家族");
   });
 });

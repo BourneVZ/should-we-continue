@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState, type ReactNode } from "react";
+import { Fragment, useEffect, useMemo, useState, type ReactNode } from "react";
 import {
   ALL_ARCHETYPES,
   DIMENSIONS,
@@ -462,18 +462,31 @@ function getRadarTextAnchor(x: number): "start" | "middle" | "end" {
   return x < RADAR_CENTER ? "end" : "start";
 }
 
-function ResultBreadcrumb(props: { onGoHome: () => void; currentLabel: string }) {
+type BreadcrumbItem = {
+  label: string;
+  onClick?: () => void;
+  strong?: boolean;
+};
+
+function BreadcrumbTrail(props: { items: readonly BreadcrumbItem[] }) {
   return (
     <div className="flex flex-wrap items-center gap-2 text-sm text-[#7b6c61]">
-      <button
-        type="button"
-        onClick={props.onGoHome}
-        className="font-bold text-[#4f433b] transition hover:text-[#2f2118]"
-      >
-        返回首页
-      </button>
-      <span aria-hidden="true">/</span>
-      <span className="font-medium text-[#6a5c52]">{props.currentLabel}</span>
+      {props.items.map((item, index) => (
+        <Fragment key={`${item.label}-${index}`}>
+          {index > 0 ? <span aria-hidden="true">/</span> : null}
+          {item.onClick ? (
+            <button
+              type="button"
+              onClick={item.onClick}
+              className={`transition hover:text-[#2f2118] ${item.strong ? "font-bold text-[#4f433b]" : "font-medium text-[#6a5c52]"}`}
+            >
+              {item.label}
+            </button>
+          ) : (
+            <span className={item.strong ? "font-bold text-[#4f433b]" : "font-medium text-[#6a5c52]"}>{item.label}</span>
+          )}
+        </Fragment>
+      ))}
     </div>
   );
 }
@@ -502,26 +515,26 @@ function ResultHeroSection(props: {
 
   return (
     <section className="rounded-[36px] border border-black/5 bg-white p-6 shadow-[0_24px_80px_rgba(43,37,31,0.08)] md:p-8">
-      <div className="grid gap-8 lg:grid-cols-[0.92fr_1.08fr] lg:items-center">
+      <div className="grid gap-8 lg:grid-cols-[0.92fr_1.08fr] lg:items-start">
         <div className="mx-auto w-full max-w-[520px]">
           <ArchetypePoster archetype={props.archetype} compact />
         </div>
         <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_220px] xl:items-start">
           <div>
-            <p className="text-sm font-semibold tracking-[0.16em] text-[#6e8573]">测试结果已生成 · {family.name}</p>
+            <p className="text-sm font-semibold tracking-[0.16em] text-[#6e8573]">{"\u6d4b\u8bd5\u7ed3\u679c\u5df2\u751f\u6210 \u00b7 "}{family.name}</p>
             <h1 className="mt-4 font-serif text-4xl font-semibold leading-tight text-[#1f2b27] md:text-6xl">
               {props.archetype.code}
               <span className="mt-3 block text-3xl text-[#314740] md:text-4xl">{props.archetype.name}</span>
             </h1>
             <div className="mt-5 inline-flex rounded-full border border-[#d6e3d8] bg-[#f4faf6] px-4 py-2 text-sm font-semibold text-[#466b5f]">
-              匹配度 {props.match.similarityPercent}% · 精准命中 {props.match.exactMatchCount}/{DIMENSIONS.length} 维
+              {"\u5339\u914d\u5ea6 "}{props.match.similarityPercent}% {" \u00b7 \u7cbe\u51c6\u547d\u4e2d "}{props.match.exactMatchCount}/{DIMENSIONS.length} {"\u7ef4"}
             </div>
             <p className="mt-6 text-xl font-semibold leading-8 text-[#33453f]">{props.archetype.punchline}</p>
-            <p className="mt-4 max-w-2xl text-[15px] leading-8 text-[#5b4e45]">{getArchetypeDescription(props.archetype)}</p>
           </div>
           <div className="xl:pt-4">
             <ResultTagStack tags={props.whyTags} />
           </div>
+          <p className="text-[15px] leading-8 text-[#5b4e45] xl:col-span-2">{getArchetypeDescription(props.archetype)}</p>
         </div>
       </div>
     </section>
@@ -557,8 +570,8 @@ function RadarChart(props: { vector: ScoreVector }) {
   });
 
   return (
-    <div className="overflow-hidden rounded-[28px] border border-[#efe8dd] bg-[#fbfaf7] p-4">
-      <svg viewBox={`0 0 ${RADAR_SIZE} ${RADAR_SIZE}`} className="mx-auto block w-full max-w-[560px]" role="img" aria-label="15 个维度的雷达图">
+    <div className="px-2">
+      <svg viewBox={`0 0 ${RADAR_SIZE} ${RADAR_SIZE}`} className="mx-auto block w-full max-w-[440px]" role="img" aria-label={"15 \u4e2a\u7ef4\u5ea6\u7684\u96f7\u8fbe\u56fe"}>
         {gridScales.map((scale) => (
           <polygon
             key={scale}
@@ -650,14 +663,14 @@ function LegacyDetailedFingerprintPanel(props: { vector: ScoreVector }) {
 function DetailedFingerprintPanel(props: { vector: ScoreVector }) {
   return (
     <section className="rounded-[32px] border border-black/5 bg-white p-7 shadow-[0_18px_60px_rgba(43,37,31,0.08)]">
-      <h2 className="text-2xl font-semibold text-[#2f2118]">维度信息</h2>
-      <div className="mt-6 space-y-8">
+      <h2 className="text-2xl font-semibold text-[#2f2118]">{"\u7ef4\u5ea6\u4fe1\u606f"}</h2>
+      <div className="mt-5 space-y-7">
         <RadarChart vector={props.vector} />
-        <div className="space-y-8">
+        <div className="space-y-7">
           {MODELS.map((model) => (
             <div key={model.id}>
               <h3 className="text-lg font-semibold text-[#556960]">{model.label}</h3>
-              <div className="mt-3">
+              <div className="mt-2">
                 {model.dimensionIds.map((dimensionId) => {
                   const dimension = DIMENSIONS.find((item) => item.id === dimensionId);
 
@@ -669,25 +682,23 @@ function DetailedFingerprintPanel(props: { vector: ScoreVector }) {
                   const meta = LEVEL_BADGE_META[level];
 
                   return (
-                    <article key={dimensionId} className="border-b border-[#ece4da] py-4 last:border-b-0">
-                      <div className="flex items-start justify-between gap-4">
-                        <div className="min-w-0 flex-1">
-                          <p className="text-[11px] font-semibold tracking-[0.18em] text-[#7c8f83]">
-                            {getDimensionOrderLabel(dimensionId)} · {model.label}
-                          </p>
-                          <h4 className="mt-1 text-[18px] font-semibold text-[#2f2118]">{dimension.label}</h4>
-                          <p className="mt-2 text-sm leading-7 text-[#74685f]">{dimension.notes[level]}</p>
+                    <article key={dimensionId} className="border-b border-[#ece4da] py-3 last:border-b-0">
+                      <p className="text-[12px] font-semibold tracking-[0.12em] text-[#7c8f83]">
+                        {getDimensionOrderLabel(dimensionId)} {" \u00b7 "}{model.label}
+                      </p>
+                      <div className="mt-1.5 flex items-center gap-3">
+                        <h4 className="shrink-0 text-[18px] font-semibold text-[#2f2118]">{dimension.label}</h4>
+                        <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-[#e9eee8]">
+                          <div
+                            className="h-full rounded-full bg-[linear-gradient(90deg,#7e9480,#5f755b)]"
+                            style={{ width: getDimensionBarWidth(props.vector[dimensionId]) }}
+                          />
                         </div>
-                        <span className={`inline-flex min-w-8 justify-center rounded-full px-2.5 py-1 text-sm font-semibold ${meta.className}`}>
+                        <span className={`inline-flex min-w-7 shrink-0 justify-center rounded-full px-2 py-0.5 text-[13px] font-semibold ${meta.className}`}>
                           {meta.text}
                         </span>
                       </div>
-                      <div className="mt-3 h-2 overflow-hidden rounded-full bg-[#e9eee8]">
-                        <div
-                          className="h-full rounded-full bg-[linear-gradient(90deg,#7e9480,#5f755b)]"
-                          style={{ width: getDimensionBarWidth(props.vector[dimensionId]) }}
-                        />
-                      </div>
+                      <p className="mt-1.5 text-[15px] leading-7 text-[#74685f]">{dimension.notes[level]}</p>
                     </article>
                   );
                 })}
@@ -737,9 +748,9 @@ function PersonalityTraitsSection(props: { archetype: ArchetypeDefinition }) {
 function StandalonePersonalityTraits(props: { archetype: ArchetypeDefinition }) {
   return (
     <>
-      <PersonalityTraitCard index={1} title="典型反应" body={props.archetype.reaction} />
-      <PersonalityTraitCard index={2} title="最容易翻车的地方" body={props.archetype.failureMode} />
-      <PersonalityTraitCard index={3} title="别人怎么配合你更有用" body={props.archetype.needFromOthers} />
+      <PersonalityTraitCard index={1} title={"典型反应"} body={props.archetype.reaction} />
+      <PersonalityTraitCard index={2} title={"最容易翻车的地方"} body={props.archetype.failureMode} />
+      <PersonalityTraitCard index={3} title={"别人怎么配合你更有用"} body={props.archetype.needFromOthers} />
     </>
   );
 }
@@ -938,15 +949,6 @@ function LegacyResultView(props: {
   );
 }
 
-function DetailDescriptionSection(props: { archetype: ArchetypeDefinition }) {
-  return (
-    <section className="rounded-[32px] border border-black/5 bg-white p-7 shadow-[0_18px_60px_rgba(43,37,31,0.08)]">
-      <h2 className="text-2xl font-semibold text-[#2f2118]">类型说明</h2>
-      <p className="mt-4 text-[16px] leading-9 text-[#5c5047]">{getArchetypeDescription(props.archetype)}</p>
-    </section>
-  );
-}
-
 export function ResultView(props: {
   matched: ArchetypeDefinition;
   resultVector: ScoreVector;
@@ -961,19 +963,19 @@ export function ResultView(props: {
 
   return (
     <main className="mx-auto flex min-h-screen max-w-7xl flex-col gap-6 px-5 py-8 md:px-8">
-      <ResultBreadcrumb onGoHome={props.onGoHome} currentLabel="测试结果" />
+      <BreadcrumbTrail items={[{ label: "\u8fd4\u56de\u9996\u9875", onClick: props.onGoHome, strong: true }, { label: "\u6d4b\u8bd5\u7ed3\u679c" }]} />
       <ResultHeroSection archetype={props.matched} match={headlineMatch} whyTags={whyTags} />
       <DetailedFingerprintPanel vector={props.resultVector} />
       <StandalonePersonalityTraits archetype={props.matched} />
 
       {props.matched.code === "NOIS" ? (
         <p className="rounded-[24px] border border-[#8a8a8a]/20 bg-[#f5f5f5] px-5 py-4 text-sm leading-7 text-[#545454]">
-          标准提示：你不是“没有结果”，而是多股模式一起在拉方向盘。先看最接近的标准类型，再回头看哪些维度同时在牵扯你。
+          {"\u6807\u51c6\u63d0\u793a\uff1a\u4f60\u4e0d\u662f\u201c\u6ca1\u6709\u7ed3\u679c\u201d\uff0c\u800c\u662f\u591a\u80a1\u6a21\u5f0f\u4e00\u8d77\u5728\u62c9\u65b9\u5411\u76d8\u3002\u5148\u770b\u6700\u63a5\u8fd1\u7684\u6807\u51c6\u7c7b\u578b\uff0c\u518d\u56de\u5934\u770b\u54ea\u4e9b\u7ef4\u5ea6\u540c\u65f6\u5728\u7275\u6240\u4f60\u3002"}
         </p>
       ) : null}
 
       <p className="pb-8 text-center text-sm leading-7 text-[#73675e]">
-        本产品是类型测试，不提供医疗、法律或心理建议，也不替你决定是否继续妊娠。
+        {"\u672c\u4ea7\u54c1\u662f\u7c7b\u578b\u6d4b\u8bd5\uff0c\u4e0d\u63d0\u4f9b\u533b\u7597\u3001\u6cd5\u5f8b\u6216\u5fc3\u7406\u5efa\u8bae\uff0c\u4e5f\u4e0d\u66ff\u4f60\u51b3\u5b9a\u662f\u5426\u7ee7\u7eed\u598a\u5a20\u3002"}
       </p>
     </main>
   );
@@ -981,25 +983,13 @@ export function ResultView(props: {
 
 function CatalogView(props: {
   onOpenDetail: (code: string) => void;
-  onBack: () => void;
+  onGoHome: () => void;
 }) {
   return (
     <main className="mx-auto min-h-screen max-w-7xl px-5 py-8 md:px-8">
-      <div className="flex flex-wrap items-center justify-between gap-4">
-        <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[#8b4e37]">All Types</p>
-          <h1 className="mt-3 font-serif text-4xl font-semibold text-[#2f2118] md:text-5xl">25 种孕妈类型一览</h1>
-          <p className="mt-4 max-w-3xl text-[15px] leading-8 text-[#5e5249]">
-            浏览全部 {PROJECT_BRAND.code} 类型。先看轮廓、再点进去看大图、长文案和 15 维度画像。
-          </p>
-        </div>
-        <button
-          type="button"
-          onClick={props.onBack}
-          className="rounded-full border border-black/5 bg-white px-5 py-3 font-semibold text-[#594d45] shadow-sm transition hover:bg-white"
-        >
-          返回
-        </button>
+      <BreadcrumbTrail items={[{ label: "\u8fd4\u56de\u9996\u9875", onClick: props.onGoHome, strong: true }, { label: "\u5168\u90e8\u7c7b\u578b" }]} />
+      <div className="mt-4">
+        <h1 className="font-serif text-4xl font-semibold text-[#2f2118] md:text-5xl">{"25 \u79cd\u7c7b\u578b\u4e00\u89c8"}</h1>
       </div>
 
       <div className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
@@ -1059,7 +1049,7 @@ function LegacyDetailView(props: {
 }
 export function DetailView(props: {
   archetypeCode: string;
-  onBack: () => void;
+  onGoHome: () => void;
   onOpenCatalog: () => void;
   onOpenDetail: (code: string) => void;
 }) {
@@ -1068,27 +1058,13 @@ export function DetailView(props: {
 
   return (
     <main className="mx-auto min-h-screen max-w-7xl px-5 py-8 md:px-8">
-      <div className="flex flex-wrap items-center justify-between gap-4">
-        <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[#8b4e37]">{"\u7c7b\u578b\u8be6\u60c5"}</p>
-        </div>
-        <div className="flex flex-wrap gap-3">
-          <button
-            type="button"
-            onClick={props.onBack}
-            className="rounded-full border border-black/5 bg-white px-5 py-3 font-semibold text-[#594d45] shadow-sm transition hover:bg-[#fffdfa]"
-          >
-            {"\u8fd4\u56de"}
-          </button>
-          <button
-            type="button"
-            onClick={props.onOpenCatalog}
-            className="rounded-full bg-[#2f2118] px-5 py-3 font-semibold text-white transition hover:bg-[#472f22]"
-          >
-            {"\u6d4f\u89c8\u5168\u90e8\u7c7b\u578b"}
-          </button>
-        </div>
-      </div>
+      <BreadcrumbTrail
+        items={[
+          { label: "\u8fd4\u56de\u9996\u9875", onClick: props.onGoHome, strong: true },
+          { label: "\u5168\u90e8\u7c7b\u578b", onClick: props.onOpenCatalog, strong: true },
+          { label: "\u7c7b\u578b\u8be6\u60c5" },
+        ]}
+      />
 
       <section
         className="mt-6 rounded-[34px] border border-black/5 bg-white p-6 shadow-[0_20px_70px_rgba(43,37,31,0.1)] md:p-8"
@@ -1099,18 +1075,17 @@ export function DetailView(props: {
             <ArchetypePoster archetype={archetype} />
           </div>
           <p className="text-center text-lg leading-8 text-[#5c5047]">{archetype.punchline}</p>
+          <p className="mx-auto max-w-4xl text-[16px] leading-9 text-[#5c5047]">{getArchetypeDescription(archetype)}</p>
         </div>
       </section>
 
       <div className="mt-6 space-y-6">
-        <DetailDescriptionSection archetype={archetype} />
         <DetailedFingerprintPanel vector={archetype.prototype} />
         <StandalonePersonalityTraits archetype={archetype} />
       </div>
     </main>
   );
 }
-
 
 export function CoreSpecRebuildApp() {
   const initial = useMemo(() => loadPersistedQuizState(), []);
@@ -1140,12 +1115,14 @@ export function CoreSpecRebuildApp() {
   }
 
   function openDetail(code: string, returnView: DetailReturnView) {
+    scrollToTop();
     setSelectedDetailCode(code);
     setDetailReturnView(returnView);
     setView("detail");
   }
 
   function navigate(nextView: View, options?: { detailCode?: string; detailReturnView?: DetailReturnView }) {
+    scrollToTop();
     if (options?.detailCode) {
       setSelectedDetailCode(options.detailCode);
     }
@@ -1153,6 +1130,16 @@ export function CoreSpecRebuildApp() {
       setDetailReturnView(options.detailReturnView);
     }
     setView(nextView);
+  }
+
+  function scrollToTop() {
+    if (typeof window === "undefined") {
+      return;
+    }
+
+    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
   }
 
   function goHistoryBack(fallbackView: View, options?: { detailCode?: string; detailReturnView?: DetailReturnView }) {
@@ -1163,6 +1150,19 @@ export function CoreSpecRebuildApp() {
 
     navigate(fallbackView, options);
   }
+
+  useEffect(() => {
+    if (typeof window === "undefined" || !("scrollRestoration" in window.history)) {
+      return undefined;
+    }
+
+    const previous = window.history.scrollRestoration;
+    window.history.scrollRestoration = "manual";
+
+    return () => {
+      window.history.scrollRestoration = previous;
+    };
+  }, []);
 
   useEffect(() => {
     if (typeof window === "undefined") {
@@ -1209,6 +1209,10 @@ export function CoreSpecRebuildApp() {
     if (window.location.hash !== nextHash) {
       window.location.hash = nextHash;
     }
+  }, [selectedDetailCode, view]);
+
+  useEffect(() => {
+    scrollToTop();
   }, [selectedDetailCode, view]);
 
   function handleStart() {
@@ -1308,7 +1312,7 @@ export function CoreSpecRebuildApp() {
     return (
       <CatalogView
         onOpenDetail={(code) => openDetail(code, "catalog")}
-        onBack={() => goHistoryBack(completed ? "result" : "home")}
+        onGoHome={() => navigate("home")}
       />
     );
   }
@@ -1317,7 +1321,7 @@ export function CoreSpecRebuildApp() {
     return (
       <DetailView
         archetypeCode={selectedDetailCode}
-        onBack={() => goHistoryBack(detailReturnView, { detailCode: selectedDetailCode })}
+        onGoHome={() => navigate("home")}
         onOpenCatalog={() => navigate("catalog")}
         onOpenDetail={(code) => openDetail(code, detailReturnView)}
       />
