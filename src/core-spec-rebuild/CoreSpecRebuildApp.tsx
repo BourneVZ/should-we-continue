@@ -7,7 +7,6 @@ import {
   QUESTIONS,
   QUESTION_SCALE_OPTIONS,
   getArchetype,
-  getArchetypeDescription,
   getFamily,
   type ArchetypeDefinition,
   type FingerprintLevel,
@@ -534,7 +533,7 @@ function ResultHeroSection(props: {
           <div className="xl:pt-4">
             <ResultTagStack tags={props.whyTags} />
           </div>
-          <p className="text-[15px] leading-8 text-[#5b4e45] xl:col-span-2">{getArchetypeDescription(props.archetype)}</p>
+          <p className="text-[15px] leading-8 text-[#5b4e45] xl:col-span-2">{props.archetype.intro}</p>
         </div>
       </div>
     </section>
@@ -726,16 +725,12 @@ function PersonalityTraitCard(props: { index: number; title: string; body: strin
 }
 
 function PersonalityTraitsSection(props: { archetype: ArchetypeDefinition }) {
-  const traits = [
-    { title: "典型反应", body: props.archetype.reaction },
-    { title: "最容易翻车的地方", body: props.archetype.failureMode },
-    { title: "别人怎么配合你更有用", body: props.archetype.needFromOthers },
-  ];
+  const traits = props.archetype.sections;
 
   return (
     <section className="rounded-[32px] border border-black/5 bg-white p-7 shadow-[0_18px_60px_rgba(43,37,31,0.08)]">
       <h2 className="text-2xl font-semibold text-[#2f2118]">扩写性格特点</h2>
-      <p className="mt-3 text-sm leading-7 text-[#66594f]">这里保留三块最稳定、最可回溯的特征，不额外发明脱离题库的新标签。</p>
+      <p className="mt-3 text-sm leading-7 text-[#66594f]">这里把第一反应、脑内预演、核心卡点、压力上头方式、失真触发器和有效支持拆成 6 块，方便你看清这类类型在家庭场景里怎么运作。</p>
       <div className="mt-6 space-y-4">
         {traits.map((trait, index) => (
           <PersonalityTraitCard key={trait.title} index={index + 1} title={trait.title} body={trait.body} />
@@ -748,9 +743,9 @@ function PersonalityTraitsSection(props: { archetype: ArchetypeDefinition }) {
 function StandalonePersonalityTraits(props: { archetype: ArchetypeDefinition }) {
   return (
     <>
-      <PersonalityTraitCard index={1} title={"典型反应"} body={props.archetype.reaction} />
-      <PersonalityTraitCard index={2} title={"最容易翻车的地方"} body={props.archetype.failureMode} />
-      <PersonalityTraitCard index={3} title={"别人怎么配合你更有用"} body={props.archetype.needFromOthers} />
+      {props.archetype.sections.map((trait, index) => (
+        <PersonalityTraitCard key={trait.title} index={index + 1} title={trait.title} body={trait.body} />
+      ))}
     </>
   );
 }
@@ -1075,7 +1070,7 @@ export function DetailView(props: {
             <ArchetypePoster archetype={archetype} />
           </div>
           <p className="text-center text-lg leading-8 text-[#5c5047]">{archetype.punchline}</p>
-          <p className="mx-auto max-w-4xl text-[16px] leading-9 text-[#5c5047]">{getArchetypeDescription(archetype)}</p>
+          <p className="mx-auto max-w-4xl text-[16px] leading-9 text-[#5c5047]">{archetype.intro}</p>
         </div>
       </section>
 

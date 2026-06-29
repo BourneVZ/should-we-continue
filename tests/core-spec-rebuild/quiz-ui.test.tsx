@@ -66,7 +66,7 @@ describe("core-spec-rebuild quiz ui", () => {
 });
 
 describe("core-spec-rebuild result ui", () => {
-  it("renders the moved description, shared dimension info, and standalone trait sections without similar types", () => {
+  it("renders the intro, dimension info, and six extended sections without similar types", () => {
     const archetype = getArchetype("CTRL");
     const match = matchArchetype(archetype.prototype);
     const html = renderToStaticMarkup(
@@ -86,16 +86,20 @@ describe("core-spec-rebuild result ui", () => {
     expect(html).toContain("匹配度");
     expect(html).toContain("精准命中");
     expect(html).toContain("维度信息");
-    expect(html).toContain(getArchetypeDescription(archetype));
-    expect(html).toContain("典型反应");
-    expect(html).toContain("最容易翻车的地方");
+    expect(html).toContain(archetype.intro);
+    expect(html).not.toContain(getArchetypeDescription(archetype));
+    expect(html).toContain("你第一反应通常先去哪");
+    expect(html).toContain("你脑内最常开的预演剧情");
+    expect(html).toContain("你真正在意的点是什么");
+    expect(html).toContain("你最容易把自己逼到哪一步");
+    expect(html).toContain("什么情况下你会明显失真");
     expect(html).toContain("别人怎么配合你更有用");
     expect(html).not.toContain("相近类型 TOP 5");
   });
 });
 
 describe("core-spec-rebuild detail ui", () => {
-  it("uses direct home navigation in breadcrumb and reuses the lower report sections", () => {
+  it("uses direct home navigation in breadcrumb and reuses the six lower report sections", () => {
     const archetype = getArchetype("CTRL");
     const html = renderToStaticMarkup(
       <DetailView archetypeCode={archetype.code} onGoHome={() => {}} onOpenCatalog={() => {}} onOpenDetail={() => {}} />,
@@ -105,9 +109,10 @@ describe("core-spec-rebuild detail ui", () => {
     expect(html).toContain("全部类型");
     expect(html).toContain("类型详情");
     expect(html).toContain(archetype.punchline);
-    expect(html).toContain(getArchetypeDescription(archetype));
+    expect(html).toContain(archetype.intro);
     expect(html).toContain("维度信息");
-    expect(html).toContain("典型反应");
+    expect(html).toContain("你第一反应通常先去哪");
+    expect(html).toContain("别人怎么配合你更有用");
     expect(html).not.toContain("相近类型 TOP 5");
   });
 });

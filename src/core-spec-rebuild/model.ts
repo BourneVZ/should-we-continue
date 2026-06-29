@@ -22,12 +22,18 @@ export interface FamilyDefinition {
   accentTo: string;
 }
 
+export interface ArchetypeSection {
+  title: string;
+  body: string;
+}
+
 export interface ArchetypeDefinition {
   code: string;
   name: string;
   punchline: string;
   familyId: FamilyId;
   intro: string;
+  sections: readonly ArchetypeSection[];
   reaction: string;
   failureMode: string;
   needFromOthers: string;
@@ -549,6 +555,305 @@ const FINAL_ARTWORK_CODES = new Set([
   "FRAY",
 ]);
 
+type ArchetypeContentSeed = {
+  firstReaction: string;
+  mentalPreview: string;
+  coreConcern: string;
+  selfPressure: string;
+  distortionTrigger: string;
+  effectiveSupport: string;
+};
+
+const INTRO_OPENERS: Record<string, string> = {
+  CTRL: "CTRL 往往不是先慌，是先把总控台亮起来。",
+  SCAN: "SCAN 常常不是先高兴，是先跑一轮风险演习。",
+  GRID: "GRID 一听到大事，脑内先开工的通常是结构图。",
+  DRAG: "DRAG 最先启动的不是答案，而是缓冲区。",
+  FOGG: "FOGG 最拿手的不是定论，而是先把雾留住。",
+  HUSH: "HUSH 遇到压强太高的话题，先按下的是静音键。",
+  QCER: "QCER 一听见承诺，直觉先去看交付口。",
+  LIST: "LIST 脑内最先冒出来的，常常不是情绪而是待办。",
+  TICK: "TICK 对落地成本的嗅觉，通常比气氛更早上线。",
+  WALL: "WALL 真正先响的，多半不是情绪而是边界警报。",
+  SOLO: "SOLO 第一反应往往不是靠近，而是先保住自己。",
+  EXIT: "EXIT 真正要先确认的，从来都是门还在不在。",
+  HOLD: "HOLD 事情还没落地，肩膀已经先预热了。",
+  GIVE: "GIVE 常常还没轮到自己，就先在照顾全场。",
+  SPNG: "SPNG 的雷达很灵，别人情绪一变你先知道。",
+  GLOW: "GLOW 最容易先被点亮的，是那张未来海报。",
+  FILM: "FILM 一有重大变化，脑内预告片就开始剪了。",
+  NEST: "NEST 对这类议题的入口，常常是一种家的气味。",
+  BASE: "BASE 一开局先看的，通常不是浪漫而是地基。",
+  LOAD: "LOAD 对重量的感知很具体，几乎一秒就有账。",
+  PLAN: "PLAN 很难只聊一半，因为执行表会自动弹出。",
+  SHAK: "SHAK 最难受的不是单点问题，而是全频道一起响。",
+  CLAS: "CLAS 会一边整理混乱，一边被新混乱继续打断。",
+  FRAY: "FRAY 的纠结通常不是一条线，而是一团线。",
+  NOIS: "NOIS 像所有频道同时开麦，谁都不肯当背景音。",
+};
+
+export const EXTENDED_SECTION_TITLES = [
+  "你第一反应通常先去哪",
+  "你脑内最常开的预演剧情",
+  "你真正在意的点是什么",
+  "你最容易把自己逼到哪一步",
+  "什么情况下你会明显失真",
+  "别人怎么配合你更有用",
+] as const;
+
+const ARCHETYPE_CONTENT_SEEDS: Record<string, ArchetypeContentSeed> = {
+  CTRL: {
+    firstReaction: "先查变量、边界和信息缺口",
+    mentalPreview: "流程失控、责任飘走、最后默认你兜底",
+    coreConcern: "不是能不能做，是别又变成无人负责的局",
+    selfPressure: "提前把自己顶成临时项目经理",
+    distortionTrigger: "信息含糊、时间很赶、承诺空转",
+    effectiveSupport: "给更新、给节点、给能执行的动作",
+  },
+  SCAN: {
+    firstReaction: "先扫风险点和最坏版本",
+    mentalPreview: "症状升级、计划失手、后果补刀",
+    coreConcern: "不是唱衰，是别被现实从背后偷袭",
+    selfPressure: "把所有坏可能都提前背进脑子",
+    distortionTrigger: "身体异常、消息不清、别人只会安慰",
+    effectiveSupport: "把风险拆成已知、未知和可核实",
+  },
+  GRID: {
+    firstReaction: "先搭结构、排角色、看谁交接",
+    mentalPreview: "分工断档、资源失衡、系统没人维护",
+    coreConcern: "不是你扫兴，是你在找承重墙",
+    selfPressure: "把全套施工图都先揽到自己脑内",
+    distortionTrigger: "责任模糊、节奏乱套、人人只谈感受",
+    effectiveSupport: "一起把分工、资源和备份方案说清",
+  },
+  DRAG: {
+    firstReaction: "先争取喘口气，不让答案立刻落地",
+    mentalPreview: "一旦点头就再也退不回来",
+    coreConcern: "不是没想法，是你需要不被逼答的空间",
+    selfPressure: "拖着拖着把每个变量都拖到涨价",
+    distortionTrigger: "连续追问、当场站队、只给二选一",
+    effectiveSupport: "给缓冲窗口，也给下一次对话节点",
+  },
+  FOGG: {
+    firstReaction: "先把模糊区保住，不急着把话说死",
+    mentalPreview: "哪句话一旦坐实，哪条退路就会关掉",
+    coreConcern: "不是你含糊，是太早定性会压扁别的可能",
+    selfPressure: "反复拨散焦点，连自己也一起看不清",
+    distortionTrigger: "黑白式提问、情绪催促、被迫表态",
+    effectiveSupport: "把雾拆成几种状态，不替你抢定义",
+  },
+  HUSH: {
+    firstReaction: "先降输入，避免系统继续过载",
+    mentalPreview: "再多刺激一点就要直接死机",
+    coreConcern: "不是不在乎，是你想保住还能思考的自己",
+    selfPressure: "把感受压到最低音量才敢继续处理",
+    distortionTrigger: "信息太密、情绪太吵、围攻式沟通",
+    effectiveSupport: "短句、低压、可暂停的沟通节奏",
+  },
+  QCER: {
+    firstReaction: "先验承诺，不先吃口号",
+    mentalPreview: "谁嘴上站队、谁落地掉线",
+    coreConcern: "不是苛刻，是你在查兑现率",
+    selfPressure: "把亲密关系也开成质检现场",
+    distortionTrigger: "大话很多、细节很少、责任没人认领",
+    effectiveSupport: "明确能做什么、何时做、做不到什么",
+  },
+  LIST: {
+    firstReaction: "先列事项、节奏和责任人",
+    mentalPreview: "长期运营会不会变成无人维护的烂尾楼",
+    coreConcern: "不是你不浪漫，是任务比语气更诚实",
+    selfPressure: "把每段关系都做成可复盘项目",
+    distortionTrigger: "讨论很散、分工很虚、任务没人接",
+    effectiveSupport: "一起对齐待办、时间线和分工表",
+  },
+  TICK: {
+    firstReaction: "先看谁落地、谁收尾、谁补位",
+    mentalPreview: "重复杂务、睡眠赤字、长期接盘",
+    coreConcern: "不是你悲观，是你记得收尾有多累",
+    selfPressure: "还没发生就按最累版本先验收",
+    distortionTrigger: "到时候再说、期限漂移、细节空白",
+    effectiveSupport: "把日常运转细节补齐，再谈愿景",
+  },
+  WALL: {
+    firstReaction: "先看身体、时间和身份有没有被越线",
+    mentalPreview: "别人默认调用你，边界一路后退",
+    coreConcern: "不是你冷，是你在守自主权和同意权",
+    selfPressure: "为了保线把门一口气焊太死",
+    distortionTrigger: "擅自安排、价值绑架、亲密式越界",
+    effectiveSupport: "先问边界，再提期待和建议",
+  },
+  SOLO: {
+    firstReaction: "先确认原来的自己还能不能活着穿过去",
+    mentalPreview: "角色一上身，自己就慢慢断线",
+    coreConcern: "不是拒绝亲密，是别把自我连续性赔进去",
+    selfPressure: "把所有需求都练成我自己来",
+    distortionTrigger: "母职模板太重、私人空间被默认牺牲",
+    effectiveSupport: "尊重独处、节奏和个人表达权",
+  },
+  EXIT: {
+    firstReaction: "先找出口、暂停键和可逆空间",
+    mentalPreview: "一步走错就被套进无法调头的轨道",
+    coreConcern: "不是逃，是你需要选择权还在",
+    selfPressure: "把每场讨论都过成撤离演练",
+    distortionTrigger: "没有暂停权、没有退路、没有缓冲",
+    effectiveSupport: "保留节奏权、暂停权和重新商量的门",
+  },
+  HOLD: {
+    firstReaction: "先把最重那一段往自己肩上预放",
+    mentalPreview: "身体、关系、照护最后都压到你这边",
+    coreConcern: "不是伟大，是没人接的时候你最先会顶上",
+    selfPressure: "提前预支体力、情绪和责任额度",
+    distortionTrigger: "别人夸你懂事却不真接手",
+    effectiveSupport: "别夸可靠，直接分担具体负荷",
+  },
+  GIVE: {
+    firstReaction: "先理解别人，再想自己让到哪",
+    mentalPreview: "只要你多配合一点，全场就能顺下来",
+    coreConcern: "不是你没立场，是体谅感总抢先发言",
+    selfPressure: "把委屈提前翻译成懂事和体面",
+    distortionTrigger: "愧疚施压、家庭期待、伴侣先崩",
+    effectiveSupport: "直接问你最不想让的是什么",
+  },
+  SPNG: {
+    firstReaction: "先接住全场情绪，再轮到自己",
+    mentalPreview: "如果你不稳住，别人就会更乱",
+    coreConcern: "不是没主见，是情绪传染太容易穿过你",
+    selfPressure: "把自己的版本泡软，先吸别人的波动",
+    distortionTrigger: "房间里有人慌、失望、内疚或崩溃",
+    effectiveSupport: "别把情绪整桶倒给你代处理",
+  },
+  GLOW: {
+    firstReaction: "先被意义感、连接感和温柔画面点亮",
+    mentalPreview: "人生会不会突然长出更完整的一章",
+    coreConcern: "不是你天真，是那张未来海报太有说服力",
+    selfPressure: "把光感误当成现实已经靠谱",
+    distortionTrigger: "温暖叙事很满、现实账目很空",
+    effectiveSupport: "别嘲笑浪漫，把成本也摆到同一桌",
+  },
+  FILM: {
+    firstReaction: "先把这件事接进自己的人生叙事",
+    mentalPreview: "这会不会成为命运转场和主题升级",
+    coreConcern: "不是戏多，是你真的会先看章节感",
+    selfPressure: "爱上剧情张力，晚一点才看执行成本",
+    distortionTrigger: "象征意味太强、现实细节太少",
+    effectiveSupport: "陪你谈意义，也帮你拆回到日子",
+  },
+  NEST: {
+    firstReaction: "先想那个家像不像能住人的地方",
+    mentalPreview: "气味、空间、关系感能不能把人安放住",
+    coreConcern: "不是形式感，是你在找可居住的日常",
+    selfPressure: "把氛围搭满，却迟迟不碰承重结构",
+    distortionTrigger: "浪漫画面很多、分工支撑很少",
+    effectiveSupport: "把家的感觉翻译成日程和分工",
+  },
+  BASE: {
+    firstReaction: "先摸地基，再看理想会不会塌",
+    mentalPreview: "长期承重、现金流和照护供给够不够",
+    coreConcern: "不是你扫兴，是你在看系统能不能活",
+    selfPressure: "凡事先按最稳版本去估，弹性被压低",
+    distortionTrigger: "收入不稳、支援缺位、承重没人算",
+    effectiveSupport: "认真一起算资源和长期承重",
+  },
+  LOAD: {
+    firstReaction: "先感到身体、恢复和疲惫那笔重账",
+    mentalPreview: "睡不够、接不了班、长期劳损怎么收场",
+    coreConcern: "不是爱想重，是重量真的会先落在身体上",
+    selfPressure: "还没开始就先把劳损预演了很多遍",
+    distortionTrigger: "恢复期未知、补位不明、持续照护逼近",
+    effectiveSupport: "提前谈好接手、补位和恢复期安排",
+  },
+  PLAN: {
+    firstReaction: "先把愿望和执行一起摆上桌",
+    mentalPreview: "谁来维护系统、谁来补漏洞、谁来接班",
+    coreConcern: "不是控制欲，是你知道没施工图会烂尾",
+    selfPressure: "把整套系统都先扛到脑子里总包",
+    distortionTrigger: "只谈理想、不谈维护、变量持续加码",
+    effectiveSupport: "一起分包，而不是把靠谱全外包给你",
+  },
+  SHAK: {
+    firstReaction: "先感到好多频道一起响，根本静不下来",
+    mentalPreview: "每一条分支都能导向新的失控版本",
+    coreConcern: "不是矫情，是系统同时收到太多拉扯",
+    selfPressure: "和每一个自己都打一轮内部辩论",
+    distortionTrigger: "新变量叠加、话题切太快、范围太大",
+    effectiveSupport: "一次只收窄一层，不要整锅一起谈",
+  },
+  CLAS: {
+    firstReaction: "先想分类整理，下一秒又被新变量打断",
+    mentalPreview: "优先级刚排好，新的警报又同时亮起",
+    coreConcern: "不是没整理，是秩序刚搭就被冲垮",
+    selfPressure: "把所有事情都拖进紧急通道处理",
+    distortionTrigger: "输入不断、问题并发、每件事都要现在",
+    effectiveSupport: "先停新增噪音，再帮你排顺序",
+  },
+  FRAY: {
+    firstReaction: "先发现不是一道题，而是几条线同时打结",
+    mentalPreview: "身体、关系、自由和现实互相牵连失手",
+    coreConcern: "不是钻牛角尖，是多种真相一起成立",
+    selfPressure: "为了讲清楚每根线，把自己解释到脱力",
+    distortionTrigger: "一句话硬盖全局、强行只准选一条线",
+    effectiveSupport: "陪你一根一根拆，不用大而化之",
+  },
+  NOIS: {
+    firstReaction: "先听见好多声音同时抢前排",
+    mentalPreview: "每个版本都像有理，互相又彼此打架",
+    coreConcern: "不是没答案，是噪声太大听不清主线",
+    selfPressure: "把每个信号都当最终结论一起背",
+    distortionTrigger: "低匹配、高拉扯、话题一扩就过载",
+    effectiveSupport: "先降噪，再拉出第一条最重要的线",
+  },
+};
+
+function getTopDimensionLabels(vector: ScoreVector, count: number): string {
+  return [...DIMENSION_IDS]
+    .sort((left, right) => vector[right] - vector[left])
+    .slice(0, count)
+    .map((dimensionId) => getDimension(dimensionId).label)
+    .join("、");
+}
+
+function buildArchetypeIntro(
+  spec: Pick<ArchetypeDefinition, "code" | "intro" | "reaction" | "failureMode" | "needFromOthers">,
+  prototype: ScoreVector,
+): string {
+  const salientDimensions = spec.code === "NOIS" ? "多条维度" : getTopDimensionLabels(prototype, 3);
+  const opener = INTRO_OPENERS[spec.code] ?? `${spec.code} 这型人的系统有自己很固执的优先级。`;
+
+  return `${opener}${spec.intro} 一遇到怀孕、和老公谈分工、带宝宝或顾及已有孩子节奏时，这套模式就会上线。碰上${salientDimensions}这些维度一起抬头，${spec.reaction} 这让你常常更早看见关键，也更容易把自己推到过载边缘，因为${spec.failureMode} 真正有帮助的，不是被催着想开，而是${spec.needFromOthers}`;
+}
+
+function buildExtendedSections(prototype: ScoreVector, seed: ArchetypeContentSeed): readonly ArchetypeSection[] {
+  const focusDimensions = getTopDimensionLabels(prototype, 2);
+  const pressureDimensions = getTopDimensionLabels(prototype, 3);
+
+  return [
+    {
+      title: EXTENDED_SECTION_TITLES[0],
+      body: `${seed.firstReaction}。消息一落地，或话题转到孕周、和老公怎么谈、宝宝出生后谁扛、已有孩子会不会受影响时，你通常先盯这里。它和你在${focusDimensions}这些维度上的高敏感有关，所以外人看像反应快，其实是大脑先找安全位。`,
+    },
+    {
+      title: EXTENDED_SECTION_TITLES[1],
+      body: `${seed.mentalPreview}。你脑内先预演的，往往不只是一种最坏结果，还包括关系会不会失衡、照护会不会失手、生活节奏会不会被整锅端。${pressureDimensions}这些维度一抬高，你就更容易先把后果片看完，再决定要不要放心。`,
+    },
+    {
+      title: EXTENDED_SECTION_TITLES[2],
+      body: `${seed.coreConcern}。表面上你像在纠结要不要、生不生、说不说，底层更像在确认自己会不会被困住、被失望，或被默认接盘。怀孕和养育在你这里从来不是单题，而是${focusDimensions}一起把那个真正卡点顶出来。`,
+    },
+    {
+      title: EXTENDED_SECTION_TITLES[3],
+      body: `${seed.selfPressure}。你最容易不是被别人一句话压垮，而是自己先把责任、体面、效率和关系稳定统统打包背走。特别在和老公谈分工、安排产检、预想带宝宝或顾及已有孩子节奏时，你会比别人更早把“那就我来”内化成默认动作。`,
+    },
+    {
+      title: EXTENDED_SECTION_TITLES[4],
+      body: `${seed.distortionTrigger}。一旦局面同时满足这些条件，你就更容易失真：信息含糊、时间逼近、承诺落空，或者所有人都把情绪和任务往你面前一倒。那不是你故意难搞，而是${pressureDimensions}这些高敏维度一起超载，系统只能靠退避、控场或僵住自保。`,
+    },
+    {
+      title: EXTENDED_SECTION_TITLES[5],
+      body: `${seed.effectiveSupport}。真正有用的配合不是鸡汤，也不是替你拍板，而是按你能消化的节奏把事实、选择、分工和情绪容纳都放到位。尤其在怀孕、带宝宝、和老公磨合或照顾已有孩子的现实场景里，这样的支持最能帮你把防御慢慢放下。`,
+    },
+  ];
+}
+
 const ARCHETYPE_SPECS = [
   {
     code: "CTRL",
@@ -816,32 +1121,66 @@ const ARCHETYPE_SPECS = [
   },
 ] as const;
 
-export const ARCHETYPES: readonly ArchetypeDefinition[] = ARCHETYPE_SPECS.map((spec) => ({
-  code: spec.code,
-  familyId: spec.familyId,
-  name: spec.name,
-  punchline: spec.punchline,
-  intro: spec.intro,
-  reaction: spec.reaction,
-  failureMode: spec.failureMode,
-  needFromOthers: spec.needFromOthers,
-  artwork:
-    FINAL_ARTWORK_CODES.has(spec.code)
-      ? {
-          posterPath: `/archetypes/${spec.code}.png`,
-          alt: `${spec.code} ${spec.name}角色海报`,
-          status: "final",
-        }
-      : undefined,
-  prototype: tweak(FAMILY_BASELINES[spec.familyId], spec.patch),
-}));
+export const ARCHETYPES: readonly ArchetypeDefinition[] = ARCHETYPE_SPECS.map((spec) => {
+  const prototype = tweak(FAMILY_BASELINES[spec.familyId], spec.patch);
+
+  return {
+    code: spec.code,
+    familyId: spec.familyId,
+    name: spec.name,
+    punchline: spec.punchline,
+    intro: buildArchetypeIntro(spec, prototype),
+    sections: buildExtendedSections(prototype, ARCHETYPE_CONTENT_SEEDS[spec.code]),
+    reaction: spec.reaction,
+    failureMode: spec.failureMode,
+    needFromOthers: spec.needFromOthers,
+    artwork:
+      FINAL_ARTWORK_CODES.has(spec.code)
+        ? {
+            posterPath: `/archetypes/${spec.code}.png`,
+            alt: `${spec.code} ${spec.name}角色海报`,
+            status: "final",
+          }
+        : undefined,
+    prototype,
+  };
+});
+
+const FALLBACK_PROTOTYPE = vector({
+  factCheck: 3,
+  delay: 3,
+  controlCompensation: 3,
+  intrusionSensitivity: 3,
+  riskSimulation: 3,
+  recoveryCatastrophizing: 3,
+  selfContinuity: 3,
+  motherhoodProjection: 3,
+  rhythmDefense: 3,
+  confirmationNeed: 3,
+  attachmentNeed: 3,
+  commitmentVerification: 3,
+  orderAnxiety: 3,
+  freedomLossSensitivity: 3,
+  careLoadEstimation: 3,
+});
 
 export const FALLBACK_ARCHETYPE: ArchetypeDefinition = {
   code: "NOIS",
   familyId: "fallback",
   name: "噪点综合体",
   punchline: "不是你没类型，是你脑内频道同时开麦。",
-  intro: "当多股反应一起拉扯、又和所有标准原型都差一口气时，结果就会掉进这里。",
+  intro: buildArchetypeIntro(
+    {
+      code: "NOIS",
+      intro: "你不是没有模式，而是太多模式同时来抢方向盘，谁都不肯安静当背景音。",
+      reaction:
+        "你不是没有模式，而是好几种模式同时抢前排。怀孕和养育想象在你这里像多路输入并发播放，谁都不像背景音。",
+      failureMode: "最容易翻车的地方，是你把每一种声音都当成最终结论，最后整个人卡在过载状态里。",
+      needFromOthers: "最需要的不是替你定性，而是帮你缩小范围、降低噪声、把最重要的一条线先拉出来。",
+    },
+    FALLBACK_PROTOTYPE,
+  ),
+  sections: buildExtendedSections(FALLBACK_PROTOTYPE, ARCHETYPE_CONTENT_SEEDS.NOIS),
   reaction: "你不是没有模式，而是好几种模式同时抢前排。怀孕和养育想象在你这里像多路输入并发播放，谁都不像背景音。",
   failureMode: "最容易翻车的地方，是你把每一种声音都当成最终结论，最后整个人卡在过载状态里。",
   needFromOthers: "最需要的不是替你定性，而是帮你缩小范围、降低噪声、把最重要的一条线先拉出来。",
@@ -850,23 +1189,7 @@ export const FALLBACK_ARCHETYPE: ArchetypeDefinition = {
     alt: "NOIS 噪点综合体角色海报",
     status: "final",
   },
-  prototype: vector({
-    factCheck: 3,
-    delay: 3,
-    controlCompensation: 3,
-    intrusionSensitivity: 3,
-    riskSimulation: 3,
-    recoveryCatastrophizing: 3,
-    selfContinuity: 3,
-    motherhoodProjection: 3,
-    rhythmDefense: 3,
-    confirmationNeed: 3,
-    attachmentNeed: 3,
-    commitmentVerification: 3,
-    orderAnxiety: 3,
-    freedomLossSensitivity: 3,
-    careLoadEstimation: 3,
-  }),
+  prototype: FALLBACK_PROTOTYPE,
 };
 
 export const ALL_ARCHETYPES: readonly ArchetypeDefinition[] = [...ARCHETYPES, FALLBACK_ARCHETYPE];

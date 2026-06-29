@@ -42,6 +42,10 @@
   结果页结构规范。
 - [persona-sample-ctrl.md](/Z:/Users/BVZ/WorkSpace/101Doodle/VibeCoding/should-we-continue/specs/003-core-spec-rebuild/persona-sample-ctrl.md)
   单类型文案与视觉设定样板。
+- [type-description-prompt-template.md](/Z:/Users/BVZ/WorkSpace/101Doodle/VibeCoding/should-we-continue/specs/003-core-spec-rebuild/type-description-prompt-template.md)
+  类型描述离线生成模板，定义结构化输入、输出 schema、知识卡和审校规则。
+- [type-description-sample-ctrl.md](/Z:/Users/BVZ/WorkSpace/101Doodle/VibeCoding/should-we-continue/specs/003-core-spec-rebuild/type-description-sample-ctrl.md)
+  `CTRL` 类型的模板填充示例，包含示范输入、示范 prompt 拼装和示范输出。
 
 ## 代码清理边界
 
