@@ -4,6 +4,7 @@ export interface DimensionDefinition {
   model: ModelId;
   lowTag: string;
   highTag: string;
+  notes: Record<FingerprintLevel, string>;
 }
 
 export interface QuestionDefinition {
@@ -30,7 +31,20 @@ export interface ArchetypeDefinition {
   reaction: string;
   failureMode: string;
   needFromOthers: string;
+  artwork?: {
+    posterPath: string;
+    alt: string;
+    status: "final" | "placeholder";
+  };
   prototype: ScoreVector;
+}
+
+export interface ProjectBrandOption {
+  code: string;
+  title: string;
+  fullName: string;
+  chinese: string;
+  rationale: string;
 }
 
 export type ModelId = "decision" | "body" | "identity" | "relationship" | "reality";
@@ -66,6 +80,47 @@ export const DIMENSION_IDS = [
 
 export type DimensionId = (typeof DIMENSION_IDS)[number];
 export type ScoreVector = Record<DimensionId, number>;
+export type FingerprintLevel = "low" | "medium" | "high";
+
+export const PROJECT_BRAND_OPTIONS: readonly ProjectBrandOption[] = [
+  {
+    code: "MMTI",
+    title: "MMTI 测试",
+    fullName: "Matrescence Mode Type Indicator",
+    chinese: "母职转变模式指标",
+    rationale: "最平衡，既能覆盖怀孕到母职转变，又不会太像医学量表。",
+  },
+  {
+    code: "PMTI",
+    title: "PMTI 测试",
+    fullName: "Pregnancy & Motherhood Type Indicator",
+    chinese: "怀孕与母职类型指标",
+    rationale: "最好懂，直白，但产品个性略弱一点。",
+  },
+  {
+    code: "MRTI",
+    title: "MRTI 测试",
+    fullName: "Maternal Response Type Indicator",
+    chinese: "母职反应类型指标",
+    rationale: "更贴近“反应模式”，适合你现在这套底层逻辑。",
+  },
+  {
+    code: "MBMI",
+    title: "MBMI 测试",
+    fullName: "Motherhood Behavior Mode Index",
+    chinese: "母职行为模式指数",
+    rationale: "更偏讽刺测试感，但比前三个更玩梗。",
+  },
+  {
+    code: "GBTI",
+    title: "GBTI 测试",
+    fullName: "Gestational Behavior Type Indicator",
+    chinese: "孕期行为类型指标",
+    rationale: "聚焦怀孕阶段很准，但会弱化后续育儿想象部分。",
+  },
+] as const;
+
+export const PROJECT_BRAND = PROJECT_BRAND_OPTIONS[0];
 
 export const MODELS: readonly { id: ModelId; label: string; dimensionIds: readonly DimensionId[] }[] = [
   { id: "decision", label: "决策模型", dimensionIds: ["factCheck", "delay", "controlCompensation"] },
@@ -76,21 +131,186 @@ export const MODELS: readonly { id: ModelId; label: string; dimensionIds: readon
 ] as const;
 
 export const DIMENSIONS: readonly DimensionDefinition[] = [
-  { id: "factCheck", label: "核实欲", model: "decision", lowTag: "先感觉后核实", highTag: "先核实再允许自己动情" },
-  { id: "delay", label: "决断迟滞", model: "decision", lowTag: "该拍板时能拍板", highTag: "先拖住，谁都别逼" },
-  { id: "controlCompensation", label: "掌控补偿", model: "decision", lowTag: "不靠排变量续命", highTag: "越慌越想控场" },
-  { id: "intrusionSensitivity", label: "身体侵入敏感", model: "body", lowTag: "身体变化还能慢慢适应", highTag: "身体边界一被改写就起毛" },
-  { id: "riskSimulation", label: "风险预演度", model: "body", lowTag: "不先把坏剧情放大", highTag: "坏情况会先脑内公映" },
-  { id: "recoveryCatastrophizing", label: "恢复灾难想象", model: "body", lowTag: "恢复期不默认地狱难度", highTag: "恢复想象自带灾难片" },
-  { id: "selfContinuity", label: "自我连续性", model: "identity", lowTag: "旧版本自己可以先松一点", highTag: "原来的我别断线" },
-  { id: "motherhoodProjection", label: "母职浪漫投射", model: "identity", lowTag: "不拿母职开滤镜", highTag: "母职容易被你想成意义大作" },
-  { id: "rhythmDefense", label: "人生节奏保卫度", model: "identity", lowTag: "节奏能让位", highTag: "生活节奏不能被整锅端" },
-  { id: "confirmationNeed", label: "关系确认需求", model: "relationship", lowTag: "不急着让别人站队", highTag: "别人最好赶紧表态" },
-  { id: "attachmentNeed", label: "陪伴黏连度", model: "relationship", lowTag: "不靠二十四小时陪伴续命", highTag: "需要有人持续在场" },
-  { id: "commitmentVerification", label: "承诺验收强度", model: "relationship", lowTag: "口头支持也能先听听", highTag: "先拿行动和清单来" },
-  { id: "orderAnxiety", label: "秩序焦虑", model: "reality", lowTag: "秩序乱一点也还能转", highTag: "一乱套就很难装没事" },
-  { id: "freedomLossSensitivity", label: "自由损失敏感", model: "reality", lowTag: "自由缩水还能谈", highTag: "一想到被套牢就警铃大作" },
-  { id: "careLoadEstimation", label: "照护承重预估", model: "reality", lowTag: "不会先把照护重量算满", highTag: "先算这活到底谁扛" },
+  {
+    id: "factCheck",
+    label: "核实欲",
+    model: "decision",
+    lowTag: "先感觉后核实",
+    highTag: "先核实再允许自己动情",
+    notes: {
+      low: "你能先跟着感受走，不会被信息空白卡到完全停机。",
+      medium: "你会查关键点，但还不至于查到情绪也一起冻结。",
+      high: "只要还有关键空白，你就很难放心把态度说死。",
+    },
+  },
+  {
+    id: "delay",
+    label: "决断迟滞",
+    model: "decision",
+    lowTag: "该拍板时能拍板",
+    highTag: "先拖住，谁都别逼",
+    notes: {
+      low: "该做决定时，你更容易进入处理模式，而不是无限缓冲。",
+      medium: "你会给自己留一点观察时间，但不会一直挂起。",
+      high: "越逼你立刻定论，你越容易先按下暂停键。",
+    },
+  },
+  {
+    id: "controlCompensation",
+    label: "掌控补偿",
+    model: "decision",
+    lowTag: "不靠排变量续命",
+    highTag: "越慌越想控场",
+    notes: {
+      low: "你不太需要靠列流程、排变量来稳住自己。",
+      medium: "局面一乱时，你会适度整理，但不会什么都想接管。",
+      high: "一慌起来，你的大脑就会本能地冲去接管现场。",
+    },
+  },
+  {
+    id: "intrusionSensitivity",
+    label: "身体侵入敏感",
+    model: "body",
+    lowTag: "身体变化还能慢慢适应",
+    highTag: "身体边界一被改写就起毛",
+    notes: {
+      low: "你对身体被改写这件事的耐受度相对更高一些。",
+      medium: "你会在意身体边界，但还可以慢慢谈、慢慢适应。",
+      high: "只要想到身体会长期被改写，警觉感就会先上来。",
+    },
+  },
+  {
+    id: "riskSimulation",
+    label: "风险预演度",
+    model: "body",
+    lowTag: "不先把坏剧情放大",
+    highTag: "坏情况会先脑内公映",
+    notes: {
+      low: "你不会本能地先把坏剧情放到最大音量。",
+      medium: "你会预想风险，但还不至于一路脑补到最黑版本。",
+      high: "坏情况通常会先在你脑内试映几轮，再轮到别人开口。",
+    },
+  },
+  {
+    id: "recoveryCatastrophizing",
+    label: "恢复灾难想象",
+    model: "body",
+    lowTag: "恢复期不默认地狱难度",
+    highTag: "恢复想象自带灾难片",
+    notes: {
+      low: "你不会自动把恢复期预设成一部漫长灾难片。",
+      medium: "你会担心恢复成本，但还保留一点弹性空间。",
+      high: "一想到恢复期，你的大脑就容易先切到重灾版预告。",
+    },
+  },
+  {
+    id: "selfContinuity",
+    label: "自我连续性",
+    model: "identity",
+    lowTag: "旧版本自己可以先松一点",
+    highTag: "原来的我别断线",
+    notes: {
+      low: "你对“旧版本自己要不要完整保留”这件事相对没那么执拗。",
+      medium: "你希望保住原来的自己，但也知道身份会发生调整。",
+      high: "你很在意原来的自己别被整件事直接覆盖掉。",
+    },
+  },
+  {
+    id: "motherhoodProjection",
+    label: "母职浪漫投射",
+    model: "identity",
+    lowTag: "不拿母职开滤镜",
+    highTag: "母职容易被你想成意义大作",
+    notes: {
+      low: "你不太会自动给母职套上一层救赎或完整感滤镜。",
+      medium: "你能理解母职的意义感，但还不至于被它整套带走。",
+      high: "你很容易先被“也许会更完整、更有意义”的画面击中。",
+    },
+  },
+  {
+    id: "rhythmDefense",
+    label: "人生节奏保卫度",
+    model: "identity",
+    lowTag: "节奏能让位",
+    highTag: "生活节奏不能被整锅端",
+    notes: {
+      low: "你能接受现有节奏为新变化让一部分位。",
+      medium: "你会在意节奏被打乱，但还愿意留出协商空间。",
+      high: "你对生活节奏被整锅端这件事格外敏感。",
+    },
+  },
+  {
+    id: "confirmationNeed",
+    label: "关系确认需求",
+    model: "relationship",
+    lowTag: "不急着让别人站队",
+    highTag: "别人最好赶紧表态",
+    notes: {
+      low: "别人暂时不表态，也不会立刻让你失去平衡。",
+      medium: "你希望听到明确态度，但还不至于立刻炸毛。",
+      high: "这种时刻，别人到底站不站你这边，对你非常关键。",
+    },
+  },
+  {
+    id: "attachmentNeed",
+    label: "陪伴黏连度",
+    model: "relationship",
+    lowTag: "不靠二十四小时陪伴续命",
+    highTag: "需要有人持续在场",
+    notes: {
+      low: "你不太依赖高密度陪伴，也能自己把系统维持住。",
+      medium: "你希望有人稳定在场，但也保留独处的可用性。",
+      high: "没人持续陪着一起扛时，你会明显更容易慌。",
+    },
+  },
+  {
+    id: "commitmentVerification",
+    label: "承诺验收强度",
+    model: "relationship",
+    lowTag: "口头支持也能先听听",
+    highTag: "先拿行动和清单来",
+    notes: {
+      low: "你对口头支持还有一定耐心，不会立刻要求交作业。",
+      medium: "你会看行动，但也愿意给别人一点落实时间。",
+      high: "你更信动作、安排和责任分配，不太吃空口安慰。",
+    },
+  },
+  {
+    id: "orderAnxiety",
+    label: "秩序焦虑",
+    model: "reality",
+    lowTag: "秩序乱一点也还能转",
+    highTag: "一乱套就很难装没事",
+    notes: {
+      low: "日常秩序乱一点，你还可以边走边修。",
+      medium: "你会在意秩序被打乱，但系统还不至于立刻报警。",
+      high: "一想到流程和生活节拍要全面重排，你就先开始累。",
+    },
+  },
+  {
+    id: "freedomLossSensitivity",
+    label: "自由损失敏感",
+    model: "reality",
+    lowTag: "自由缩水还能谈",
+    highTag: "一想到被套牢就警铃大作",
+    notes: {
+      low: "你对自由被压缩这件事相对更能协商和适应。",
+      medium: "你会警觉自由缩水，但还愿意继续谈条件。",
+      high: "一想到被长期套进某种角色里，警铃就会先大作。",
+    },
+  },
+  {
+    id: "careLoadEstimation",
+    label: "照护承重预估",
+    model: "reality",
+    lowTag: "不会先把照护重量算满",
+    highTag: "先算这活到底谁扛",
+    notes: {
+      low: "你不会一上来就把照护重量按满格估算。",
+      medium: "你会想到承重问题，但不会先把最沉那版默认成现实。",
+      high: "你很快就会追问一句：这活最后到底谁来扛？",
+    },
+  },
 ] as const;
 
 export const QUESTION_SCALE_OPTIONS = [
@@ -301,6 +521,33 @@ const FAMILY_BASELINES: Record<Exclude<FamilyId, "fallback">, ScoreVector> = {
     careLoadEstimation: 4.0,
   }),
 };
+
+const FINAL_ARTWORK_CODES = new Set([
+  "CTRL",
+  "SCAN",
+  "GRID",
+  "DRAG",
+  "FOGG",
+  "HUSH",
+  "QCER",
+  "LIST",
+  "TICK",
+  "WALL",
+  "SOLO",
+  "EXIT",
+  "HOLD",
+  "GIVE",
+  "SPNG",
+  "GLOW",
+  "FILM",
+  "NEST",
+  "BASE",
+  "LOAD",
+  "PLAN",
+  "SHAK",
+  "CLAS",
+  "FRAY",
+]);
 
 const ARCHETYPE_SPECS = [
   {
@@ -578,6 +825,14 @@ export const ARCHETYPES: readonly ArchetypeDefinition[] = ARCHETYPE_SPECS.map((s
   reaction: spec.reaction,
   failureMode: spec.failureMode,
   needFromOthers: spec.needFromOthers,
+  artwork:
+    FINAL_ARTWORK_CODES.has(spec.code)
+      ? {
+          posterPath: `/archetypes/${spec.code}.png`,
+          alt: `${spec.code} ${spec.name}角色海报`,
+          status: "final",
+        }
+      : undefined,
   prototype: tweak(FAMILY_BASELINES[spec.familyId], spec.patch),
 }));
 
@@ -590,6 +845,11 @@ export const FALLBACK_ARCHETYPE: ArchetypeDefinition = {
   reaction: "你不是没有模式，而是好几种模式同时抢前排。怀孕和养育想象在你这里像多路输入并发播放，谁都不像背景音。",
   failureMode: "最容易翻车的地方，是你把每一种声音都当成最终结论，最后整个人卡在过载状态里。",
   needFromOthers: "最需要的不是替你定性，而是帮你缩小范围、降低噪声、把最重要的一条线先拉出来。",
+  artwork: {
+    posterPath: "/archetypes/NOIS.png",
+    alt: "NOIS 噪点综合体角色海报",
+    status: "final",
+  },
   prototype: vector({
     factCheck: 3,
     delay: 3,
@@ -610,6 +870,22 @@ export const FALLBACK_ARCHETYPE: ArchetypeDefinition = {
 };
 
 export const ALL_ARCHETYPES: readonly ArchetypeDefinition[] = [...ARCHETYPES, FALLBACK_ARCHETYPE];
+
+const FAMILY_DESCRIPTION_OPENERS: Record<FamilyId, string> = {
+  control: "你不是天生爱控场，你只是很难把方向盘交给一个还没做功课的人。 ",
+  delay: "你不是单纯拖延，你更像在用暂停键给自己争回一点不被逼着表态的空间。 ",
+  audit: "你不是爱抬杠，你只是比很多人更早意识到口头支持和实际承重根本不是一回事。 ",
+  boundary: "你不是冷，你只是先感到边界被改写，然后才轮到情绪和道理上桌。 ",
+  sacrifice: "你不是自带圣光，你只是太容易先把自己放进那个最能扛的位置。 ",
+  projection: "你不是天真，你只是比很多人更容易先被未来画面、关系想象和意义感击中。 ",
+  foundation: "你不是扫兴，你只是比氛围更早看到长期承重这张账单。 ",
+  disorder: "你不是矫情，你只是很多条高压线路会在同一时间一起报警。 ",
+  fallback: "你不是没有类型，你只是暂时不像任何单一原型那样安静。 ",
+};
+
+export function getArchetypeDescription(archetype: ArchetypeDefinition): string {
+  return `${FAMILY_DESCRIPTION_OPENERS[archetype.familyId]}${archetype.intro}${archetype.reaction}${archetype.failureMode} 真正对你有用的支持通常也很明确：${archetype.needFromOthers}`;
+}
 
 export function getDimension(dimensionId: DimensionId): DimensionDefinition {
   const match = DIMENSIONS.find((dimension) => dimension.id === dimensionId);

@@ -9,4 +9,4 @@ coverage/
 .env.production.local
 !.env.example
 .idea/
-.log
+*.log

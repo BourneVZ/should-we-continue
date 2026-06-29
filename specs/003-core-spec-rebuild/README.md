@@ -40,6 +40,16 @@
   24+1 类型系统与家族层说明。
 - [report.md](/Z:/Users/BVZ/WorkSpace/101Doodle/VibeCoding/should-we-continue/specs/003-core-spec-rebuild/report.md)
   结果页结构规范。
+- [persona-sample-ctrl.md](/Z:/Users/BVZ/WorkSpace/101Doodle/VibeCoding/should-we-continue/specs/003-core-spec-rebuild/persona-sample-ctrl.md)
+  单类型文案与视觉设定样板。
+
+## 代码清理边界
+
+当前仓库按 `003` 的产品边界做过一轮主线清理：
+
+- 直接删除：伴侣共同讨论、伴侣独立问卷、分享授权、共同版报告、安全/医学主流程、地区政策与成本、LLM 报告生成及其 API。
+- 保留最低声明：首页与结果页底部仍保留一句固定边界说明。
+- 雪藏而非继续运行：旧版“9 维现实支持度 + 行动建议”只保留在 `specs/001-core-functionality/` 作为后续扩展参考，不再保留运行时代码入口。
 
 ## 与旧版的关系
 
