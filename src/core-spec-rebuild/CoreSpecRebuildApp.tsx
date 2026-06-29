@@ -196,7 +196,6 @@ function ArchetypePoster(props: { archetype: ArchetypeDefinition; compact?: bool
 export function HomeView(props: {
   hasDraft: boolean;
   canOpenResult: boolean;
-  saveMessage: string | null;
   onStart: () => void;
   onOpenResult: () => void;
   onOpenCatalog: () => void;
@@ -240,14 +239,13 @@ export function HomeView(props: {
             <button type="button" onClick={props.onOpenResult} className="font-semibold text-[#4f433b] transition hover:text-[#2f2118]">
               查看上次结果
             </button>
+          ) : props.hasDraft ? (
+            <button type="button" onClick={props.onReset} className="font-semibold text-[#4f433b] transition hover:text-[#2f2118]">
+              重新测试
+            </button>
           ) : null}
         </div>
 
-        {props.saveMessage ? (
-          <p className="mx-auto mt-6 max-w-2xl rounded-2xl border border-[#c86b4f]/20 bg-[#fff3ed] px-4 py-3 text-center text-sm leading-6 text-[#9d4b34]">
-            {props.saveMessage}
-          </p>
-        ) : null}
       </section>
 
       <section className="rounded-[34px] border border-black/5 bg-white p-7 shadow-[0_18px_70px_rgba(43,37,31,0.08)]">
@@ -355,7 +353,7 @@ export function QuizView(props: {
           </div>
         </div>
 
-        <h1 className="mt-8 max-w-3xl text-3xl font-semibold leading-tight text-[#2f2118] md:text-4xl">{question.prompt}</h1>
+        <h1 className="mt-8 text-2xl font-semibold leading-tight text-[#2f2118] md:text-3xl">{question.prompt}</h1>
 
         <div className="mt-8 space-y-3">
           {QUESTION_SCALE_OPTIONS.map((option) => {
@@ -1089,7 +1087,7 @@ export function CoreSpecRebuildApp() {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(Math.min(initial.value.currentQuestionIndex, QUESTIONS.length - 1));
   const [view, setView] = useState<View>(initialRoute.view);
   const [detailReturnView, setDetailReturnView] = useState<DetailReturnView>("home");
-  const [saveMessage, setSaveMessage] = useState(initial.error);
+
   const [validationMessage, setValidationMessage] = useState<string | null>(null);
   const [selectedDetailCode, setSelectedDetailCode] = useState(initialRoute.code ?? HOME_FEATURED_CODE);
 
@@ -1100,13 +1098,11 @@ export function CoreSpecRebuildApp() {
   const result = completed ? matchArchetype(resultVector) : null;
 
   function persist(nextAnswers = answers, nextQuestionIndex = currentQuestionIndex) {
-    const error = savePersistedQuizState({
+    savePersistedQuizState({
       answers: nextAnswers,
       currentQuestionIndex: nextQuestionIndex,
       updatedAt: new Date().toISOString(),
     });
-
-    setSaveMessage(error ? error : "草稿已保存到本机浏览器");
   }
 
   function openDetail(code: string, returnView: DetailReturnView) {
@@ -1269,8 +1265,7 @@ export function CoreSpecRebuildApp() {
     setValidationMessage(null);
     setSelectedDetailCode(HOME_FEATURED_CODE);
     navigate("home");
-    const error = clearPersistedQuizState();
-    setSaveMessage(error);
+    clearPersistedQuizState();
   }
 
   if (view === "quiz") {
@@ -1327,7 +1322,6 @@ export function CoreSpecRebuildApp() {
     <HomeView
       hasDraft={hasDraft}
       canOpenResult={completed}
-      saveMessage={saveMessage}
       onStart={handleStart}
       onOpenResult={() => {
         if (result) {

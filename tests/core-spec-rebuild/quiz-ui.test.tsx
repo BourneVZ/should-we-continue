@@ -16,7 +16,6 @@ describe("core-spec-rebuild home ui", () => {
       <HomeView
         hasDraft
         canOpenResult
-        saveMessage={null}
         onStart={() => {}}
         onOpenResult={() => {}}
         onOpenCatalog={() => {}}
