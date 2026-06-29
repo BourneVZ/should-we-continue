@@ -884,7 +884,7 @@ const FAMILY_DESCRIPTION_OPENERS: Record<FamilyId, string> = {
 };
 
 export function getArchetypeDescription(archetype: ArchetypeDefinition): string {
-  return `${FAMILY_DESCRIPTION_OPENERS[archetype.familyId]}${archetype.intro}${archetype.reaction}${archetype.failureMode} 真正对你有用的支持通常也很明确：${archetype.needFromOthers}`;
+  return `${archetype.name}这型人，往往不是事情一来就立刻拍板，而是脑内先开拍一部只对自己上映的特别篇。${archetype.intro} 你看起来像在想剧情，其实是在替未来试镜，想先确认这个选择配不配进入你的人生主线。好处是你对细微情绪和隐含意义很敏感，常能比别人更早察觉哪件事会真正改变自己；代价是，${archetype.failureMode} 所以你最需要的不是旁人催你“现实一点”，而是有人既懂你的感受戏，又肯陪你把镜头落回日常执行。说到底，${archetype.needFromOthers}`;
 }
 
 export function getDimension(dimensionId: DimensionId): DimensionDefinition {
